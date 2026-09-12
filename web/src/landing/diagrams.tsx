@@ -7,8 +7,12 @@
  * the usual pattern of an icon beside three paragraphs, which is what the
  * first version of this page was.
  *
- * All four share a frame (280 x 156), a mono type scale and the token palette,
- * so four different mechanisms still read as one system.
+ * They share a mono type scale and the token palette so four different
+ * mechanisms read as one system, and a 280 x 156 frame except where a diagram
+ * genuinely needs more room: each `Frame` can override its own width and
+ * height. That matters because these SVGs deliberately do NOT allow overflow,
+ * text escaping its card having been a real bug, so anything drawn past the
+ * viewBox is silently clipped rather than spilling.
  */
 
 const W = 280;
@@ -20,10 +24,28 @@ const mono = {
   letterSpacing: '0.04em',
 } as const;
 
-function Frame({ children, label }: { children: React.ReactNode; label: string }) {
+/**
+ * `w` exists because the two-state SPOF diagram genuinely needs more
+ * horizontal room than the others: it draws the same cluster twice, side by
+ * side. Squeezing it into the shared 280 units pushed the right-hand group and
+ * its heading past the edge, and since these SVGs deliberately do not allow
+ * overflow (text escaping the card was a real bug), the excess was simply
+ * clipped.
+ */
+function Frame({
+  children,
+  label,
+  w = W,
+  h = H,
+}: {
+  children: React.ReactNode;
+  label: string;
+  w?: number;
+  h?: number;
+}) {
   return (
     <svg
-      viewBox={`0 0 ${W} ${H}`}
+      viewBox={`0 0 ${w} ${h}`}
       className="h-auto w-full"
       role="img"
       aria-label={label}
@@ -121,10 +143,16 @@ function Envelope({ x, y, w = 13, tone = 'var(--color-risk)' }: { x: number; y: 
    a deadline that did not wait while nobody answered.
    ───────────────────────────────────────────────────────── */
 
+/** 288 wide: the deadline arrowhead on the right sat just past 280. */
+const LOOP_W = 288;
+
 export function OpenLoopDiagram() {
   const others = [0, 1, 2, 3];
   return (
-    <Frame label="One ask sent to five recipients, only one of whom it was for, and no reply in six days against a deadline in two">
+    <Frame
+      w={LOOP_W}
+      label="One ask sent to five recipients, only one of whom it was for, and no reply in six days against a deadline in two"
+    >
       <text x="0" y="9" fill="var(--color-ink-3)" style={mono}>
         THE ASK
       </text>
@@ -179,7 +207,7 @@ export function OpenLoopDiagram() {
       <text x="0" y="124" fill="var(--color-ink-3)" style={mono}>
         THE CLOCK
       </text>
-      <rect x="0" y="132" width={W} height="7" rx="3.5" fill="var(--color-paper-2)" />
+      <rect x="0" y="132" width={LOOP_W} height="7" rx="3.5" fill="var(--color-paper-2)" />
       <rect x="0" y="132" width="186" height="7" rx="3.5" fill="var(--color-risk)" opacity="0.28" />
       <rect x="0" y="132" width="4" height="7" rx="2" fill="var(--color-ink-4)" />
       <text x="8" y="152" fill="var(--color-ink-3)" style={mono}>
@@ -189,9 +217,9 @@ export function OpenLoopDiagram() {
       <text x="190" y="152" fill="var(--color-risk)" style={mono}>
         6 DAYS OF SILENCE
       </text>
-      <path d="M262 128 v15" stroke="var(--color-ink)" strokeWidth="2.4" strokeLinecap="round" />
-      <path d="M262 129 l11 3.5 -11 3.5z" fill="var(--color-ink)" />
-      <text x={W} y="124" textAnchor="end" fill="var(--color-ink)" style={mono}>
+      <path d="M268 128 v15" stroke="var(--color-ink)" strokeWidth="2.4" strokeLinecap="round" />
+      <path d="M268 129 l11 3.5 -11 3.5z" fill="var(--color-ink)" />
+      <text x={LOOP_W} y="124" textAnchor="end" fill="var(--color-ink)" style={mono}>
         DEADLINE
       </text>
     </Frame>
@@ -358,6 +386,9 @@ export function DeadlineDiagram() {
    needs the whole graph, so the diagram is the graph, twice.
    ───────────────────────────────────────────────────────── */
 
+/** This one is 320 units wide, not 280: it draws the cluster twice. */
+const SPOF_W = 320;
+
 export function SpofDiagram() {
   const tasks = [
     [26, 96],
@@ -366,16 +397,22 @@ export function SpofDiagram() {
     [124, 100],
   ];
   return (
-    <Frame label="Four critical tasks all owned by one person, shown once as they look today and once with that person unavailable, when all four and the deadline turn red">
+    <Frame
+      w={SPOF_W}
+      h={164}
+      label="Four critical tasks all owned by one person, shown once as they look today and once with that person unavailable, when all four turn red"
+    >
       <text x="0" y="9" fill="var(--color-ink-3)" style={mono}>
         TODAY
       </text>
-      <text x="163" y="9" fill="var(--color-risk)" style={mono}>
+      {/* Right-aligned to the frame edge rather than positioned from the left,
+          so the heading can never run off however long the wording gets. */}
+      <text x={SPOF_W} y="9" textAnchor="end" fill="var(--color-risk)" style={mono}>
         ONE PERSON, ONE DAY OFF
       </text>
 
       {/* divider between the two states */}
-      <path d={`M151 14 V${H}`} stroke="var(--color-line)" strokeWidth="1" strokeDasharray="3 4" />
+      <path d={`M155 14 V${H}`} stroke="var(--color-line)" strokeWidth="1" strokeDasharray="3 4" />
 
       {/* left: as it looks */}
       <g>
@@ -392,20 +429,25 @@ export function SpofDiagram() {
         </text>
       </g>
 
-      {/* right: the same graph with the owner removed */}
-      <g transform="translate(163, 0)">
-        {tasks.map(([x, y]) => (
-          <g key={x}>
-            <path
-              d={`M75 60 L${x} ${y}`}
-              stroke="var(--color-risk)"
-              strokeWidth="1.1"
-              strokeDasharray="3 3"
-              opacity="0.6"
-            />
-            <Tick x={x * 0.78 + 14} y={y} tone="var(--color-risk)" />
-          </g>
-        ))}
+      {/* right: the same graph with the owner removed. Ticks are pulled in to
+          0.7 of their original spread so the outermost one, plus its own half
+          width, still lands inside the frame. */}
+      <g transform="translate(170, 0)">
+        {tasks.map(([x, y]) => {
+          const tx = x * 0.7 + 14;
+          return (
+            <g key={x}>
+              <path
+                d={`M75 60 L${tx} ${y}`}
+                stroke="var(--color-risk)"
+                strokeWidth="1.1"
+                strokeDasharray="3 3"
+                opacity="0.6"
+              />
+              <Tick x={tx} y={y} tone="var(--color-risk)" />
+            </g>
+          );
+        })}
         <Person x={75} y={60} r={12} label="PR" tone="var(--color-ink-4)" dim />
         <g stroke="var(--color-risk)" strokeWidth="2" strokeLinecap="round">
           <path d="M66 51 l18 18" />
