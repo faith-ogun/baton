@@ -19,6 +19,14 @@
 </p>
 
 <p align="center">
+  <b>Live:</b> <a href="https://baton-hack-2026.web.app/app">baton-hack-2026.web.app/app</a>
+  &nbsp;·&nbsp;
+  <b>API:</b> <a href="https://baton-104295462760.europe-west1.run.app/health">Cloud Run health</a>
+  &nbsp;·&nbsp;
+  reading a real Ambiguous workspace
+</p>
+
+<p align="center">
   <a href="#run-it-in-two-commands"><b>◆ Run it in two commands&nbsp;→</b></a>
   &nbsp;&nbsp;·&nbsp;&nbsp;
   <a href="#what-gets-dropped">What gets dropped</a>
@@ -36,9 +44,6 @@
   <img src="https://img.shields.io/badge/detectors-3_of_4_deterministic-2ea043?style=flat-square" alt="three of the four detectors are deterministic">
   <img src="https://img.shields.io/badge/outputs-drafts_only-8A96A3?style=flat-square" alt="drafts only">
   <img src="https://img.shields.io/badge/auto--sends-never-2ea043?style=flat-square" alt="nothing auto-sends">
-  &nbsp;
-  <img src="https://img.shields.io/endpoint?style=flat-square&url=https://raw.githubusercontent.com/faith-ogun/baton/main/.stats/views-badge.json" alt="All-time repository views">
-  <img src="https://img.shields.io/endpoint?style=flat-square&url=https://raw.githubusercontent.com/faith-ogun/baton/main/.stats/clones-badge.json" alt="All-time repository clones">
 </p>
 
 <p align="center">
@@ -273,7 +278,9 @@ Three properties, and all three are structural rather than instructions in a pro
 - **Not autonomous.** Deliberately. See Governance.
 - **Not a surveillance tool.** It watches work items and hand-offs, not people's activity, and the
   audit trail is readable by the team it covers.
-- **Not deployed.** The demo runs locally on purpose, for reliability.
+- **Not a mock when deployed.** The public site reads the same real workspace through Cloud Run, and
+  its status bar says so. The demo video is recorded against localhost only because a cold Cloud Run
+  instance adds a few seconds to the first request.
 
 ---
 
@@ -306,8 +313,9 @@ Start at [`docs/_meta/MOC.md`](docs/_meta/MOC.md).
 | Graph | **NetworkX** server-side · `react-force-graph-2d` + `d3-force` on the screen |
 | Backend | **FastAPI** · httpx · in-memory state, no database |
 | Front end | **Vite** · React 19 · Tailwind 4 · Fraunces / Inter / JetBrains Mono |
-| Video | **Remotion** for the animation above |
-| Deploy | **Google Cloud Run** (stretch; the demo runs locally) |
+| Video | **Remotion** for the animation above and the demo cutaways |
+| Identity | The mark is Hermes mid-hand-off, generated with **ChatGPT's image tool** and then cut out, background-removed and given a reversed cream-on-navy cut for dark grounds |
+| Deploy | **Google Cloud Run** (`europe-west1`) for the API, **Firebase Hosting** for the front end, secrets in **Secret Manager** |
 
 Vite rather than Next: the dashboard is a single client-rendered canvas app with a WebSocket, so
 server rendering buys nothing and costs an `ssr: false` dance around the one component that must not
@@ -324,5 +332,6 @@ break. `/app` is a client route, so a static host needs unknown paths rewritten 
 
 <p align="center">
   <i>Somebody on your team is about to drop something today.</i><br>
-  <sub>Faith Ogundimu &nbsp;·&nbsp; Agents, Everywhere &nbsp;·&nbsp; 12 September 2026</sub>
+  <sub>Faith Ogundimu &nbsp;·&nbsp; Agents, Everywhere &nbsp;·&nbsp; 12 September 2026</sub><br>
+  <sub>Mark generated with ChatGPT's image tool. Aldermere Bio and Sentrix are invented; the workspace is real.</sub>
 </p>
