@@ -1,0 +1,150 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 660" width="1200" height="660" font-family="Inter, -apple-system, Helvetica, Arial, sans-serif">
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#8A96A3"/>
+    </marker>
+    <marker id="ao" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#C96A3D"/>
+    </marker>
+    <marker id="ap" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#7A6FF0"/>
+    </marker>
+    <style>
+      .k { font-family: 'JetBrains Mono', ui-monospace, Menlo, monospace; font-size: 10px; letter-spacing: .14em; text-transform: uppercase; }
+      .m { font-family: 'JetBrains Mono', ui-monospace, Menlo, monospace; font-size: 11px; }
+      .t { font-size: 14px; font-weight: 600; }
+      .b { font-size: 12.5px; }
+      .s { font-size: 11.5px; }
+    </style>
+  </defs>
+
+  <rect width="1200" height="660" fill="#F3EEE4"/>
+
+  <!-- ── the environment ─────────────────────────────── -->
+  <rect x="40" y="34" width="1120" height="112" rx="12" fill="#0F2238"/>
+  <text x="62" y="60" class="k" fill="#8A96A3">THE AMBIGUOUS WORKSPACE</text>
+  <text x="1138" y="60" class="m" fill="#8A96A3" text-anchor="end">aldermere.ambi.cc</text>
+  <g fill="#16304A" stroke="#22405C">
+    <rect x="62" y="76" width="168" height="50" rx="8"/>
+    <rect x="244" y="76" width="168" height="50" rx="8"/>
+    <rect x="426" y="76" width="168" height="50" rx="8"/>
+    <rect x="608" y="76" width="168" height="50" rx="8"/>
+    <rect x="790" y="76" width="168" height="50" rx="8"/>
+    <rect x="972" y="76" width="166" height="50" rx="8"/>
+  </g>
+  <g class="t" fill="#F3EEE4" text-anchor="middle">
+    <text x="146" y="99">Mail</text><text x="328" y="99">Chat</text><text x="510" y="99">Tasks</text>
+    <text x="692" y="99">Calendar</text><text x="874" y="99">CRM</text><text x="1055" y="99">Sheets</text>
+  </g>
+  <g class="m" fill="#7D8B9A" text-anchor="middle" font-size="9.5">
+    <text x="146" y="115">who asked whom</text><text x="328" y="115">the side thread</text>
+    <text x="510" y="115">owner · status · due</text><text x="692" y="115">what is booked</text>
+    <text x="874" y="115">which account</text><text x="1055" y="115">the audit log</text>
+  </g>
+
+  <!-- in: webhooks + reads -->
+  <path d="M300 146 V196" stroke="#8A96A3" stroke-width="1.6" marker-end="url(#a)"/>
+  <text x="312" y="166" class="m" fill="#566677">webhooks · ~100ms</text>
+  <text x="312" y="182" class="m" fill="#566677">+ REST reads · 45s sweep</text>
+
+  <!-- out: the executor writes back, as Baton -->
+  <path d="M900 196 V146" stroke="#7A6FF0" stroke-width="1.8" marker-end="url(#ap)"/>
+  <text x="888" y="172" class="m" fill="#5348C4" text-anchor="end">acts as Baton, on approval</text>
+
+  <!-- ── the backend ─────────────────────────────────── -->
+  <rect x="40" y="196" width="1120" height="252" rx="12" fill="#FFFFFF" stroke="#E6DCCD" stroke-width="1.5"/>
+  <text x="62" y="222" class="k" fill="#98461F">FASTAPI BACKEND</text>
+  <text x="1138" y="222" class="m" fill="#8A96A3" text-anchor="end">in-memory WorkspaceState, no database</text>
+
+  <!-- deterministic band -->
+  <rect x="62" y="238" width="700" height="190" rx="10" fill="#F3EEE4" stroke="#D3C4B0"/>
+  <text x="78" y="260" class="k" fill="#2E7D5B">DETERMINISTIC · CANNOT GO DIFFERENTLY ON A SECOND RUN</text>
+
+  <g>
+    <rect x="78" y="272" width="152" height="66" rx="8" fill="#FFFFFF" stroke="#E6DCCD"/>
+    <text x="92" y="294" class="t" fill="#0F2238">ingest</text>
+    <text x="92" y="311" class="s" fill="#566677">verify HMAC,</text>
+    <text x="92" y="326" class="s" fill="#566677">replay check</text>
+
+    <rect x="246" y="272" width="152" height="66" rx="8" fill="#FFFFFF" stroke="#E6DCCD"/>
+    <text x="260" y="294" class="t" fill="#0F2238">graph</text>
+    <text x="260" y="311" class="s" fill="#566677">NetworkX: people,</text>
+    <text x="260" y="326" class="s" fill="#566677">work, threads, dates</text>
+
+    <rect x="414" y="272" width="152" height="66" rx="8" fill="#FFFFFF" stroke="#C96A3D" stroke-width="1.6"/>
+    <text x="428" y="294" class="t" fill="#0F2238">risk</text>
+    <text x="428" y="311" class="s" fill="#566677">4 detectors scored</text>
+    <text x="428" y="326" class="s" fill="#98461F">from rules.yaml</text>
+
+    <rect x="582" y="272" width="164" height="66" rx="8" fill="#FFFFFF" stroke="#E6DCCD"/>
+    <text x="596" y="294" class="t" fill="#0F2238">executor</text>
+    <text x="596" y="311" class="s" fill="#566677">act, then append</text>
+    <text x="596" y="326" class="s" fill="#566677">the audit Sheet</text>
+  </g>
+  <g stroke="#8A96A3" stroke-width="1.4" marker-end="url(#a)">
+    <path d="M230 305 H240"/><path d="M398 305 H408"/><path d="M566 305 H576"/>
+  </g>
+
+  <!-- the four detectors -->
+  <g class="m" fill="#566677" font-size="9.5">
+    <text x="78" y="362">open_loop_ask</text>
+    <text x="78" y="378">stalled_task</text>
+    <text x="246" y="362">unbooked_deadline</text>
+    <text x="246" y="378">spof</text>
+  </g>
+  <rect x="414" y="348" width="332" height="42" rx="8" fill="#FFFFFF" stroke="#E6DCCD"/>
+  <text x="428" y="365" class="s" fill="#0F2238" font-weight="600">Severity, ranking, health, cost</text>
+  <text x="428" y="381" class="s" fill="#566677">one readable registry, tunable live in the UI</text>
+
+  <text x="78" y="412" class="m" fill="#8A96A3" font-size="9.5">3 OF THE 4 DETECTORS NEED NO MODEL AT ALL</text>
+
+  <!-- the model band -->
+  <rect x="784" y="238" width="354" height="190" rx="10" fill="#E8E6FD" stroke="#7A6FF0" stroke-opacity=".45"/>
+  <text x="802" y="260" class="k" fill="#5348C4">THE MODEL · OPENAI AGENTS SDK</text>
+  <text x="802" y="284" class="s" fill="#0F2238" font-weight="600">Three jobs, all of them language</text>
+  <g class="s" fill="#3D5169">
+    <text x="802" y="308">1. is this message an ask, and to whom</text>
+    <text x="802" y="328">2. does &#8220;the Sentrix thing&#8221; mean this project</text>
+    <text x="802" y="348">3. the wording of the nudge a human reads</text>
+  </g>
+  <rect x="802" y="364" width="318" height="46" rx="8" fill="#FFFFFF" stroke="#7A6FF0" stroke-opacity=".3"/>
+  <text x="816" y="382" class="s" fill="#5348C4" font-weight="600">It never decides whether to act.</text>
+  <text x="816" y="399" class="s" fill="#3D5169">Rules decide structure. Humans approve.</text>
+
+  <path d="M766 305 H778" stroke="#7A6FF0" stroke-width="1.4" marker-end="url(#ap)"/>
+
+  <!-- ── the human gate ──────────────────────────────── -->
+  <path d="M600 448 V494" stroke="#C96A3D" stroke-width="2" marker-end="url(#ao)"/>
+  <text x="612" y="476" class="m" fill="#98461F">ranked drop risks, over a WebSocket</text>
+
+  <rect x="40" y="494" width="1120" height="126" rx="12" fill="#FFFFFF" stroke="#E6DCCD" stroke-width="1.5"/>
+  <text x="62" y="520" class="k" fill="#98461F">THE SCREEN · VITE + REACT</text>
+  <text x="1138" y="520" class="m" fill="#8A96A3" text-anchor="end">light and dark</text>
+
+  <g>
+    <rect x="62" y="536" width="248" height="66" rx="8" fill="#F3EEE4" stroke="#E6DCCD"/>
+    <text x="76" y="558" class="t" fill="#0F2238">The live graph</text>
+    <text x="76" y="575" class="s" fill="#566677">shape and glyph say what a node is,</text>
+    <text x="76" y="590" class="s" fill="#566677">the ring says how bad it is</text>
+
+    <rect x="326" y="536" width="248" height="66" rx="8" fill="#F3EEE4" stroke="#E6DCCD"/>
+    <text x="340" y="558" class="t" fill="#0F2238">The drop-risk queue</text>
+    <text x="340" y="575" class="s" fill="#566677">worst first, the money on each,</text>
+    <text x="340" y="590" class="s" fill="#566677">and the rule that fired</text>
+
+    <rect x="590" y="536" width="248" height="66" rx="8" fill="#FAE1D4" stroke="#C96A3D" stroke-width="1.6"/>
+    <text x="604" y="558" class="t" fill="#0F2238">A human approves</text>
+    <text x="604" y="575" class="s" fill="#98461F">nothing auto-sends, and there is</text>
+    <text x="604" y="590" class="s" fill="#98461F">no mode that changes that</text>
+
+    <rect x="854" y="536" width="284" height="66" rx="8" fill="#E8E6FD" stroke="#7A6FF0" stroke-opacity=".45"/>
+    <text x="868" y="558" class="t" fill="#0F2238">The audit trail</text>
+    <text x="868" y="575" class="s" fill="#3D5169">every action, in the dashboard and in a</text>
+    <text x="868" y="590" class="s" fill="#3D5169">Sheet inside the workspace</text>
+  </g>
+
+  <!-- approval is what releases the executor, which is where the loop closes -->
+  <path d="M714 536 V344" fill="none" stroke="#7A6FF0" stroke-width="1.6" stroke-dasharray="5 4" marker-end="url(#ap)"/>
+  <text x="726" y="476" class="m" fill="#5348C4">approval releases the executor</text>
+  <text x="726" y="492" class="m" fill="#5348C4">and the loop closes</text>
+</svg>
