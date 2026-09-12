@@ -104,12 +104,13 @@
   <text x="802" y="284" class="s" fill="#0F2238" font-weight="600">Three jobs, all of them language</text>
   <g class="s" fill="#3D5169">
     <text x="802" y="308">1. is this message an ask, and to whom</text>
-    <text x="802" y="328">2. does &#8220;the Sentrix thing&#8221; mean this project</text>
-    <text x="802" y="348">3. the wording of the nudge a human reads</text>
+    <text x="802" y="328">2. which project a loosely named one is</text>
+    <text x="802" y="348">3. plain-language questions, grounded, read-only</text>
+    <text x="802" y="368">4. the wording of the nudge a human reads</text>
   </g>
-  <rect x="802" y="364" width="318" height="46" rx="8" fill="#FFFFFF" stroke="#7A6FF0" stroke-opacity=".3"/>
-  <text x="816" y="382" class="s" fill="#5348C4" font-weight="600">It never decides whether to act.</text>
-  <text x="816" y="399" class="s" fill="#3D5169">Rules decide structure. Humans approve.</text>
+  <rect x="802" y="380" width="318" height="40" rx="8" fill="#FFFFFF" stroke="#7A6FF0" stroke-opacity=".3"/>
+  <text x="816" y="396" class="s" fill="#5348C4" font-weight="600">It never decides whether to act.</text>
+  <text x="816" y="412" class="s" fill="#3D5169">Rules decide structure. Humans approve.</text>
 
   <path d="M766 305 H778" stroke="#7A6FF0" stroke-width="1.4" marker-end="url(#ap)"/>
 
