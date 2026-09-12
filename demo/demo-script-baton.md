@@ -4,8 +4,12 @@
 scored. So this is not the full product tour. It is the one spine that proves the category claim,
 cut to a real spoken length, against the **live Ambiguous workspace** rather than seeded data.
 
-**Measured (not guessed):** the voice-over is **266 spoken words**.
-- at 140 wpm → **1:54** · at 150 wpm → **1:46** · at 155 wpm → **1:43** · at 165 wpm → **1:37**
+**Measured (not guessed):** the voice-over is **269 spoken words**, across exactly five spoken lines.
+- at 140 wpm → **1:55** · at 150 wpm → **1:48** · at 155 wpm → **1:44** · at 165 wpm → **1:38**
+
+Every production note in this file is deliberately **not** a blockquote. In this format `>` means
+"words you say out loud", so a note written as one would be counted and the running time above
+would be a lie.
 
 Under 2:00 at any realistic pace, with real headroom: the eight-second silent close still lands the
 film around 1:50. A crisp 1:50 beats a rushed 2:00, and the spare seconds are there so you can
@@ -30,18 +34,28 @@ team drops. Every sentence finishes.
 
 ---
 
-## PART 1 — A real workspace, and the thing nobody can see (0:00 – 0:20)
-**~20 seconds · 46 words**
+## PART 1 — Baton is a member of a real workspace (0:00 – 0:22)
+**~22 seconds · 52 words**
 
-- `[SCREEN: the dashboard already open and settled. Do NOT film the load. The status bar reads `webhooks live` and `aldermere.ambi.cc`; the header reads Regulatory affairs, Aldermere Bio, 7 people, lead Rachel Foster.]`
+**Note: the first shot is Ambiguous, NOT Baton.**
 
-- `[CAP: "Live Ambiguous workspace. Invented company, real records."]`
+This was the weak point of the first draft. Narrating "this is a real Ambiguous workspace" over
+Baton's own dashboard proves nothing, because a dashboard is only our UI and a judge cannot tell it
+from a mock. So open **inside Ambiguous**, on the member list, where Baton appears as an agent
+account with its own address next to the five people. That shot is un-fakeable, and it lands the
+category claim in four seconds. Only then cut to Baton's board.
 
-> "This is a real Ambiguous workspace, and Baton is a member of it with its own address. It is watching seven people push a filing due on the fourteenth. Nothing here was typed by me. Baton read all of it, and found four things about to fall through the cracks."
+- `[AMBI: ~5s. app.ambiguous.ai, the Aldermere Bio workspace, Admin then People and access then Users. Baton is listed as type Agent at baton@aldermere.ambi.cc, alongside Frank, Sally, Priya, Tomas and Rachel. No cursor movement; just hold it.]`
+
+- `[CAP: "Aldermere Bio is invented. The workspace and its records are real."]`
+
+- `[SCREEN: cut to Baton's board, already open and settled. Do NOT film the load. The status bar reads webhooks live and aldermere.ambi.cc; the header reads Regulatory affairs, Aldermere Bio, 7 people, lead Rachel Foster.]`
+
+> "Baton is a member of this team's workspace, with its own address, sitting alongside the five people it watches. This is its board. Nothing on it was typed by me: Baton read the tasks, the calendar and the people for itself, and it has found four things about to fall through the cracks."
 
 ---
 
-## PART 2 — The risk that is invisible from inside any app (0:20 – 0:48)
+## PART 2 — The risk that is invisible from inside any app (0:22 – 0:50)
 **~26 seconds · 60 words**
 
 - `[SCREEN: click the top row. It expands: "Priya is the only owner of 4 critical items." Severity 82. The graph dims to just her cluster, her node wearing its dashed sole-owner collar.]`
@@ -54,7 +68,7 @@ team drops. Every sentence finishes.
 
 ---
 
-## PART 3 — THE WOW. It acts in the workspace, as itself. (0:48 – 1:22)
+## PART 3 — THE WOW. It acts in the workspace, as itself. (0:50 – 1:24)
 **~32 seconds · 67 words**
 
 - `[SCREEN: the proposal is already visible on the open card. Click **Approve** once. The button goes to "Acting in the workspace", the card hands itself off to the right, the graph cools, health ticks up, and a row writes into the audit strip.]`
@@ -67,7 +81,7 @@ team drops. Every sentence finishes.
 
 ---
 
-## PART 4 — The judgement is a file, and it refuses things (1:22 – 1:42)
+## PART 4 — The judgement is a file, and it refuses things (1:24 – 1:44)
 **~22 seconds · 55 words**
 
 - `[SCREEN: press R. Drag `no_update_days`. The severities re-score in front of you. Then press / and click the suggestion "Send Sally a nudge", and let the refusal sit on screen for two full seconds.]`
@@ -87,7 +101,7 @@ team drops. Every sentence finishes.
 
 ---
 
-## PART 6 — Close (1:58 – 2:00, or straight out)
+## PART 6 — Close (straight out, or a 2s card)
 **Card only. No voice-over.**
 
 - `[ANIM: ../assets/readme/thumbnail.mp4 — the existing 8.7s hero. Use the last two seconds, the lockup and "Never drop the baton.", and let it settle. Speed up or trim so the film never crosses 2:00.]`
@@ -100,8 +114,8 @@ team drops. Every sentence finishes.
 
 | Beat | What the judge learns | Criterion |
 |---|---|---|
-| The live status bar and workspace address | It runs in a real environment, not on mock data | Core requirements |
-| Baton as a member with its own address | The deepest available Ambiguous integration | **Best Use of Ambiguous** |
+| The Ambiguous member list with Baton on it | It is a member of a real workspace, not a dashboard over a mock | **Best Use of Ambiguous** |
+| The live status bar and workspace address | It runs in a real environment | Core requirements |
 | The single point of failure, with betweenness on screen | A risk that is genuinely invisible from inside one app | Innovation |
 | Approve, then the artefact inside Ambiguous | The loop closes in the real workspace, not in our UI | Core requirements |
 | The audit sheet in the workspace | Governed, logged, and readable by the audited team | Usefulness |
@@ -113,6 +127,7 @@ team drops. Every sentence finishes.
 
 ## Must-show checklist
 
+- [ ] **The Ambiguous member list**, with Baton listed as an Agent at `baton@aldermere.ambi.cc`. This is the single most important shot in the film for the category prize
 - [ ] Status bar reading **`webhooks live`** and **`aldermere.ambi.cc`** (restart the dev server first, or it will say `seeded workspace`)
 - [ ] The header showing the scope: Aldermere Bio, Regulatory affairs, 7 people, lead Rachel Foster
 - [ ] The **rule line** legible on screen, not just narrated
@@ -135,7 +150,7 @@ the written submission or a longer cut.
 
 1. The rules-drawer half of Part 4, keeping only the Ask refusal (~8s)
 2. The head of the `why-not-a-chatbox` cutaway in Part 5, starting on the graph rather than the chat window (~4s)
-3. The second sentence of Part 1, "It is watching seven people…" (~7s)
+3. The "sitting alongside the five people it watches" clause in Part 1 (~4s). **Never cut the member-list shot itself.**
 
 **Never cut:** the Approve, the artefact inside Ambiguous, or the audit sheet. Those three are the
 category. And never shorten a sentence to fit; drop a whole line from this list instead.
@@ -144,18 +159,20 @@ category. And never shorten a sentence to fit; drop a whole line from this list 
 
 ## Guardrails
 
-> [!warning] Approve is verified, but do NOT restart the backend once you start recording
-> The approve loop was proven end to end on live data: a real calendar event
-> `ab7f63f0-410c-4c23-853d-9868ace84dc9` was created in the workspace, the detector then stopped
-> firing because the workspace genuinely had a hold, and the row read back out of the sheet.
-> **But the audit timeline is in-memory.** A backend restart empties it while the sheet keeps its
-> rows, so restarting between the Approve and the audit-strip shot would show an empty timeline.
-> It is deliberately at zero rows right now so it fills live on camera.
+**Warning: Approve is verified, but do NOT restart the backend once you start recording.**
 
-> [!warning] One click on Approve, not two
-> The calendar endpoint does **not** honour `Idempotency-Key`: two identical posts create two
-> events. The route now only accepts a risk in `open`, so a double click is refused rather than
-> duplicated, but do not lean on it. Click once and wait for the card to fly out.
+The approve loop was proven end to end on live data: a real calendar event
+`ab7f63f0-410c-4c23-853d-9868ace84dc9` was created in the workspace, the detector then stopped
+firing because the workspace genuinely had a hold, and the row read back out of the sheet.
+**But the audit timeline is in-memory.** A backend restart empties it while the sheet keeps its
+rows, so restarting between the Approve and the audit-strip shot would show an empty timeline.
+It is deliberately at zero rows right now so it fills live on camera.
+
+**Warning: one click on Approve, not two.**
+
+The calendar endpoint does **not** honour `Idempotency-Key`: two identical posts create two
+events. The route now only accepts a risk in `open`, so a double click is refused rather than
+duplicated, but do not lean on it. Click once and wait for the card to fly out.
 
 - **The board is set.** At recording time it carries **4 risks**: the sole-owner at 82 leading, one
   stalled task at 74, and the 13 and 14 September unbooked deadlines at 66 and 64. Exposure

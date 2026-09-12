@@ -34,27 +34,30 @@ const COLUMNS: [string, [string, string][]][] = [
 
 /**
  * The footer carries the mark at a size that reads without turning into a
- * poster. The first cut set the lockup at 248px against three short link
- * columns, which left a tall empty band down the right of the page: the brand
- * block was twice the height of everything beside it. Four columns of roughly
- * equal height fixes that without shrinking the mark to nothing.
+ * poster.
+ *
+ * The awkward bit is that three link columns of four items each are short,
+ * while the brand block is tall, so anything stacked only in the left column
+ * leaves a hole under the links. Two cuts got this wrong: first a 248px lockup
+ * against the columns, then four balanced columns which still left the
+ * description as a narrow measure with blank space beside it.
+ *
+ * So the description does not live in a column at all. It runs across the
+ * lower row, underneath the links, which is exactly the space that was empty.
+ * A long line of text is the right shape for the space rather than a tall
+ * narrow paragraph fighting it.
  */
 export function Footer() {
   return (
     <footer className="border-t border-line bg-paper">
       <Container className="py-12 sm:py-14">
-        <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-[1.1fr_repeat(3,0.72fr)] lg:gap-12">
-          <div>
+        <div className="grid gap-x-12 gap-y-9 md:grid-cols-2 lg:grid-cols-[1.05fr_repeat(3,0.7fr)]">
+          <div className="lg:row-span-1">
             <Link to="/" className="inline-block">
               <Lockup width={168} className="transition-opacity hover:opacity-85" />
             </Link>
             <p className="display-tight mt-4 text-[1.25rem]">
               Never drop the <em className="display-em text-accent-mid">baton</em>.
-            </p>
-            <p className="mt-3 max-w-[34ch] text-[0.875rem] leading-[1.6] text-ink-2">
-              An AI coworker that makes sure nothing gets dropped. It lives inside your team&rsquo;s
-              Ambiguous workspace, holds the whole graph of who owes whom what, and hands off the
-              work about to fall through the cracks before it does.
             </p>
             <Link
               to="/app"
@@ -96,9 +99,19 @@ export function Footer() {
               </ul>
             </div>
           ))}
+
+          {/* The description runs along the lower row, under the links, because
+              that is where the blank space was. */}
+          <p className="text-[0.9375rem] leading-[1.7] text-ink-2 md:col-span-2 lg:col-span-3 lg:col-start-2 lg:self-end">
+            An AI coworker that makes sure nothing gets dropped. It lives inside your team&rsquo;s
+            Ambiguous workspace, holds the whole graph of who owes whom what, and catches the ask
+            nobody answered, the person carrying too much and the deadline nobody booked, then hands
+            each one off before it drops. Nothing auto-sends; every action is approved by a human and
+            logged into a sheet the team can read.
+          </p>
         </div>
 
-        <div className="mt-10 flex flex-col gap-2 border-t border-line-2 pt-5 sm:flex-row sm:items-center sm:justify-between">
+        <div className="mt-9 flex flex-col gap-2 border-t border-line-2 pt-5 sm:flex-row sm:items-center sm:justify-between">
           <p className="font-mono text-[0.6875rem] leading-relaxed text-ink-3">
             Faith Ogundimu · Agents, Everywhere · 12 September 2026
           </p>
