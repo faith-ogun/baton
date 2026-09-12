@@ -125,47 +125,51 @@ export function Who() {
           lede="Baton is scoped to one workstream and answers to its lead. That is not a limitation of the graph; it is what makes the fixes usable."
         />
 
-        <div className="mt-11 grid gap-6 lg:grid-cols-[1.05fr_1fr] lg:items-start">
+        {/* The diagram beside the argument, and then the deployment shape
+            running the full width underneath as three side-by-side items.
+            It used to be a second card stacked in the right column, which made
+            that column much taller than the diagram and left a large hole to
+            the left of it. Three short columns are the right shape for the
+            space; one tall card was not. */}
+        <div className="mt-11 grid gap-6 lg:grid-cols-[1.05fr_1fr] lg:items-stretch">
           <div className="reveal rounded-2xl border border-line bg-card p-6 shadow-paper">
             <ScopeDiagram />
           </div>
 
-          <div className="reveal space-y-5">
-            <div className="rounded-2xl border border-line bg-card p-6 shadow-paper">
-              <Kicker>the constraint nobody mentions</Kicker>
-              <h3 className="display-tight mt-3 text-[1.375rem]">
-                A fix is only useful if the person approving it can send it.
-              </h3>
-              <p className="mt-3 text-[0.9375rem] leading-[1.7] text-ink-2">
-                Baton&rsquo;s output is always a message or a change with someone&rsquo;s name on
-                it. A chief executive cannot approve &ldquo;Sally, this is the last working day
-                this can move&rdquo; to somebody three levels down they have never worked with; it
-                would land as a summons, not a nudge. The person who can send that sentence is the
-                one accountable for the date. So that is who Baton reports to, and it is why the
-                board-level view at the top of that diagram has a cross through it rather than
-                being the flagship feature.
-              </p>
-            </div>
-
-            <div className="rounded-2xl border border-line bg-card p-6 shadow-paper">
-              <Kicker>the shape of a deployment</Kicker>
-              <dl className="mt-4 space-y-3.5">
-                {[
-                  ['One workstream', 'five to thirty people, one accountable lead, one set of dates. The graph stays readable and every risk names people the lead actually knows.'],
-                  ['One coworker per team', 'Baton is provisioned into the workspace as a member, so its permissions are that team’s permissions and it can never reach further than the team can.'],
-                  ['A roll-up for a director', 'someone who owns three teams switches between three boards and sees three health numbers. It is a switcher, not a merge: the risks stay where the standing to fix them is.'],
-                ].map(([t, d]) => (
-                  <div key={t} className="flex gap-3">
-                    <span className="mt-[0.5rem] inline-block size-1.5 shrink-0 rounded-full bg-accent" />
-                    <div>
-                      <dt className="text-[0.9375rem] font-semibold text-ink">{t}</dt>
-                      <dd className="mt-1 text-[0.875rem] leading-[1.6] text-ink-2">{d}</dd>
-                    </div>
-                  </div>
-                ))}
-              </dl>
-            </div>
+          <div className="reveal flex flex-col justify-center rounded-2xl border border-line bg-card p-6 shadow-paper">
+            <Kicker>the constraint nobody mentions</Kicker>
+            <h3 className="display-tight mt-3 text-[1.375rem]">
+              A fix is only useful if the person approving it can send it.
+            </h3>
+            <p className="mt-3 text-[0.9375rem] leading-[1.7] text-ink-2">
+              Baton&rsquo;s output is always a message or a change with someone&rsquo;s name on it.
+              A chief executive cannot approve &ldquo;Sally, this is the last working day this can
+              move&rdquo; to somebody three levels down they have never worked with; it would land
+              as a summons, not a nudge. The person who can send that sentence is the one
+              accountable for the date. So that is who Baton reports to, and it is why the
+              board-level view at the top of that diagram has a cross through it rather than being
+              the flagship feature.
+            </p>
           </div>
+        </div>
+
+        <div className="reveal mt-5 rounded-2xl border border-line bg-card p-6 shadow-paper sm:p-7">
+          <Kicker>the shape of a deployment</Kicker>
+          <dl className="mt-5 grid gap-6 sm:grid-cols-3 sm:gap-8">
+            {[
+              ['One workstream', 'Five to thirty people, one accountable lead, one set of dates. The graph stays readable, and every risk names people the lead actually knows.'],
+              ['One coworker per team', 'Baton is provisioned into the workspace as a member, so its permissions are that team’s permissions and it can never reach further than the team can.'],
+              ['A roll-up for a director', 'Somebody who owns three teams switches between three boards and sees three health numbers. It is a switcher, not a merge: the risks stay where the standing to fix them is.'],
+            ].map(([t, d]) => (
+              <div key={t}>
+                <div className="flex items-center gap-2.5">
+                  <span className="baton-rule w-4" />
+                  <dt className="text-[0.9375rem] font-semibold text-ink">{t}</dt>
+                </div>
+                <dd className="mt-2 text-[0.875rem] leading-[1.65] text-ink-2">{d}</dd>
+              </div>
+            ))}
+          </dl>
         </div>
 
         {/* the journey */}

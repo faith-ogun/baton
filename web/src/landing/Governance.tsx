@@ -38,9 +38,15 @@ const SPLIT = [
     tone: 'agent' as const,
     label: 'The model',
     sub: 'OpenAI Agents SDK',
+    // Five, matching the deterministic column, because three against five read
+    // as though the model had been undersold. These are the real jobs, not
+    // padding: classifying a question and phrasing the answer are genuinely two
+    // steps, and the Ask panel needs both.
     items: [
       'Is this message an ask, and to whom',
       'Which project a message belongs to, when it is named loosely',
+      'Which question was asked, when somebody types one in plain language',
+      'How to phrase the answer the graph computed',
       'The wording of the nudge a human will read',
     ],
   },
@@ -62,8 +68,12 @@ export function Governance() {
           lede="The model never decides whether to act. It never decides who is at risk, or how badly. It writes sentences, and a rule you can read decides everything else."
         />
 
-        <div className="mt-12 grid gap-5 lg:grid-cols-[1fr_1.05fr]">
-          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-1">
+        {/* The split sits in its own full-width row. It used to share a row
+            with the registry panel, which is tall, so both cards were
+            stretched to match it and each ended up with a pool of empty space
+            under its bullets. Two rows, and nothing stretches. */}
+        <div className="mt-12 grid gap-5 md:grid-cols-2">
+          <>
             {SPLIT.map((col) => (
               <div
                 key={col.label}
@@ -89,9 +99,13 @@ export function Governance() {
                 </ul>
               </div>
             ))}
-          </div>
+          </>
+        </div>
 
-          {/* the registry, shown rather than described */}
+        {/* The registry beside the three guarantees, because the YAML is tall
+            and three stacked cards are the only thing on the page tall enough
+            to sit next to it without leaving a hole. */}
+        <div className="mt-5 grid gap-5 lg:grid-cols-[1.05fr_1fr]">
           <div className="reveal overflow-hidden rounded-2xl border border-line bg-ink shadow-lift">
             <div className="flex items-center gap-3 border-b border-onink-line px-5 py-3.5">
               <Kicker tone="paper">rules.yaml</Kicker>
@@ -108,19 +122,19 @@ export function Governance() {
               thresholds inside a prompt.
             </p>
           </div>
-        </div>
 
-        <div className="reveal mt-5 grid gap-5 sm:grid-cols-3">
-          {[
-            ['Nothing auto-sends', 'Every action is a draft until a person approves it. There is no mode that changes this.'],
-            ['Recipients confirmed server-side', 'The approval names the exact address. An idempotency key means a retry can never double-send.'],
-            ['Its own identity', 'Baton acts as Baton, with its own permissions, so no message ever appears to come from you.'],
-          ].map(([h, b]) => (
-            <div key={h} className="rounded-2xl border border-line bg-card p-5 shadow-paper">
-              <h4 className="text-[0.9375rem] font-semibold">{h}</h4>
-              <p className="mt-2 text-[0.875rem] leading-[1.6] text-ink-2">{b}</p>
-            </div>
-          ))}
+          <div className="reveal flex flex-col gap-5">
+            {[
+              ['Nothing auto-sends', 'Every action is a draft until a person approves it. There is no mode that changes this, and no setting to find.'],
+              ['Recipients confirmed server-side', 'The approval names the exact address, resolved from the workspace directory rather than taken from the client. An idempotency key means a retry can never double-send.'],
+              ['Its own identity', 'Baton acts as Baton, with the team’s permissions, so no message ever appears to come from you and it can never reach further than the team can.'],
+            ].map(([h, b]) => (
+              <div key={h} className="flex-1 rounded-2xl border border-line bg-card p-5 shadow-paper">
+                <h4 className="text-[0.9375rem] font-semibold">{h}</h4>
+                <p className="mt-2 text-[0.875rem] leading-[1.6] text-ink-2">{b}</p>
+              </div>
+            ))}
+          </div>
         </div>
       </Container>
     </section>
