@@ -1,5 +1,6 @@
 import type { AuditEntry } from '../types';
 import { APP_ICON } from '../ui/icons';
+import { ChevronIcon } from '../ui/theme-icons';
 
 function clock(iso: string) {
   const d = new Date(iso);
@@ -14,16 +15,35 @@ function clock(iso: string) {
  * made visible: it is the same set of rows that go into the audit sheet in the
  * workspace, which is also where the persistence lives.
  */
-export function AuditTimeline({ entries }: { entries: AuditEntry[] }) {
+export function AuditTimeline({
+  entries,
+  open = true,
+  onToggle,
+}: {
+  entries: AuditEntry[];
+  open?: boolean;
+  onToggle?: () => void;
+}) {
   return (
     <div className="flex h-full min-h-0 flex-col">
-      <div className="flex h-[30px] shrink-0 items-center gap-2.5 border-b border-hair px-3.5">
+      {/* The header doubles as the collapse control, so the strip can be a
+          one-line peek or a full window without a separate chrome affordance. */}
+      <button
+        type="button"
+        onClick={onToggle}
+        className="flex h-[30px] w-full shrink-0 items-center gap-2.5 border-b border-hair px-3.5 text-left transition-colors hover:bg-panel-2"
+      >
         <span className="baton-rule w-4" />
         <span className="kicker text-dim">audit trail</span>
-        <span className="ml-auto font-mono text-[0.625rem] text-dim">
+        {!open && entries[0] && (
+          <span className="truncate text-[0.6875rem] text-mid">{entries[0].verb}</span>
+        )}
+        <span className="ml-auto flex items-center gap-2 font-mono text-[0.625rem] text-dim">
           {entries.length} actions · written to Sheets
+          <ChevronIcon size={13} className={open ? '' : 'rotate-180'} />
+          <kbd className="rounded border border-hair-2 px-1">\</kbd>
         </span>
-      </div>
+      </button>
 
       <ol className="min-h-0 flex-1 divide-y divide-hair overflow-y-auto">
         {entries.map((e, i) => (

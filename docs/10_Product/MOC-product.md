@@ -21,6 +21,11 @@ What Baton is, who it is for, and why it wins.
 - [[The user journey]] — Rachel's five minutes on a Monday
 - [[The naming and brand]] — the mark, the palette, the slogan
 
+## Setting it up
+
+- [[The Ambiguous workspace setup]] — what to name the workspace, who is in it, and why the
+  workspace is the company rather than the product
+
 ## Boundaries
 
 - [[Scope guards]] — what was deliberately not built

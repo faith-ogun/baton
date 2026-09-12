@@ -7,6 +7,7 @@ const KEYS: [string, string][] = [
   ['R', 'toggle the rules registry'],
   ['F', 'fit the graph'],
   ['[  ]', 'narrow / widen the queue'],
+  ['\\', 'open / close the audit trail'],
   ['G', 'light or dark'],
   ['T', 'start the tour'],
   ['?', 'this list'],

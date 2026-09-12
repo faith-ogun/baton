@@ -1,0 +1,25 @@
+{
+  "name": "baton-video",
+  "version": "1.0.0",
+  "description": "Remotion animation for the Baton README hero",
+  "scripts": {
+    "studio": "remotion studio",
+    "render": "remotion render ReadmeHero out/thumbnail.mp4",
+    "still": "remotion still ReadmeHero"
+  },
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "@remotion/cli": "^4.0.523",
+    "@remotion/google-fonts": "^4.0.523",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0",
+    "remotion": "^4.0.523"
+  },
+  "devDependencies": {
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "typescript": "^7.0.2"
+  },
+  "private": true
+}

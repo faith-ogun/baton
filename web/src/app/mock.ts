@@ -121,7 +121,7 @@ export const RISKS: Risk[] = [
       label: 'Send the nudge',
       summary: 'Reply in the existing thread, addressed to Sally only, with the deadline stated.',
       app: 'Mail',
-      to: ['sally@aldermere.ambi'],
+      to: ['sally.ahmed@aldermere.ambi.cc'],
       draft:
         'Hi Sally, quick one on Module 3. Nicolas asked for your sign-off on 6 September and I do not think it reached you as an action, the thread had five people on it. The filing is on 14 September, so this is the last working day it can move. Is there anything blocking the sign-off I can clear from here? Baton',
     },
@@ -317,7 +317,7 @@ export const RULES: Rules = {
 export function mockState(): WorkspaceState {
   return {
     generatedAt: new Date().toISOString(),
-    workspace: 'aldermere.ambi',
+    workspace: 'aldermere.ambi.cc',
     scope: SCOPE,
     health: 61,
     connected: false,

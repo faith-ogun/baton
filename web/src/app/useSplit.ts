@@ -1,18 +1,31 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 
-const KEY = 'baton:split';
+type Axis = 'x' | 'y';
+
+interface Options {
+  axis?: Axis;
+  initial: number;
+  min: number;
+  max: number;
+  /** localStorage key, so a layout somebody set stays set. */
+  key: string;
+}
 
 /**
- * A draggable divider between the graph and the queue.
+ * A draggable pane divider, for either axis.
  *
- * Stores the QUEUE's width rather than the graph's, because the queue has a
- * legible minimum (a sentence plus a number) while the graph will happily use
- * whatever is left. Width is persisted, so the layout a person set stays set.
+ * It stores the size of the SECONDARY pane (the queue's width, the audit
+ * strip's height) rather than the primary one, because the secondary pane has a
+ * legible minimum while the graph will happily use whatever is left over.
+ *
+ * Horizontal drags measure from the right edge and vertical from the bottom,
+ * which is where those panes are anchored; measuring from the origin instead
+ * makes the divider drift whenever the window is resized.
  */
-export function useSplit(initial = 404, min = 300, max = 760) {
-  const [width, setWidth] = useState(() => {
+export function useSplit({ axis = 'x', initial, min, max, key }: Options) {
+  const [size, setSize] = useState(() => {
     try {
-      const saved = Number(localStorage.getItem(KEY));
+      const saved = Number(localStorage.getItem(key));
       if (saved >= min && saved <= max) return saved;
     } catch {
       /* blocked storage falls through to the default */
@@ -22,27 +35,27 @@ export function useSplit(initial = 404, min = 300, max = 760) {
   const [dragging, setDragging] = useState(false);
   const frame = useRef(0);
 
-  const clamp = useCallback((w: number) => Math.max(min, Math.min(max, w)), [min, max]);
+  const clamp = useCallback((v: number) => Math.max(min, Math.min(max, v)), [min, max]);
 
   useEffect(() => {
     if (!dragging) return;
 
     const onMove = (e: MouseEvent) => {
-      // rAF-throttled: a mousemove can fire faster than the browser paints, and
+      // rAF-throttled: a mousemove fires faster than the browser paints, and
       // every change here resizes a canvas.
       if (frame.current) return;
       frame.current = requestAnimationFrame(() => {
         frame.current = 0;
-        setWidth(clamp(window.innerWidth - e.clientX));
+        setSize(clamp(axis === 'x' ? window.innerWidth - e.clientX : window.innerHeight - e.clientY));
       });
     };
     const onUp = () => setDragging(false);
 
     window.addEventListener('mousemove', onMove);
     window.addEventListener('mouseup', onUp);
-    // Without these the pointer picks up a text caret and the whole page
-    // selects while you drag, which is the giveaway of a hand-rolled splitter.
-    document.body.style.cursor = 'col-resize';
+    // Without these the pointer picks up a text caret and the page selects as
+    // you drag, which is the giveaway of a hand-rolled splitter.
+    document.body.style.cursor = axis === 'x' ? 'col-resize' : 'row-resize';
     document.body.style.userSelect = 'none';
 
     return () => {
@@ -53,17 +66,18 @@ export function useSplit(initial = 404, min = 300, max = 760) {
       if (frame.current) cancelAnimationFrame(frame.current);
       frame.current = 0;
     };
-  }, [dragging, clamp]);
+  }, [dragging, clamp, axis]);
 
   useEffect(() => {
     try {
-      localStorage.setItem(KEY, String(width));
+      localStorage.setItem(key, String(size));
     } catch {
-      /* the width still applies for this session */
+      /* the size still applies for this session */
     }
-  }, [width]);
+  }, [key, size]);
 
-  const nudge = useCallback((by: number) => setWidth((w) => clamp(w + by)), [clamp]);
+  const nudge = useCallback((by: number) => setSize((v) => clamp(v + by)), [clamp]);
+  const set = useCallback((v: number) => setSize(clamp(v)), [clamp]);
 
-  return { width, dragging, startDrag: () => setDragging(true), nudge };
+  return { size, dragging, startDrag: () => setDragging(true), nudge, set, reset: () => set(initial) };
 }

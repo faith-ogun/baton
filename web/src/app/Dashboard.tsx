@@ -13,6 +13,7 @@ import { RiskRow } from './RiskRow';
 import { RulesDrawer } from './RulesDrawer';
 import { Shortcuts } from './Shortcuts';
 import { Tour } from './Tour';
+import { Divider } from './Divider';
 import { useSplit } from './useSplit';
 
 /** Team health, 0-100. A ring and a number: cheap to compute, big payoff. */
@@ -173,7 +174,13 @@ export function Dashboard() {
   const [sort, setSort] = useState<'severity' | 'cost'>('severity');
   const [openId, setOpenId] = useState<string | null>(null);
   const graph = useRef<GraphHandle | null>(null);
-  const { width, dragging, startDrag, nudge } = useSplit();
+
+  const queue = useSplit({ axis: 'x', initial: 404, min: 300, max: 760, key: 'baton:split' });
+  // The audit strip is a peek by default and a full window when you drag it up,
+  // because most of the time you want to know the last thing Baton did, and
+  // occasionally you want to read everything it has ever done.
+  const audit = useSplit({ axis: 'y', initial: 172, min: 30, max: 620, key: 'baton:audit' });
+  const auditOpen = audit.size > 120;
 
   const rate = state.rules.cost_model.blended_day_rate_gbp;
 
@@ -245,10 +252,14 @@ export function Dashboard() {
           graph.current?.fit();
           break;
         case '[':
-          nudge(-48);
+          queue.nudge(-48);
           break;
         case ']':
-          nudge(48);
+          queue.nudge(48);
+          break;
+        case '\\':
+          e.preventDefault();
+          audit.set(auditOpen ? 30 : 420);
           break;
         case 'g':
           toggleTheme();
@@ -267,7 +278,7 @@ export function Dashboard() {
     };
     window.addEventListener('keydown', onKey);
     return () => window.removeEventListener('keydown', onKey);
-  }, [step, openId, approve, dismiss, trigger, nudge, toggleTheme]);
+  }, [step, openId, approve, dismiss, trigger, queue, audit, auditOpen, toggleTheme]);
 
   return (
     <div className="app-shell flex h-dvh flex-col overflow-hidden bg-void text-strong">
@@ -350,35 +361,18 @@ export function Dashboard() {
               </div>
             </section>
 
-            {/* the divider */}
-            <div
-              role="separator"
-              aria-orientation="vertical"
-              aria-label="Resize the queue"
-              onMouseDown={startDrag}
-              onDoubleClick={() => nudge(404 - width)}
-              className={`group relative w-px shrink-0 cursor-col-resize transition-colors ${
-                dragging ? 'bg-accent' : 'bg-hair hover:bg-accent'
-              }`}
-            >
-              {/*
-                A 1px divider is a 1px target, which nobody can hit. The real
-                grab area is this: 13px of transparent nothing centred on the
-                hairline, spilling over both panels. Fitts's law, basically.
-              */}
-              <span className="absolute inset-y-0 -left-[6px] w-[13px] cursor-col-resize" />
-              <span
-                aria-hidden
-                className={`absolute top-1/2 left-1/2 h-7 w-[3px] -translate-x-1/2 -translate-y-1/2 rounded-full transition-colors ${
-                  dragging ? 'bg-accent' : 'bg-hair-2 group-hover:bg-accent'
-                }`}
-              />
-            </div>
+            <Divider
+              axis="x"
+              dragging={queue.dragging}
+              onDrag={queue.startDrag}
+              onReset={queue.reset}
+              label="Resize the queue"
+            />
 
             {/* the queue */}
             <section
               className="flex shrink-0 flex-col bg-void"
-              style={{ width }}
+              style={{ width: queue.size }}
               data-tour="queue"
             >
               <div className="flex h-[30px] shrink-0 items-center gap-2.5 border-b border-hair bg-panel px-3.5">
@@ -420,9 +414,24 @@ export function Dashboard() {
             </section>
           </div>
 
-          {/* the audit strip */}
-          <section className="h-[172px] shrink-0 border-t border-hair bg-panel" data-tour="audit">
-            <AuditTimeline entries={state.audit} />
+          {/* the audit trail, resizable from a peek to a full window */}
+          <Divider
+            axis="y"
+            dragging={audit.dragging}
+            onDrag={audit.startDrag}
+            onReset={audit.reset}
+            label="Resize the audit trail"
+          />
+          <section
+            className="shrink-0 overflow-hidden bg-panel"
+            style={{ height: audit.size }}
+            data-tour="audit"
+          >
+            <AuditTimeline
+              entries={state.audit}
+              open={auditOpen}
+              onToggle={() => audit.set(auditOpen ? 30 : 420)}
+            />
           </section>
 
           {/* ── status bar ─────────────────────────────────── */}
