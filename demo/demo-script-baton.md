@@ -1,11 +1,17 @@
-# Baton — Demo Video Script (hard 2:00, lands ~1:52)
+# Baton — Demo Video Script (hard 2:00, lands ~1:56)
 
 **Why this version:** the hackathon brief is a **2-minute** video, and only what is inside it gets
 scored. So this is not the full product tour. It is the one spine that proves the category claim,
 cut to a real spoken length, against the **live Ambiguous workspace** rather than seeded data.
 
-**Measured (not guessed):** the voice-over is **278 spoken words**, across exactly five spoken lines.
-- at 140 wpm → **1:59** · at 150 wpm → **1:51** · at 155 wpm → **1:48** · at 165 wpm → **1:41**
+**Measured (not guessed):** the voice-over is **296 spoken words**, across exactly five spoken lines.
+- at 140 wpm → **2:07** · at 150 wpm → **1:58** · at 155 wpm → **1:55** · at 165 wpm → **1:48**
+
+At 140 wpm this crosses 2:00, so take cut 1 below if your calibration comes in slow. Parts 4 and 5
+were rewritten after the first voice-over pass: Part 4 now names what the OpenAI model actually
+does, because the earlier line led with what it does not do, which read as though the model were
+barely involved. **Only those two lines changed.** Parts 1, 2 and 3 are word for word as recorded,
+so nothing else needs another take.
 
 Every production note in this file is deliberately **not** a blockquote. In this format `>` means
 "words you say out loud", so a note written as one would be counted and the running time above
@@ -100,25 +106,25 @@ rather than fighting it.
 
 ---
 
-## PART 4 — The judgement is a file, and it refuses things (1:24 – 1:44)
-**~22 seconds · 55 words**
+## PART 4 — What the model does, and what it never does (1:24 – 1:47)
+**~23 seconds · 56 words**
 
 - `[SCREEN: press R. Drag `no_update_days`. The severities re-score in front of you. Then press / and click the suggestion "Send Sally a nudge", and let the refusal sit on screen for two full seconds.]`
 
 - `[CAP: "It declines. The only route to an action is Approve."]`
 
-> "Most of this needs no model at all. Every threshold that decides what counts as dropped is one file you can read, and moving a number re-scores the queue in front of you. You can ask it questions in plain language, and it answers from the graph. Ask it to send something, and it says it cannot."
+> "The OpenAI model does the language work. It reads a thread, decides whether it is an ask, links a loosely named project, and writes the sentence a human will send. What it never decides is whether to act. Ask it a question and it answers from the graph; ask it to send something and it declines."
 
 ---
 
-## PART 5 — The claim (1:44 – 1:58)
-**~14 seconds · 24 words**
+## PART 5 — The claim (1:47 – 1:58)
+**~18 seconds · 44 words**
 
 - `[ANIM: clips/why-not-a-chatbox.mp4 — rendered and ready, 14s at 1920x1080, silent. It runs longer than the words, which is fine: this is the one place in the film to let a shot breathe. Start it as you begin the line. Its first beat, the chat window answering correctly and uselessly, reads on its own in about 4s.]`
 
 - `[If you need to claw back time, trim the clip's head by 4s and start on the graph assembling. The spoken line carries the beat either way.]`
 
-> "This cannot exist in a chat window. A chatbot answers the question you thought to ask, and every risk here is one you did not."
+> "This cannot exist in a chat window. A chatbot answers the question you thought to ask, and every risk here is one you did not: nobody thinks to ask which thread went quiet next to which deadline. Baton reads all of them at once."
 
 ---
 
@@ -169,7 +175,8 @@ the written submission or a longer cut.
 
 ## Cut order if it runs long
 
-1. The rules-drawer half of Part 4, keeping only the Ask refusal (~8s)
+1. In Part 2, the clause "so there is no document you could open that contains it", which restates
+   the sentence before it (~5s)
 2. The head of the `why-not-a-chatbox` cutaway in Part 5, starting on the graph rather than the chat window (~4s)
 3. The "sitting alongside the five people it watches" clause in Part 1 (~4s). **Never cut the member-list shot itself.**
 
@@ -209,8 +216,13 @@ duplicated, but do not lean on it. Click once and wait for the card to fly out.
   you want the sole-owner card as the hero, fire it once in rehearsal first and re-seed.
 - **Do not narrate a live workspace over a seeded one.** If the status bar says `seeded workspace`,
   the dev server has not picked up `web/.env.local`; restart it.
-- **Never say "deterministic" on camera.** Say "needs no model at all", or "cannot go differently on
-  a second run".
+- **Never say "deterministic" on camera.** Say "cannot go differently on a second run".
+  And never say "most of this needs no model at all", which was the old Part 4 line. It is true and
+  it is still a terrible thing to say in a room judging agents: it hands back the credit for the
+  hardest part of the build. Name the model's job out loud instead. Reading a thread and deciding
+  whether it is an ask, resolving "the Aldermere thing" to a project, and writing a sentence a
+  manager is willing to put their name to are the parts a rule cannot do at all. The claim is a
+  **division of labour**, not an absence of model: the model reads and writes, the registry decides.
 - **Do not claim the open-loop detector.** Mail is recipient-scoped in Ambiguous so Baton cannot
   read Frank's ask, and that detector is not running. Three detectors are live: sole owner, unbooked
   deadline, and stalled task. Say "four things about to fall through the cracks", which is the true
