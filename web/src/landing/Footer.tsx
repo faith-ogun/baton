@@ -51,67 +51,76 @@ export function Footer() {
   return (
     <footer className="border-t border-line bg-paper">
       <Container className="py-12 sm:py-14">
-        <div className="grid gap-x-12 gap-y-9 md:grid-cols-2 lg:grid-cols-[1.05fr_repeat(3,0.7fr)]">
-          <div className="lg:row-span-1">
+        <div className="grid gap-10 lg:grid-cols-[auto_1fr] lg:gap-16">
+          {/* The mark fills its column rather than sitting in the top of it:
+              the CTA is pushed to the bottom, so whatever height the right-hand
+              block ends up being, this side has no dead air under it. */}
+          <div className="flex flex-col lg:min-h-full">
             <Link to="/" className="inline-block">
-              <Lockup width={168} className="transition-opacity hover:opacity-85" />
+              <Lockup width={224} className="transition-opacity hover:opacity-85" />
             </Link>
-            <p className="display-tight mt-4 text-[1.25rem]">
+            <p className="display-tight mt-5 text-[1.5rem]">
               Never drop the <em className="display-em text-accent-mid">baton</em>.
             </p>
             <Link
               to="/app"
-              className="group mt-5 inline-flex items-center gap-2 rounded-full bg-ink px-4 py-2 text-[0.8125rem] font-medium text-paper shadow-press transition-all duration-150 hover:bg-ink-2 active:translate-y-[2px] active:shadow-none"
+              className="group mt-6 inline-flex w-fit items-center gap-2 rounded-full bg-ink px-4 py-2 text-[0.8125rem] font-medium text-paper shadow-press transition-all duration-150 hover:bg-ink-2 active:translate-y-[2px] active:shadow-none lg:mt-auto"
             >
               Open the dashboard
               <Arrow />
             </Link>
           </div>
 
-          {COLUMNS.map(([heading, links]) => (
-            <div key={heading}>
-              <div className="flex items-center gap-2">
-                <span className="baton-rule w-3.5" />
-                <Kicker tone="ink">{heading}</Kicker>
-              </div>
-              <ul className="mt-3.5 space-y-2">
-                {links.map(([label, href]) =>
-                  href.startsWith('/') ? (
-                    <li key={label}>
-                      <Link
-                        to={href}
-                        className="text-[0.875rem] text-ink-2 transition-colors hover:text-accent-ink"
-                      >
-                        {label}
-                      </Link>
-                    </li>
-                  ) : (
-                    <li key={label}>
-                      <a
-                        href={href}
-                        className="text-[0.875rem] text-ink-2 transition-colors hover:text-accent-ink"
-                      >
-                        {label}
-                      </a>
-                    </li>
-                  ),
-                )}
-              </ul>
+          {/* Links and description in ONE column, stacked. They were previously
+              separate grid rows, which meant the description could not start
+              until the tallest item in the first row had finished, so it sat in
+              a pool of empty space well below the links it belongs under. */}
+          <div>
+            <div className="grid gap-8 sm:grid-cols-3">
+              {COLUMNS.map(([heading, links]) => (
+                <div key={heading}>
+                  <div className="flex items-center gap-2">
+                    <span className="baton-rule w-3.5" />
+                    <Kicker tone="ink">{heading}</Kicker>
+                  </div>
+                  <ul className="mt-3.5 space-y-2">
+                    {links.map(([label, href]) =>
+                      href.startsWith('/') ? (
+                        <li key={label}>
+                          <Link
+                            to={href}
+                            className="text-[0.875rem] text-ink-2 transition-colors hover:text-accent-ink"
+                          >
+                            {label}
+                          </Link>
+                        </li>
+                      ) : (
+                        <li key={label}>
+                          <a
+                            href={href}
+                            className="text-[0.875rem] text-ink-2 transition-colors hover:text-accent-ink"
+                          >
+                            {label}
+                          </a>
+                        </li>
+                      ),
+                    )}
+                  </ul>
+                </div>
+              ))}
             </div>
-          ))}
 
-          {/* The description runs along the lower row, under the links, because
-              that is where the blank space was. */}
-          <p className="text-[0.9375rem] leading-[1.7] text-ink-2 md:col-span-2 lg:col-span-3 lg:col-start-2 lg:self-end">
-            An AI coworker that makes sure nothing gets dropped. It lives inside your team&rsquo;s
-            Ambiguous workspace, holds the whole graph of who owes whom what, and catches the ask
-            nobody answered, the person carrying too much and the deadline nobody booked, then hands
-            each one off before it drops. Nothing auto-sends; every action is approved by a human and
-            logged into a sheet the team can read.
-          </p>
+            <p className="mt-7 text-[0.9375rem] leading-[1.7] text-ink-2">
+              An AI coworker that makes sure nothing gets dropped. It lives inside your team&rsquo;s
+              Ambiguous workspace, holds the whole graph of who owes whom what, and catches the ask
+              nobody answered, the person carrying too much and the deadline nobody booked, then
+              hands each one off before it drops. Nothing auto-sends; every action is approved by a
+              human and logged into a sheet the team can read.
+            </p>
+          </div>
         </div>
 
-        <div className="mt-9 flex flex-col gap-2 border-t border-line-2 pt-5 sm:flex-row sm:items-center sm:justify-between">
+        <div className="mt-10 flex flex-col gap-2 border-t border-line-2 pt-5 sm:flex-row sm:items-center sm:justify-between">
           <p className="font-mono text-[0.6875rem] leading-relaxed text-ink-3">
             Faith Ogundimu · Agents, Everywhere · 12 September 2026
           </p>
