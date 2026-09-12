@@ -78,13 +78,14 @@ try:
     # wants; append_audit(entry) writes the row and returns whether the
     # workspace took it. This module calls all three and implements none.
     from executor import audit_entry, execute
-    from audit import append_audit
+    from audit import append_audit, read_audit
 
     _CAN_ACT = True
 except ImportError as exc:  # pragma: no cover - depends on a sibling file existing
     execute = None  # type: ignore[assignment]
     audit_entry = None  # type: ignore[assignment]
     append_audit = None  # type: ignore[assignment]
+    read_audit = None  # type: ignore[assignment]
     _CAN_ACT = False
     log.warning("executor/audit not importable yet (%s); approve will answer 503", exc)
 
@@ -277,6 +278,29 @@ async def lifespan(app: FastAPI):
         log.info("connected as %s in %s (%d nodes)", STORE.state["scope"]["org"] or "?", STORE.state["workspace"], len(who))
     except Exception as exc:
         log.error("startup pull failed: %s: %s", type(exc).__name__, exc)
+
+    # Rehydrate the audit trail from the sheet in the workspace.
+    #
+    # The rows always survived a restart, because the sheet IS the store; it
+    # was only the on-screen timeline that forgot them, so a restarted
+    # dashboard claimed Baton had done nothing. On Cloud Run that matters more
+    # than locally, since the service scales to zero and every cold start
+    # would have shown an empty trail.
+    #
+    # Note what this deliberately is not: a database. Adding one to fix a
+    # missing read would have created a second source of truth and given up
+    # the claim that the record lives where the audited team can read it.
+    if read_audit is not None:
+        try:
+            rows = await read_audit()
+            if rows:
+                with STORE.lock:
+                    STORE.audit = rows
+                    STORE.state["audit"] = list(rows)
+                log.info("rehydrated %d audit row(s) from the workspace sheet", len(rows))
+        except Exception as exc:  # pragma: no cover - network shape
+            log.warning("could not rehydrate the audit trail: %s", exc)
+
     task = asyncio.create_task(sweep_forever())
     try:
         yield

@@ -31,3 +31,8 @@ __pycache__/
 # remotion
 video/node_modules/
 video/out/
+
+# caption pill renders: 143MB of alpha ProRes, editing intermediates for
+# iMovie rather than repo content. The PNG stills and the Remotion sources
+# under video/src/captions are committed, so any pill can be re-rendered.
+demo/captions/*.mov

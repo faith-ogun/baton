@@ -121,3 +121,68 @@ async def append_audit(entry: dict[str, Any]) -> bool:
             return r.status_code < 400
     except Exception:
         return False
+
+
+async def read_audit(limit: int = 60) -> list[dict[str, Any]]:
+    """Rehydrate the audit trail from the sheet, newest first.
+
+    This is the other half of `append_audit`, and its absence was a real
+    fragility rather than a cosmetic one: the rows always survived a restart
+    because they live in the workspace, but the timeline on screen forgot
+    them, so the dashboard would claim Baton had done nothing. On Cloud Run
+    that is worse than a fragility, because the service scales to zero and
+    every cold start would show an empty trail.
+
+    Worth being explicit about why this is not a database. The sheet is
+    already the store, deliberately: it is the deepest available integration
+    with the environment, and it puts the record where the team being audited
+    can read it rather than somewhere only the operator can. Adding Firestore
+    to fix a missing read would have introduced a second source of truth and
+    given up that claim, to solve a problem the sheet had already solved.
+
+    Never raises. A trail we cannot read is a worse outcome than an empty one
+    only if we lie about it, so on failure it returns nothing and the caller
+    logs it.
+    """
+    try:
+        async with httpx.AsyncClient(timeout=20.0) as client:
+            sheet_id = await _find_sheet(client)
+            if not sheet_id:
+                return []
+            r = await client.get(
+                f"{BASE}/api/sheets/{sheet_id}/range",
+                headers=_headers(),
+                params={"spec": f"Sheet1!A1:F{limit + 1}"},
+            )
+            if r.status_code >= 400:
+                return []
+
+            body = r.json() or {}
+            rows = body.get("values") or body.get("data") or []
+            out: list[dict[str, Any]] = []
+            for row in rows:
+                if not row or not isinstance(row, list):
+                    continue
+                cells = [str(c) if c is not None else "" for c in row]
+                cells += [""] * (6 - len(cells))
+                # Skip the header, which is the only row whose first cell is
+                # not a timestamp.
+                if cells[0].strip().lower() == "when" or not cells[0].strip():
+                    continue
+                out.append(
+                    {
+                        "id": f"a:sheet-{len(out)}",
+                        "at": cells[0],
+                        "riskId": cells[1] or None,
+                        "verb": cells[2],
+                        "detail": cells[3],
+                        "app": cells[4] or "Sheets",
+                        "approvedBy": cells[5],
+                    }
+                )
+            # The sheet is append-only, so the newest row is last. The UI wants
+            # newest first.
+            out.reverse()
+            return out
+    except Exception:
+        return []
