@@ -4,8 +4,8 @@
 scored. So this is not the full product tour. It is the one spine that proves the category claim,
 cut to a real spoken length, against the **live Ambiguous workspace** rather than seeded data.
 
-**Measured (not guessed):** the voice-over is **293 spoken words**, across exactly five spoken lines.
-- at 140 wpm → **2:06** · at 150 wpm → **1:57** · at 155 wpm → **1:53** · at 165 wpm → **1:47**
+**Measured (not guessed):** the voice-over is **298 spoken words**, across exactly five spoken lines.
+- at 140 wpm → **2:08** · at 150 wpm → **1:59** · at 155 wpm → **1:55** · at 165 wpm → **1:48**
 
 At 140 wpm this crosses 2:00, so take cut 1 below if your calibration comes in slow. Parts 4 and 5
 were rewritten after the first voice-over pass: Part 4 now names what the OpenAI model actually
@@ -75,13 +75,19 @@ task list with a red tint.
 ## PART 2 — The risk that is invisible from inside any app (0:22 – 0:50)
 **~26 seconds · 60 words**
 
-**Note: click the SECOND card, not the first.**
+**Note: click the FIRST card. This changed at 15:48.**
 
-A stalled task sits at the top scoring 99, because a stall's score climbs the
-longer it sits and it will be pinned at the cap by recording time. The card you
-want is the one below it: **"Priya is the only owner of 4 critical items", 82**.
-The line below is written for that, and it turns the ordering into the point
-rather than fighting it.
+The card you want is **"Priya is the only owner of 4 critical items", 82**, and it is now the top
+one, because the stall threshold was retuned to stop seven tasks firing at once. So the recorded
+line "the one that matters is not the late task at the top" is no longer true.
+
+**Re-record just that opening clause.** Say this instead, which is a better line anyway because the
+point is that the worst risk is not a task at all:
+
+`SAY: "The one that matters is right at the top, and it is not a task at all."` (not a blockquote,
+because in this file a blockquote is counted as spoken words and this is the same line as below.)
+
+Then carry straight on with the rest of the line, unchanged, from "Priya is the only person".
 
 - `[SCREEN: click the sole-owner card, the second one. It expands. The graph dims to just her cluster, her node wearing its dashed sole-owner collar.]`
 
@@ -89,7 +95,7 @@ rather than fighting it.
 
 - `[CAP: "spof · 4 sole-owned critical items > 3 · betweenness 1.00 > 0.90"]`
 
-> "The one that matters is not the late task at the top. Priya is the only person who can finish four items on the critical path, and her betweenness across the graph is one. That is not in any record. It is the shape of the work, so there is no document you could open that contains it. It is worth four thousand pounds if she is out for a week."
+> "The one that matters is right at the top, and it is not a task at all. Priya is the only person who can finish four items on the critical path, and her betweenness across the graph is one. That is not in any record. It is the shape of the work, so there is no document you could open that contains it. It is worth four thousand pounds if she is out for a week."
 
 ---
 
@@ -210,10 +216,18 @@ The calendar endpoint does **not** honour `Idempotency-Key`: two identical posts
 events. The route now only accepts a risk in `open`, so a double click is refused rather than
 duplicated, but do not lean on it. Click once and wait for the card to fly out.
 
-- **The board carries 4 risks**, in this order: a stalled task pinned at **99**, the sole-owner at
-  **82**, then the 13 and 14 September unbooked deadlines at **66** and **64**. Health around 51.
-  The sole-owner risk is £4,160 of it. **Click the second card, not the first**; see the note in
-  Part 2.
+- **The board carries 4 risks**, in this order: **the sole-owner at 82**, the stalled task at
+  **78**, then the 13 and 14 September unbooked deadlines at **66** and **64**. Health **58**.
+  Total £9,360, of which the sole-owner risk is £4,160. **Click the FIRST card**; the ordering
+  changed at 15:48, see the note in Part 2.
+
+  Why it changed: elapsed-time thresholds run in minutes (see `rules.yaml`), and the threshold was
+  calibrated for a 12:40 recording. By 15:40 six more tasks had gone cold and the board was seven
+  stalls at 99, a wall of red that said nothing. `stalled_task.no_update_days` is now 113 minutes,
+  which fires only the genuinely oldest task and restores four legible risks with four different
+  severities. **This holds until roughly 16:08**, when the next cohort crosses 113 minutes. If you
+  are still filming after that, raise it again through the rules drawer or with:
+  `curl -s http://127.0.0.1:8000/api/rules | python3 -c "import json,sys;r=json.load(sys.stdin);r['stalled_task']['no_update_days']=150;print(json.dumps(r))" | curl -s -X PUT http://127.0.0.1:8000/api/rules -H 'Content-Type: application/json' --data @-`
 - **You can record against the deployed site instead of localhost if you prefer.**
   `https://baton-hack-2026.web.app/app` is live, reads `webhooks live` and pulls the same real
   workspace through Cloud Run. Localhost is still the safer bet for the Approve beat, because a
@@ -240,5 +254,6 @@ duplicated, but do not lean on it. Click once and wait for the card to fly out.
 - **Say the company is invented** once, or put it on a caption. Aldermere Bio and the drug name are
   fictional; the records in the workspace are real.
 - No cursor in frame for the cold open. Jump-cut across every load.
-- Money on screen is real: £7,280 across the board, £4,160 on the sole-owner risk, at the £520
-  blended day rate in the registry.
+- Money on screen is real: **£9,360 across the board**, £4,160 on the sole-owner risk, at the £520
+  blended day rate in the registry. Person-days times the rate, and each card shows its own
+  arithmetic in `impact.basis`.
