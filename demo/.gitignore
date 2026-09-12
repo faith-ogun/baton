@@ -1,0 +1,8 @@
+# macOS cruft
+.DS_Store
+
+# scratch renders and intermediates: the finished clips in clips/ ARE the deliverable
+*.mov
+*.aiff
+*.wav
+scratch/

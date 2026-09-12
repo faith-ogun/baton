@@ -1,0 +1,66 @@
+# Baton's rules registry.
+#
+# Every threshold that decides what counts as dropped work is here, in one
+# readable file, and the dashboard's rules drawer edits this same shape through
+# PUT /rules. Detection is deterministic on purpose: a number on screen is
+# always a sum of these constants against workspace facts, never a model's
+# opinion.
+#
+# PUT /rules changes the running registry in memory and does not write back to
+# this file, so the comments below survive a slider being dragged on camera.
+# A restart returns to exactly what is written here.
+
+# Which unit the ELAPSED-time thresholds below are read in: days or minutes.
+#
+# Why this key exists: POST /api/tasks has no created_at or updated_at field,
+# so a task cannot be given a past timestamp. Anything seeded during the build
+# is "updated now", and "no update in 5 days" could never fire inside a
+# four-hour window. Setting minutes runs the identical rule with the identical
+# arithmetic over a scale the demo actually spans, and the unit is quoted in
+# every `because` string, so what is on screen stays literally true. Nothing
+# is ever backdated.
+#
+# Due-date windows are deliberately NOT affected: a due date can be set to any
+# real date through the API, so proximity thresholds are always read in days.
+# Set this to days for real use.
+time_unit: minutes
+
+open_loop_ask:
+  unanswered_business_days: 3
+  escalate_if_deadline_within_days: 2
+
+stalled_task:
+  # 30, against the unit above. Every seeded task was touched between 11:38 and
+  # 11:41Z, so by recording time the four untouched ones are an hour or more
+  # cold and fire, while the two that received comments have a fresher
+  # updated_at and correctly do not. For real use this is 5, in days.
+  no_update_days: 30
+  at_risk_if_due_within_days: 3
+
+deadline:
+  require_calendar_hold: true
+  warn_within_days: 3
+
+spof:
+  max_sole_critical_items: 3
+  betweenness_percentile: 0.9
+
+severity_weights:
+  deadline_proximity: 0.5
+  seniority: 0.2
+  thread_age: 0.3
+
+# Turns person-days at risk into money. The only figure Baton cannot infer
+# from the workspace, so it is stated rather than guessed.
+cost_model:
+  blended_day_rate_gbp: 520
+
+# The cost model behind Risk.impact. Person-days, because days are what the
+# workspace actually knows; the money is days times the rate above. Each
+# detector states its own arithmetic in `impact.basis`, so the reader can
+# follow the sum rather than trust it.
+impact_model:
+  restart_days: 2          # getting a stalled item moving again
+  per_blocked_item_days: 2 # each item waiting behind it
+  rebook_days: 2           # re-booking a commitment nobody held time for
+  per_sole_item_days: 2    # finding cover for one sole-owned item
