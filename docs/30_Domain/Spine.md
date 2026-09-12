@@ -57,11 +57,17 @@ The differentiators to say out loud:
   open loop needs mail **and** the calendar to know it is urgent.
 - **It acts, under its own identity, and logs it.** Detection is half the product; the hand-off is
   the other half and is where the name comes from.
+- **Its Q&A is grounded and read-only, and shows its working.** Spine's GraphRAG answers over
+  embeddings and email context, which is more flexible and less checkable. Baton's Ask panel
+  computes every answer from the graph and lists the nodes it used, refuses anything outside the
+  team's scope, and structurally cannot act. Theirs answers more questions; ours can be audited.
 - **Scoped where the standing to fix things is**, not where the most data is.
 
-One honest overlap to handle rather than hide: our SPOF detector and their dead-man switch are the
-same idea, and theirs is arguably the better-known name for it. The difference is not the metric, it
-is that Baton then **proposes the redistribution and executes it on approval**.
+Two honest overlaps to handle rather than hide. Our SPOF detector and their dead-man switch are the
+same idea, and theirs is arguably the better-known name for it; the difference is not the metric, it
+is that Baton then **proposes the redistribution and executes it on approval**. And they shipped
+graph Q&A first; ours is narrower on purpose, because an answer that cites the four nodes it was
+computed from is worth more here than one that could have come from anywhere.
 
 > [!info] Useful framing borrowed, not copied
 > Their "you pay six figures for a stale assessment" line is a good shape for a problem statement.

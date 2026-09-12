@@ -52,6 +52,12 @@ export const STEPS: Step[] = [
     side: 'top',
   },
   {
+    target: 'ask',
+    title: 'Ask it, in plain language',
+    body: 'Answers are computed from this team\u2019s graph rather than generated, so every one shows the nodes it used and clicking a chip lights them up. It is read-only: ask it to send something and it declines, because there is no path from a question to an action. Ask it about pay or another team and it says that is out of scope.',
+    side: 'left',
+  },
+  {
     target: 'rules',
     title: 'The judgement is a file you can read',
     body: 'Every threshold that decides what counts as dropped lives in one registry. Move a number and the queue re-scores in front of you. The model writes sentences; it never decides whether to act.',

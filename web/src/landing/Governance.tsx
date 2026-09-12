@@ -40,7 +40,7 @@ const SPLIT = [
     sub: 'OpenAI Agents SDK',
     items: [
       'Is this message an ask, and to whom',
-      'Does "the Sentrix thing" mean this project',
+      'Which project a message belongs to, when it is named loosely',
       'The wording of the nudge a human will read',
     ],
   },

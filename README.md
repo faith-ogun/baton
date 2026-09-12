@@ -104,6 +104,7 @@ is derived and what still needs verifying is all in
 | **`J` `K`** then **`A`** | work the queue from the keyboard and approve the open risk. Press **`?`** for all twelve bindings |
 | **`E`** | replays the webhook path by hand, so the live moment in the demo never depends on mail delivery timing |
 | **`R`** | the rules registry, with live sliders. Drag `no_update_days` from 5 to 2 and the stalled risks re-score from 83 and 44 to **95 and 56** in front of you |
+| **`/`** | **Ask** the workspace in plain language. Answers are computed from the graph, so each shows the nodes it used; ask it to send something and it declines |
 | drag any divider | the graph, the queue and the audit trail all resize, and the layout persists |
 | the **SIZE** slider | zoom the graph from 0.3x to 2.6x, or **`F`** to fit it |
 
@@ -136,7 +137,7 @@ This is the section to read if you only read one.
 | | |
 |---|---|
 | **Rules and the graph decide** | every detection, every severity score, who is involved, what is late and by how much, which structural action is proposed, the ranking, the audit trail, the cost model |
-| **The model decides** | is this message an ask and to whom · does "the Sentrix thing" mean this project · the wording of the nudge a human will read |
+| **The model decides** | is this message an ask and to whom · which project a message belongs to, when it is named loosely · the wording of the nudge a human will read |
 
 **The model never decides whether to act, and it never fires an action.** Humans approve; rules
 decide structure. The worst a bad generation can do is write an awkward sentence that a person then
@@ -230,6 +231,23 @@ things that took measuring rather than guessing are written up in
 [`docs/20_Architecture/The graph layer.md`](docs/20_Architecture/The%20graph%20layer.md).
 
 ---
+
+## Ask, grounded and read-only
+
+Press **`/`** and ask in plain language: *what is blocking the filing, how much is at risk, who is the single point of failure, what has Priya got on*.
+
+Three properties, and all three are structural rather than instructions in a prompt:
+
+- **Computed, not generated.** Every answer is derived from the `WorkspaceState` by lookups and
+  arithmetic, which is why each one lists the nodes it used as chips you can click to light them up
+  in the graph, and why the same question always returns the same answer.
+- **Read-only by construction.** There is no code path from a question to the executor. Ask it to
+  send a nudge and it says *"I cannot. This panel only reads"*, because the only route to an action
+  is the Approve button.
+- **It refuses outside its scope, and says why.** Ask about pay or performance and it says Baton
+  reads work items and hand-offs, not personnel records. Ask about another team and it names the
+  boards the lead owns and tells you to switch. Ask something the graph does not contain and it
+  says so rather than guessing.
 
 ## Governance
 

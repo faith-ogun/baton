@@ -32,6 +32,10 @@ How Baton is built.
 - [[The theme decision]] — light and dark, and the two token traps
 - [[The routing bug]] — one cause, three dead links
 
+## Asking it things
+
+- [[Ask, grounded and read-only]] — plain-language Q&A that cites what it used and cannot act
+
 ## Governance
 
 - [[Governance and human-in-the-loop]] — the four guarantees

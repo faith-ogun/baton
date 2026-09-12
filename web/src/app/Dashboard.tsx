@@ -12,6 +12,7 @@ import { GraphToolbar, SortToggle } from './GraphToolbar';
 import { RiskRow } from './RiskRow';
 import { RulesDrawer } from './RulesDrawer';
 import { Shortcuts } from './Shortcuts';
+import { Ask } from './Ask';
 import { Tour } from './Tour';
 import { Divider } from './Divider';
 import { useSplit } from './useSplit';
@@ -169,6 +170,7 @@ export function Dashboard() {
   const [showRules, setShowRules] = useState(false);
   const [tour, setTour] = useState(false);
   const [help, setHelp] = useState(false);
+  const [ask, setAsk] = useState(false);
   const [zoom, setZoom] = useState(1);
   const [labels, setLabels] = useState(true);
   const [sort, setSort] = useState<'severity' | 'cost'>('severity');
@@ -248,6 +250,10 @@ export function Dashboard() {
         case 'r':
           setShowRules((s) => !s);
           break;
+        case '/':
+          e.preventDefault();
+          setAsk(true);
+          break;
         case 'f':
           graph.current?.fit();
           break;
@@ -273,6 +279,7 @@ export function Dashboard() {
         case 'Escape':
           setHelp(false);
           setShowRules(false);
+          setAsk(false);
           break;
       }
     };
@@ -310,6 +317,19 @@ export function Dashboard() {
           <Tool onClick={trigger} title="Replay the webhook path with an inbound mail (E)">
             <WebhookIcon size={14} />
           </Tool>
+          <button
+            type="button"
+            onClick={() => setAsk((a) => !a)}
+            data-tour="ask"
+            className={`rounded border px-2 py-1 font-mono text-[0.625rem] tracking-[0.08em] uppercase transition-colors ${
+              ask
+                ? 'border-agent bg-agent-soft text-agent-ink'
+                : 'border-hair text-mid hover:border-agent hover:text-strong'
+            }`}
+            title="Ask the workspace a question (/)"
+          >
+            Ask
+          </button>
           <button
             type="button"
             onClick={() => setShowRules((s) => !s)}
@@ -461,6 +481,14 @@ export function Dashboard() {
             </button>
           </footer>
         </div>
+
+        {ask && (
+          <Ask
+            state={state}
+            onCite={(id) => setSelected(id)}
+            onClose={() => setAsk(false)}
+          />
+        )}
 
         {showRules && (
           <RulesDrawer rules={state.rules} onChange={rescore} onClose={() => setShowRules(false)} />

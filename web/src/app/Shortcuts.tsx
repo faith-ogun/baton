@@ -5,6 +5,7 @@ const KEYS: [string, string][] = [
   ['D', 'dismiss it'],
   ['E', 'trigger an inbound event'],
   ['R', 'toggle the rules registry'],
+  ['/', 'ask the workspace a question'],
   ['F', 'fit the graph'],
   ['[  ]', 'narrow / widen the queue'],
   ['\\', 'open / close the audit trail'],

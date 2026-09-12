@@ -28,7 +28,7 @@ Baton from a wrapper.
 **The model, OpenAI Agents SDK, three jobs only:**
 
 1. is this message an ask, and to whom
-2. does "the Sentrix thing" mean this project (fuzzy entity linking)
+2. which project a message belongs to, when it is named loosely (fuzzy entity linking)
 3. the wording of the nudge a human will read
 
 ## Why
