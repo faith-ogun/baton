@@ -47,6 +47,14 @@ A **baton rule**: a 3px orange bar with round caps, marking every section openin
 tab. One piece of ornament that earns its place. All motion travels **left to right**, because the
 product is a hand-off and it should read as one.
 
+## Where the mark came from
+
+Generated with **ChatGPT's image tool**, then taken through the production below
+by hand. Worth stating plainly in the README and on the architecture diagram
+rather than leaving a reader to wonder: the idea and the art direction are
+Faith's, the raster came out of an image model, and the cutting, colour
+correction and the reversed cut are real work done on top of it.
+
 ## Asset production
 
 The board arrived as a single PNG, so the usable assets were cut out of it:

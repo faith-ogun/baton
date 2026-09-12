@@ -303,7 +303,8 @@ Start at [`docs/_meta/MOC.md`](docs/_meta/MOC.md).
 | Graph | **NetworkX** server-side · `react-force-graph-2d` + `d3-force` on the screen |
 | Backend | **FastAPI** · httpx · in-memory state, no database |
 | Front end | **Vite** · React 19 · Tailwind 4 · Fraunces / Inter / JetBrains Mono |
-| Video | **Remotion** for the animation above |
+| Video | **Remotion** for the animation above and the demo cutaways |
+| Identity | The mark is Hermes mid-hand-off, generated with **ChatGPT's image tool** and then cut out, background-removed and given a reversed cream-on-navy cut for dark grounds |
 | Deploy | **Google Cloud Run** (stretch; the demo runs locally) |
 
 Vite rather than Next: the dashboard is a single client-rendered canvas app with a WebSocket, so
@@ -321,5 +322,6 @@ break. `/app` is a client route, so a static host needs unknown paths rewritten 
 
 <p align="center">
   <i>Somebody on your team is about to drop something today.</i><br>
-  <sub>Faith Ogundimu &nbsp;·&nbsp; Agents, Everywhere &nbsp;·&nbsp; 12 September 2026</sub>
+  <sub>Faith Ogundimu &nbsp;·&nbsp; Agents, Everywhere &nbsp;·&nbsp; 12 September 2026</sub><br>
+  <sub>Mark generated with ChatGPT's image tool. Aldermere Bio and Sentrix are invented; the workspace is real.</sub>
 </p>

@@ -5,7 +5,7 @@
   "scripts": {
     "studio": "remotion studio",
     "render": "remotion render ReadmeHero out/thumbnail.mp4 --codec=h264 --crf=18",
-    "gif": "ffmpeg -y -i out/thumbnail.mp4 -vf \"fps=15,scale=1000:-2:flags=lanczos,split[s0][s1];[s0]palettegen=max_colors=256:stats_mode=diff[p];[s1][p]paletteuse=dither=none:diff_mode=rectangle\" -loop 0 out/thumbnail.gif",
+    "gif": "ffmpeg -y -i out/thumbnail.mp4 -vf \"fps=15,split[s0][s1];[s0]palettegen=max_colors=256:stats_mode=diff[p];[s1][p]paletteuse=dither=none:diff_mode=rectangle\" -loop 0 out/thumbnail.gif",
     "ship": "npm run render && npm run gif && cp out/thumbnail.mp4 out/thumbnail.gif ../assets/readme/",
     "still": "remotion still ReadmeHero",
     "clip1": "remotion render WhyNotAChatbox out/why-not-a-chatbox.mp4 --codec=h264 --crf=10",
