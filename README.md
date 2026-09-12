@@ -36,9 +36,6 @@
   <img src="https://img.shields.io/badge/detectors-3_of_4_deterministic-2ea043?style=flat-square" alt="three of the four detectors are deterministic">
   <img src="https://img.shields.io/badge/outputs-drafts_only-8A96A3?style=flat-square" alt="drafts only">
   <img src="https://img.shields.io/badge/auto--sends-never-2ea043?style=flat-square" alt="nothing auto-sends">
-  &nbsp;
-  <img src="https://img.shields.io/endpoint?style=flat-square&url=https://raw.githubusercontent.com/faith-ogun/baton/main/.stats/views-badge.json" alt="All-time repository views">
-  <img src="https://img.shields.io/endpoint?style=flat-square&url=https://raw.githubusercontent.com/faith-ogun/baton/main/.stats/clones-badge.json" alt="All-time repository clones">
 </p>
 
 <p align="center">
