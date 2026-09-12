@@ -11,12 +11,12 @@ Every production note in this file is deliberately **not** a blockquote. In this
 "words you say out loud", so a note written as one would be counted and the running time above
 would be a lie.
 
-Under 2:00 at any realistic pace, with real headroom: the eight-second silent close still lands the
-film around 1:50. A crisp 1:50 beats a rushed 2:00, and the spare seconds are there so you can
-pause on the audit sheet rather than racing past it. **Calibrate
-yourself first:** record a 20-second test of Part 1, count the words you actually said, multiply by
-three. That is your real words per minute. Trust word count divided by your rate, never a "this
-part feels like 20 seconds" guess.
+Under 2:00 at any realistic pace. A crisp 1:50 beats a rushed 2:00, and the spare seconds are
+deliberate so you can pause on the audit sheet rather than racing past it.
+
+**Calibrate yourself first:** record a 20-second test of Part 1, count the words you actually said,
+multiply by three. That is your real words per minute. Trust word count divided by your rate, never
+a "this part feels like 20 seconds" guess.
 
 **Format:** screen recording of the live app at `localhost:5173/app` plus your own voice-over, cut
 with two Remotion cutaways that are **rendered and ready** in `demo/clips/`:
@@ -92,10 +92,12 @@ category claim in four seconds. Only then cut to Baton's board.
 
 ---
 
-## PART 5 — The claim (1:42 – 1:52)
-**~10 seconds · 24 words**
+## PART 5 — The claim (1:44 – 1:58)
+**~14 seconds · 24 words**
 
-- `[ANIM: clips/why-not-a-chatbox.mp4 — optional. If it is not rendered, hold on the graph with the Ask panel open instead. The line below carries the beat either way.]`
+- `[ANIM: clips/why-not-a-chatbox.mp4 — rendered and ready, 14s at 1920x1080, silent. It runs longer than the words, which is fine: this is the one place in the film to let a shot breathe. Start it as you begin the line. Its first beat, the chat window answering correctly and uselessly, reads on its own in about 4s.]`
+
+- `[If you need to claw back time, trim the clip's head by 4s and start on the graph assembling. The spoken line carries the beat either way.]`
 
 > "This cannot exist in a chat window. A chatbot answers the question you thought to ask, and every risk here is one you did not."
 
