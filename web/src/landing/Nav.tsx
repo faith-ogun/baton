@@ -5,9 +5,10 @@ import { Arrow, Container } from '../ui/ui';
 
 const LINKS = [
   ['What gets dropped', '#dropped'],
+  ['What it costs', '#cost'],
+  ['Who it is for', '#who'],
   ['How it works', '#loop'],
   ['Governance', '#governance'],
-  ['The claim', '#claim'],
 ];
 
 export function Nav() {

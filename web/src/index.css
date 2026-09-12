@@ -77,6 +77,16 @@
   --color-mid: #3d5169;
   --color-dim: #6b7a8b;
 
+  /* ── the site's navy bands ───────────────────────────────
+     The app's surface tokens are THEMED, which makes them the wrong tool for
+     the marketing page's dark bands: once the dashboard defaulted to light,
+     `border-hair` became a cream hairline and drew itself all over the navy.
+     These are fixed values for a fixed dark band, and they never flip. */
+  --color-onink-panel: #0f2238;
+  --color-onink-panel-2: #16304a;
+  --color-onink-line: #22405c;
+  --color-onink-line-2: #2d5273;
+
   /* ── accent: the brand orange ────────────────────────────
      Orange fails text contrast on cream at full strength, so it comes in
      stops: --accent for fills, --accent-mid for display type (passes AA

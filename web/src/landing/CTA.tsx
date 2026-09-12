@@ -5,7 +5,7 @@ export function CTA() {
   return (
     <section className="py-20 sm:py-24">
       <Container>
-        <div className="grain relative overflow-hidden rounded-3xl border border-hair bg-ink px-6 py-14 text-center text-paper sm:px-12 sm:py-18">
+        <div className="grain relative overflow-hidden rounded-3xl border border-onink-line bg-ink px-6 py-14 text-center text-paper sm:px-12 sm:py-18">
           <div
             aria-hidden="true"
             className="pointer-events-none absolute inset-0 opacity-70"
@@ -35,7 +35,7 @@ export function CTA() {
               </Link>
               <a
                 href="https://github.com/faith-ogun/baton"
-                className="inline-flex w-full items-center justify-center gap-2 rounded-full border border-hair-2 px-6 py-3 text-[0.9375rem] font-medium text-paper-3 transition-colors duration-150 hover:border-paper-3 hover:text-paper sm:w-auto"
+                className="inline-flex w-full items-center justify-center gap-2 rounded-full border border-onink-line-2 px-6 py-3 text-[0.9375rem] font-medium text-paper-3 transition-colors duration-150 hover:border-paper-3 hover:text-paper sm:w-auto"
               >
                 Read the source
               </a>

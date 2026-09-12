@@ -58,9 +58,9 @@ export function Claim() {
           </p>
         </div>
 
-        <div className="mt-14 grid gap-px overflow-hidden rounded-2xl border border-hair bg-hair sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-14 grid gap-px overflow-hidden rounded-2xl border border-onink-line bg-onink-line sm:grid-cols-2 lg:grid-cols-3">
           {SURFACE.map(({ icon: Icon, ...s }) => (
-            <div key={s.app} className="reveal bg-panel p-5">
+            <div key={s.app} className="reveal bg-onink-panel p-5">
               <div className="flex items-center gap-2.5">
                 <span className="inline-flex size-8 items-center justify-center rounded-lg bg-white/[0.06] text-accent-lift">
                   <Icon size={17} />

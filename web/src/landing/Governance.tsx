@@ -93,7 +93,7 @@ export function Governance() {
 
           {/* the registry, shown rather than described */}
           <div className="reveal overflow-hidden rounded-2xl border border-line bg-ink shadow-lift">
-            <div className="flex items-center gap-3 border-b border-hair px-5 py-3.5">
+            <div className="flex items-center gap-3 border-b border-onink-line px-5 py-3.5">
               <Kicker tone="paper">rules.yaml</Kicker>
               <span className="ml-auto">
                 <Chip tone="onInk">tunable, live</Chip>
@@ -102,7 +102,7 @@ export function Governance() {
             <pre className="overflow-x-auto p-5 font-mono text-[0.8125rem] leading-[1.75] text-paper-3/90">
               <code>{RULES_YAML}</code>
             </pre>
-            <p className="border-t border-hair px-5 py-4 text-[0.875rem] leading-[1.6] text-ink-4">
+            <p className="border-t border-onink-line px-5 py-4 text-[0.875rem] leading-[1.6] text-paper-3/70">
               This file is the whole of Baton&rsquo;s judgement about what counts as dropped. Move a
               number and the queue re-scores in front of you. There is no second, hidden set of
               thresholds inside a prompt.

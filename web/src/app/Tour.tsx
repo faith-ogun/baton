@@ -64,6 +64,15 @@ type Rect = { top: number; left: number; width: number; height: number };
 export function Tour({ onClose }: { onClose: () => void }) {
   const [i, setI] = useState(0);
   const [rect, setRect] = useState<Rect | null>(null);
+  /**
+   * The card's own height, measured rather than read off the ref during
+   * render. Reading `card.current` while rendering gives null on the first
+   * pass, so the first paint used a guessed height; nothing then re-rendered
+   * when the ref filled in, and a step placed ABOVE its spotlight stayed
+   * wrong for the life of the step. Measuring into state fixes it in one
+   * extra frame.
+   */
+  const [cardH, setCardH] = useState(260);
   const card = useRef<HTMLDivElement>(null);
   const step = STEPS[i]!;
 
@@ -95,13 +104,22 @@ export function Tour({ onClose }: { onClose: () => void }) {
     return () => window.removeEventListener('keydown', onKey);
   }, [onClose]);
 
+  useLayoutEffect(() => {
+    const el = card.current;
+    if (!el) return;
+    const ro = new ResizeObserver(() => setCardH(el.offsetHeight));
+    ro.observe(el);
+    setCardH(el.offsetHeight);
+    return () => ro.disconnect();
+  }, []);
+
   const last = i === STEPS.length - 1;
 
   // The card is placed against the spotlight, then clamped into the viewport,
   // so a step near an edge does not push its own explanation off screen.
   const place = (): { top: number; left: number } => {
     const W = 372;
-    const H = card.current?.offsetHeight ?? 260;
+    const H = cardH;
     const m = 16;
     if (!rect) return { top: window.innerHeight / 2 - H / 2, left: window.innerWidth / 2 - W / 2 };
     let top = rect.top;

@@ -35,15 +35,37 @@ npm install
 npm run dev          # http://localhost:5173
 ```
 
-The dashboard boots on a **seeded workspace** (a regulatory team pushing a Moderna submission,
-with an unanswered ask, a stalled critical task, a sole owner carrying four of them and an
-unbooked deadline) so the front end never blocks on the backend. It probes `GET /api/state`
-and opens `WS /live` on start; when the FastAPI server is up it switches over and the header
-chip changes from `seeded workspace` to `webhooks live`. The wire contract both sides implement
-is [`web/src/types.ts`](web/src/types.ts).
+The dashboard boots on a **seeded workspace**: the regulatory affairs team at Aldermere Bio,
+eight people, pushing the Sentrix filing, with an unanswered ask, a stalled critical task, a
+sole owner carrying four of them and an unbooked deadline. Aldermere Bio and Sentrix are
+invented; the scenario is not. See [`docs/demo-facts.md`](docs/demo-facts.md) for what is
+invented, what is derived and what still needs verifying.
+
+Set `VITE_API_BASE` to talk to the backend (see `web/.env.example`). Left unset, the app makes
+no network call at all, which is why a dev server with no backend prints nothing. With it set,
+the app probes `GET /api/state`, opens `WS /live`, and the header chip flips from
+`seeded workspace` to `webhooks live`. The wire contract both sides implement is
+[`web/src/types.ts`](web/src/types.ts).
 
 `Inbound event` in the header replays the webhook path by hand, so the live-event moment in the
-demo does not depend on mail delivery timing.
+demo does not depend on mail delivery timing. `Tour` walks a first-time viewer through the six
+things on the screen.
+
+## Who it is for
+
+One workstream and its lead, not a whole company. Baton's output is always a message or a
+change with somebody's name on it, so whoever approves it needs the standing to send it: a
+chief executive cannot approve "Sally, this is the last working day this can move" to someone
+three levels down. A director who owns several teams gets a switcher across their boards, not a
+merged view. The scope selector in the header makes that visible rather than implied.
+
+## What it is worth
+
+Each risk declares the person-days it costs if it lands, with the basis in words, and the money
+is those days times the blended rate in `rules.cost_model`. The seeded board totals 82
+person-days, £43.2k. The site's calculator runs the same model on the reader's own numbers.
+Deliberately not a borrowed market statistic: a sum somebody dialled in themselves is one they
+already believe.
 
 ## The rules registry
 
@@ -62,6 +84,9 @@ Google Cloud Run (deploy).
 
 Vite rather than Next here: the dashboard is a single client-rendered canvas app with a
 WebSocket, so server rendering buys it nothing and costs a `ssr: false` dance around the force
-graph.
+graph. The site is light only; the dashboard is themed light and dark and defaults to light.
+
+One deployment note: `/app` is a client route, so any static host needs a rewrite of unknown
+paths to `index.html`. The Vite dev server and `vite preview` already do this.
 
 See `CLAUDE.md` for the full build spec.

@@ -4,9 +4,11 @@ import { Claim } from './Claim';
 import { Dropped } from './Dropped';
 import { Footer } from './Footer';
 import { Governance } from './Governance';
+import { Cost } from './Cost';
 import { Hero } from './Hero';
 import { Loop } from './Loop';
 import { Nav } from './Nav';
+import { Who } from './Who';
 
 export function Landing() {
   useReveal();
@@ -24,6 +26,8 @@ export function Landing() {
       <main>
         <Hero />
         <Dropped />
+        <Cost />
+        <Who />
         <Loop />
         <Claim />
         <Governance />
