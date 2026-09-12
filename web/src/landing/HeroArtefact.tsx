@@ -45,7 +45,7 @@ const TONE: Record<Tone, string> = {
 
 const NODES: N[] = [
   { id: 'rachel', kind: 'person', x: 58, y: 62, r: 10, tone: 'ok', who: 'RF', drift: 'b' },
-  { id: 'nicolas', kind: 'person', x: 142, y: 44, r: 11, tone: 'warn', who: 'NB', label: 'Nicolas', drift: 'a' },
+  { id: 'frank', kind: 'person', x: 142, y: 44, r: 11, tone: 'warn', who: 'FM', label: 'Frank', drift: 'a' },
   { id: 'ask', kind: 'thread', x: 224, y: 74, r: 10, tone: 'risk', drift: 'c' },
   { id: 'sally', kind: 'person', x: 308, y: 50, r: 12, tone: 'risk', who: 'SA', label: 'Sally', drift: 'b' },
   { id: 'module3', kind: 'deadline', x: 352, y: 142, r: 10, tone: 'risk', label: 'Filing', drift: 'a' },
@@ -60,8 +60,8 @@ const NODES: N[] = [
 const AT = Object.fromEntries(NODES.map((n) => [n.id, n])) as Record<string, N>;
 
 const EDGES: [string, string, boolean?][] = [
-  ['rachel', 'nicolas'],
-  ['nicolas', 'ask', true],
+  ['rachel', 'frank'],
+  ['frank', 'ask', true],
   ['ask', 'sally', true],
   ['ask', 'module3', true],
   ['sentrix', 'module3'],
@@ -248,7 +248,7 @@ export function HeroArtefact() {
           </div>
 
           <p className="text-[0.9375rem] leading-[1.5] font-medium text-strong">
-            Nicolas asked Sally for Module 3 sign-off 6 days ago. No reply, and the filing is in 2
+            Frank asked Sally for Module 3 sign-off 6 days ago. No reply, and the filing is in 2
             days.
           </p>
 
@@ -267,7 +267,7 @@ export function HeroArtefact() {
               baton proposes
             </p>
             <p className="text-[0.8125rem] leading-[1.6] text-mid">
-              &ldquo;Hi Sally, quick one on Module 3. Nicolas asked for your sign-off on 6
+              &ldquo;Hi Sally, quick one on Module 3. Frank asked for your sign-off on 6
               September and I do not think it reached you as an action&hellip;&rdquo;
             </p>
           </div>

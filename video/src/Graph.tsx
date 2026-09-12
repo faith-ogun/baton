@@ -13,7 +13,10 @@ import {
   type Glyph,
 } from './graph-data';
 
-export const GRAPH_BOX = {left: 62, top: 62, width: 640, height: 470};
+// The SVG is drawn in its own 660x470 space and scaled up on the canvas, so
+// strokes, rings and initials all grow together and stay legible once the GIF
+// is downscaled for the README.
+export const GRAPH_BOX = {left: 56, top: 50, width: 660, height: 470, scale: 1.12};
 
 const ease = Easing.out(Easing.cubic);
 
@@ -241,8 +244,8 @@ const EdgeLine: React.FC<{
 
 export const Graph: React.FC<{frame: number}> = ({frame}) => (
   <svg
-    width={GRAPH_BOX.width}
-    height={GRAPH_BOX.height}
+    width={GRAPH_BOX.width * GRAPH_BOX.scale}
+    height={GRAPH_BOX.height * GRAPH_BOX.scale}
     viewBox={`0 0 ${GRAPH_BOX.width} ${GRAPH_BOX.height}`}
     style={{
       position: 'absolute',

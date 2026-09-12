@@ -29,7 +29,7 @@ The person who can send that sentence is the person accountable for the date. Th
 
 Two supporting reasons:
 
-1. **The detectors are team-scale.** "Nicolas asked Sally", "Priya owns four of five critical
+1. **The detectors are team-scale.** "Frank asked Sally", "Priya owns four of five critical
    tasks". These are legible at five to thirty people and meaningless at nine hundred.
 2. **The graph has to be readable.** A force-directed graph of a whole company is a hairball. The
    centrepiece of the product stops working at exactly the scale the board-level pitch wants.

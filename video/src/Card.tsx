@@ -5,11 +5,13 @@ import {SERIF, SANS, MONO} from './fonts';
 
 // Fixed geometry, so the cursor can be aimed at the button by arithmetic
 // rather than by guesswork.
-export const CARD = {left: 796, top: 76, width: 424, height: 422, pad: 26};
+export const CARD = {left: 796, top: 86, width: 424, height: 400, pad: 26};
 export const BTN = {h: 46};
-export const APPROVE_CENTRE = {
-  x: CARD.left + CARD.width / 2,
-  y: CARD.top + CARD.height - CARD.pad - BTN.h / 2,
+// Aimed at the right of the button rather than its middle, so the pointer
+// never sits on top of the word APPROVE.
+export const CLICK_POINT = {
+  x: CARD.left + CARD.width - CARD.pad - 44,
+  y: CARD.top + CARD.height - CARD.pad - BTN.h / 2 + 2,
 };
 
 export const Card: React.FC<{frame: number; press: number}> = ({frame, press}) => {
@@ -99,7 +101,7 @@ export const Card: React.FC<{frame: number; press: number}> = ({frame, press}) =
           letterSpacing: -0.2,
         }}
       >
-        Nicolas asked Sally for Module 3 sign-off 6 days ago. No reply.
+        Frank asked Sally for Module 3 sign-off 6 days ago. No reply.
       </div>
 
       <div

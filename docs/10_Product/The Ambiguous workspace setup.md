@@ -39,7 +39,7 @@ status bar, so the real workspace and the seeded one now agree.
 |---|---|---|
 | Faith Ogundimu | `faith.ogundimu@aldermere.ambi.cc` | the real human account, the owner |
 | **Baton** | assigned at provisioning | the agent. Its own identity, its own permissions |
-| Nicolas Bouvier | `nicolas.bouvier@aldermere.ambi.cc` | regulatory lead. Sends the unanswered ask |
+| Frank Mercer | `frank.mercer@aldermere.ambi.cc` | regulatory lead. Sends the unanswered ask |
 | Sally Ahmed | `sally.ahmed@aldermere.ambi.cc` | clinical ops. Never replies to it |
 | Priya Raman | `priya.raman@aldermere.ambi.cc` | CMC. The single point of failure |
 | Tomas Lind | `tomas.lind@aldermere.ambi.cc` | biostatistics. Has capacity, takes the redistributed task |

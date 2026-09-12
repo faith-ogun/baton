@@ -1,7 +1,7 @@
 import React from 'react';
 import {interpolate, Easing} from 'remotion';
 import {C} from './theme';
-import {APPROVE_CENTRE} from './Card';
+import {CLICK_POINT} from './Card';
 
 export const CURSOR = {
   enter: 146,
@@ -30,8 +30,8 @@ export const Cursor: React.FC<{frame: number}> = ({frame}) => {
     });
   if (opacity <= 0.001) return null;
 
-  const x = interpolate(t, [0, 1], [START.x, APPROVE_CENTRE.x]);
-  const y = interpolate(t, [0, 1], [START.y, APPROVE_CENTRE.y]);
+  const x = interpolate(t, [0, 1], [START.x, CLICK_POINT.x]);
+  const y = interpolate(t, [0, 1], [START.y, CLICK_POINT.y]);
 
   // The pointer dips 2px with the button it is pressing.
   const dip = interpolate(frame, [CURSOR.pressIn - 2, CURSOR.pressIn, CURSOR.pressOut, CURSOR.pressOut + 4], [0, 2, 2, 0], {

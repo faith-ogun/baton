@@ -33,7 +33,7 @@ export const AuditRow: React.FC<{frame: number}> = ({frame}) => {
   });
 
   return (
-    <div style={{position: 'absolute', left: 62, right: 62, top: 612, opacity}}>
+    <div style={{position: 'absolute', left: 64, right: 64, top: 604, opacity}}>
       <div style={{height: 1, background: 'rgba(45,82,115,0.55)'}} />
       <div
         style={{

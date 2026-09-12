@@ -18,7 +18,7 @@ const JOURNEY = [
   {
     when: '08:41',
     who: 'She reads the top card',
-    what: 'Nicolas asked Sally for a sign-off six days ago. Rachel did not know, because she was not on the thread, and neither of them thought to tell her.',
+    what: 'Frank asked Sally for a sign-off six days ago. Rachel did not know, because she was not on the thread, and neither of them thought to tell her.',
   },
   {
     when: '08:42',

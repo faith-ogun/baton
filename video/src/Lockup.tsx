@@ -43,7 +43,7 @@ export const Lockup: React.FC<{frame: number}> = ({frame}) => {
     >
       <Img
         src={staticFile('baton-logo-reversed.png')}
-        style={{height: 296, width: 'auto'}}
+        style={{height: 318, width: 'auto'}}
       />
       <div
         style={{

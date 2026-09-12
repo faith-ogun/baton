@@ -12,7 +12,7 @@ const CAPS: Cap[] = [
 ];
 
 export const Caption: React.FC<{frame: number}> = ({frame}) => (
-  <div style={{position: 'absolute', left: 64, top: 554, height: 20}}>
+  <div style={{position: 'absolute', left: 64, top: 560, height: 20}}>
     {CAPS.map((c) => {
       const o =
         interpolate(frame, c.in, [0, 1], {

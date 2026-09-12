@@ -34,7 +34,7 @@ const W = (id: string, kind: GraphNode['kind'], label: string, risk: number, loa
 });
 
 export const PEOPLE: GraphNode[] = [
-  P('u:nicolas', 'Nicolas Bouvier', 0.46, 0.62, 'Regulatory lead'),
+  P('u:frank', 'Frank Mercer', 0.46, 0.62, 'Regulatory lead'),
   P('u:sally', 'Sally Ahmed', 0.88, 0.71, 'Clinical ops'),
   P('u:priya', 'Priya Raman', 0.79, 0.94, 'CMC / quality', true),
   P('u:tomas', 'Tomas Lind', 0.31, 0.44, 'Biostatistics'),
@@ -64,8 +64,8 @@ const WORK: GraphNode[] = [
 export const NODES: GraphNode[] = [...PEOPLE, ...WORK];
 
 export const EDGES: GraphEdge[] = [
-  // the open loop: Nicolas asked, Sally never answered
-  { source: 'u:nicolas', target: 'th:sentrix-ask', kind: 'asks', open: true },
+  // the open loop: Frank asked, Sally never answered
+  { source: 'u:frank', target: 'th:sentrix-ask', kind: 'asks', open: true },
   { source: 'th:sentrix-ask', target: 'u:sally', kind: 'asks', open: true },
   { source: 'th:sentrix-ask', target: 'p:sentrix', kind: 'mentions' },
   { source: 'th:sentrix-ask', target: 'd:module3', kind: 'blocks', open: true },
@@ -85,7 +85,7 @@ export const EDGES: GraphEdge[] = [
   { source: 'u:rachel', target: 't:cover-letter', kind: 'assigned' },
   { source: 't:cover-letter', target: 'p:sentrix', kind: 'mentions' },
   { source: 't:sap-sync', target: 'p:sentrix', kind: 'mentions' },
-  { source: 'u:nicolas', target: 'p:sentrix', kind: 'participates' },
+  { source: 'u:frank', target: 'p:sentrix', kind: 'participates' },
   { source: 'u:sally', target: 'p:sentrix', kind: 'participates' },
   { source: 'u:rachel', target: 'th:qa-window', kind: 'participates' },
   { source: 'u:tomas', target: 'th:qa-window', kind: 'participates' },
@@ -106,11 +106,11 @@ export const RISKS: Risk[] = [
     id: 'r:open-loop-1',
     type: 'open_loop_ask',
     severity: 92,
-    title: 'Nicolas asked Sally for Module 3 sign-off 6 days ago. No reply.',
+    title: 'Frank asked Sally for Module 3 sign-off 6 days ago. No reply.',
     detail:
       'The ask sits in a mail thread with four other recipients, so nobody reads it as theirs. The filing deadline is in 2 days and this sign-off blocks it.',
-    people: ['Nicolas Bouvier', 'Sally Ahmed'],
-    nodes: ['u:nicolas', 'u:sally', 'th:sentrix-ask', 'd:module3'],
+    people: ['Frank Mercer', 'Sally Ahmed'],
+    nodes: ['u:frank', 'u:sally', 'th:sentrix-ask', 'd:module3'],
     project: 'Sentrix filing',
     ageDays: 6,
     dueInDays: 2,
@@ -123,7 +123,7 @@ export const RISKS: Risk[] = [
       app: 'Mail',
       to: ['sally.ahmed@aldermere.ambi.cc'],
       draft:
-        'Hi Sally, quick one on Module 3. Nicolas asked for your sign-off on 6 September and I do not think it reached you as an action, the thread had five people on it. The filing is on 14 September, so this is the last working day it can move. Is there anything blocking the sign-off I can clear from here? Baton',
+        'Hi Sally, quick one on Module 3. Frank asked for your sign-off on 6 September and I do not think it reached you as an action, the thread had five people on it. The filing is on 14 September, so this is the last working day it can move. Is there anything blocking the sign-off I can clear from here? Baton',
     },
     status: 'open',
   },
@@ -144,11 +144,11 @@ export const RISKS: Risk[] = [
     action: {
       kind: 'task_comment',
       label: 'Post the check-in',
-      summary: 'Comment on the task, set a 24-hour checkpoint and copy Nicolas as second owner.',
+      summary: 'Comment on the task, set a 24-hour checkpoint and copy Frank as second owner.',
       app: 'Tasks',
-      patch: { 'second owner': 'Nicolas Bouvier', checkpoint: 'tomorrow 09:00' },
+      patch: { 'second owner': 'Frank Mercer', checkpoint: 'tomorrow 09:00' },
       draft:
-        'Flagging this one: no movement since 4 September and it blocks the 14 September filing. I have added Nicolas as a second owner so it is not on one person, and set a checkpoint for 09:00 tomorrow. Priya, if the hold-up is the missing batch 22-041 certificate, say so here and I will chase it. Baton',
+        'Flagging this one: no movement since 4 September and it blocks the 14 September filing. I have added Frank as a second owner so it is not on one person, and set a checkpoint for 09:00 tomorrow. Priya, if the hold-up is the missing batch 22-041 certificate, say so here and I will chase it. Baton',
     },
     status: 'open',
   },
@@ -231,7 +231,7 @@ export const INCOMING_RISK: Risk = {
   title: 'The agency just asked for the dissolution dataset. Nobody owns it.',
   detail:
     'A mail from the agency landed 4 seconds ago requesting the comparative dissolution dataset within 48 hours. It names no owner, and the person who holds that data is the same person already carrying four stalled items.',
-  people: ['Priya Raman', 'Nicolas Bouvier'],
+  people: ['Priya Raman', 'Frank Mercer'],
   nodes: ['u:priya', 'th:sentrix-ask', 'd:module3', 'p:sentrix'],
   project: 'Sentrix filing',
   ageDays: 0,
@@ -242,11 +242,11 @@ export const INCOMING_RISK: Risk = {
   action: {
     kind: 'task_patch',
     label: 'Create and assign it',
-    summary: 'Open a task owned by Nicolas, due in 24 hours, linked to the agency thread.',
+    summary: 'Open a task owned by Frank, due in 24 hours, linked to the agency thread.',
     app: 'Tasks',
-    patch: { owner: 'Nicolas Bouvier', due: 'tomorrow 17:00', links: 'agency thread' },
+    patch: { owner: 'Frank Mercer', due: 'tomorrow 17:00', links: 'agency thread' },
     draft:
-      'Nicolas, the agency asked for the comparative dissolution dataset with a 48-hour clock. I have opened it as a task on you rather than Priya, who is already sole owner of four critical items. The 22-041 and 22-044 runs are the ones they will want. Baton',
+      'Frank, the agency asked for the comparative dissolution dataset with a 48-hour clock. I have opened it as a task on you rather than Priya, who is already sole owner of four critical items. The 22-041 and 22-044 runs are the ones they will want. Baton',
   },
   status: 'open',
 };
@@ -264,7 +264,7 @@ export const AUDIT: AuditEntry[] = [
     id: 'a:3',
     at: '2026-09-11T16:40:00Z',
     verb: 'Booked a review slot',
-    detail: 'Created "Module 3 pre-read" Thu 11:00 for Nicolas, Sally and Rachel.',
+    detail: 'Created "Module 3 pre-read" Thu 11:00 for Frank, Sally and Rachel.',
     app: 'Calendar',
     href: '#',
   },

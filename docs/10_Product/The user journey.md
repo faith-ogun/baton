@@ -14,7 +14,7 @@ This is the whole journey, and it is five minutes long, which is the point.
 | Time | What happens |
 |---|---|
 | **Monday 08:40** | Rachel opens Baton. Five things are about to drop and one is worth £21.8k. She has not opened a single app. |
-| **08:41** | Reads the top card. Nicolas asked Sally for a Module 3 sign-off six days ago. Rachel did not know: she was not on the thread, and neither of them thought to tell her. |
+| **08:41** | Reads the top card. Frank asked Sally for a Module 3 sign-off six days ago. Rachel did not know: she was not on the thread, and neither of them thought to tell her. |
 | **08:42** | Expands *Why this fired*. Unanswered six business days against a threshold of three, with a deadline inside two. A rule with a number she set, not a hunch. |
 | **08:43** | Edits one line of the draft and approves. Baton replies in the existing thread, to Sally alone, stating the date. It goes out **as Baton**, so it reads as a system nudge and nobody is being told off. |
 | **08:45** | Approves two more. A task gets a second owner, a hold goes in the calendar, four rows land in the audit sheet. Team health moves 52 to 71. She closes the tab. |
