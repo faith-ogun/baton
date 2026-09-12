@@ -15,7 +15,13 @@ import { INCOMING_RISK, mockState } from './mock';
  * socket; against the mock it is written here.
  */
 
-const API = '/api';
+/**
+ * Set VITE_API_BASE to talk to the backend. Unset, the app makes no network
+ * call at all and runs on the seeded workspace. That is deliberate: a dev
+ * server proxying to a backend that is not up yet spews ECONNREFUSED on every
+ * load, which buries the errors that actually matter.
+ */
+const API = import.meta.env.VITE_API_BASE as string | undefined;
 
 /**
  * A mirror of the backend's deterministic registry, so moving a threshold in
@@ -91,6 +97,13 @@ function settle(s: WorkspaceState): WorkspaceState {
   return { ...s, risks, health: healthFrom(risks) };
 }
 
+/** Money, to the nearest hundred, with no decimals to read past. */
+export function money(gbp: number): string {
+  if (gbp >= 1_000_000) return `£${(gbp / 1_000_000).toFixed(2)}m`;
+  if (gbp >= 1000) return `£${Math.round(gbp / 100) / 10}k`;
+  return `£${Math.round(gbp)}`;
+}
+
 export interface Toast {
   id: number;
   title: string;
@@ -132,10 +145,11 @@ export function useWorkspace() {
   // Try the real backend once. Failure is expected and silent: the seeded
   // workspace is already loaded, so there is nothing to fall back to.
   useEffect(() => {
+    if (!API) return;
     let live = true;
     (async () => {
       try {
-        const res = await fetch(`${API}/state`, { signal: AbortSignal.timeout(2500) });
+        const res = await fetch(`${API}/api/state`, { signal: AbortSignal.timeout(2500) });
         if (!res.ok) return;
         const real = (await res.json()) as WorkspaceState;
         // The backend owns scoring once it is there; ranking here only
@@ -170,10 +184,15 @@ export function useWorkspace() {
         risks: s.risks.map((r) => (r.id === id ? { ...r, status: 'working' } : r)),
       }));
 
-      try {
-        await fetch(`${API}/risks/${id}/approve`, { method: 'POST', signal: AbortSignal.timeout(2500) });
-      } catch {
-        /* mock path: the state change below is the action */
+      if (API) {
+        try {
+          await fetch(`${API}/api/risks/${id}/approve`, {
+            method: 'POST',
+            signal: AbortSignal.timeout(2500),
+          });
+        } catch {
+          /* the state change below still stands in for the action */
+        }
       }
 
       await new Promise((r) => setTimeout(r, 780));
@@ -241,7 +260,7 @@ export function useWorkspace() {
       );
       const edges = [
         ...s.graph.edges,
-        { source: 'th:moderna-ask', target: 'u:priya', kind: 'asks' as const, open: true },
+        { source: 'th:sentrix-ask', target: 'u:priya', kind: 'asks' as const, open: true },
       ];
       return { ...s, risks, graph: { nodes, edges }, health: healthFrom(risks) };
     });
@@ -250,6 +269,15 @@ export function useWorkspace() {
 
   const openRisks = useMemo(
     () => state.risks.filter((r) => r.status === 'open' || r.status === 'working'),
+    [state.risks],
+  );
+
+  /** Person-days on the line across the open queue. Money is this times the rate. */
+  const exposureDays = useMemo(
+    () =>
+      state.risks
+        .filter((r) => r.status === 'open' || r.status === 'working')
+        .reduce((a, r) => a + r.impact.days, 0),
     [state.risks],
   );
 
@@ -263,6 +291,7 @@ export function useWorkspace() {
     state,
     openRisks,
     visibleRisks,
+    exposureDays,
     approve,
     dismiss,
     trigger,

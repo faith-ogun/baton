@@ -13,7 +13,7 @@ const SURFACE = [
   { icon: ChatIcon, app: 'Chat', reads: 'the side conversation the task never got', acts: 'asks one line where the team already is' },
   { icon: TasksIcon, app: 'Tasks', reads: 'owner, status, due date, last movement', acts: 'reassigns, comments, sets the checkpoint' },
   { icon: CalendarIcon, app: 'Calendar', reads: 'what is actually booked against a date', acts: 'creates the hold everyone can make' },
-  { icon: CrmIcon, app: 'CRM', reads: 'which account the "Moderna thing" means', acts: 'links the work back to the record' },
+  { icon: CrmIcon, app: 'CRM', reads: 'which account the "Sentrix thing" means', acts: 'links the work back to the record' },
   { icon: SheetsIcon, app: 'Sheets', reads: 'its own history, so it never repeats itself', acts: 'writes every action to the audit log' },
 ];
 

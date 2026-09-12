@@ -103,7 +103,9 @@ export function Chip({
   className?: string;
 }) {
   const styles: Record<ChipTone, string> = {
-    neutral: 'border-line bg-card text-ink-2',
+    // `neutral` reads off the themed app tokens, so one chip works on the
+    // light site and in both cuts of the dashboard.
+    neutral: 'border-hair bg-panel-2 text-mid',
     accent: 'border-accent/25 bg-accent-soft text-accent-ink',
     agent: 'border-agent/25 bg-agent-soft text-agent-ink',
     info: 'border-info/25 bg-info-soft text-info-ink',

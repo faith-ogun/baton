@@ -35,7 +35,7 @@ const NODES: N[] = [
   { id: 'ask', x: 232, y: 80, r: 6, tone: 'risk', drift: 'c' },
   { id: 'sally', x: 312, y: 54, r: 11, tone: 'risk', label: 'Sally', drift: 'b' },
   { id: 'module3', x: 356, y: 146, r: 8, tone: 'risk', label: 'Filing', drift: 'a' },
-  { id: 'moderna', x: 252, y: 148, r: 9, tone: 'warn', drift: 'c' },
+  { id: 'sentrix', x: 252, y: 148, r: 9, tone: 'warn', drift: 'c' },
   { id: 'priya', x: 172, y: 168, r: 14, tone: 'warn', label: 'Priya', drift: 'a' },
   { id: 'cmc', x: 96, y: 214, r: 7, tone: 'risk', drift: 'b' },
   { id: 'stab', x: 232, y: 226, r: 6, tone: 'warn', drift: 'c' },
@@ -50,15 +50,15 @@ const EDGES: [string, string, boolean?][] = [
   ['nicolas', 'ask', true],
   ['ask', 'sally', true],
   ['ask', 'module3', true],
-  ['moderna', 'module3'],
+  ['sentrix', 'module3'],
   ['priya', 'cmc'],
   ['priya', 'stab'],
-  ['priya', 'moderna'],
+  ['priya', 'sentrix'],
   ['cmc', 'module3', true],
   ['stab', 'tomas'],
   ['baton', 'priya'],
-  ['baton', 'moderna'],
-  ['sally', 'moderna'],
+  ['baton', 'sentrix'],
+  ['sally', 'sentrix'],
 ];
 
 function Graph() {
@@ -130,7 +130,7 @@ export function HeroArtefact() {
       <div className="flex items-center gap-3 border-b border-hair bg-void/50 px-4 py-3">
         <Mark size={20} reverse />
         <span className="font-mono text-[0.6875rem] tracking-[0.08em] text-ink-4">
-          moderna-reg.ambi
+          aldermere.ambi
         </span>
         <span className="ml-auto flex items-center gap-2">
           <Chip tone="onInkAccent">
@@ -163,7 +163,7 @@ export function HeroArtefact() {
 
           <div className="flex flex-wrap gap-1.5">
             <Chip tone="risk">open loop</Chip>
-            <Chip tone="onInk">Moderna</Chip>
+            <Chip tone="onInk">Sentrix</Chip>
             <Chip tone="onInk">
               <MailIcon size={11} />
               Mail

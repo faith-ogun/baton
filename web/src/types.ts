@@ -70,6 +70,13 @@ export interface Risk {
   unowned?: boolean;
   /** The rule that fired, quoted so the score is never a black box. */
   because: string;
+  /**
+   * What it costs if it lands, in person-days, with the arithmetic stated.
+   * Days rather than money, because days are what the workspace actually
+   * knows; the money is days times the blended rate in the registry, so the
+   * figure on screen is always a sum the reader can follow.
+   */
+  impact: { days: number; basis: string };
   action: ProposedAction;
   status: 'open' | 'working' | 'done' | 'dismissed';
 }
@@ -85,17 +92,30 @@ export interface AuditEntry {
   href?: string;
 }
 
+/** The team Baton is watching. One workstream, not a whole company. */
+export interface Scope {
+  org: string;
+  team: string;
+  lead: string;
+  headcount: number;
+  /** Other teams this lead could switch to, for the roll-up view. */
+  siblings: { id: string; team: string; open: number; health: number }[];
+}
+
 export interface Rules {
   open_loop_ask: { unanswered_business_days: number; escalate_if_deadline_within_days: number };
   stalled_task: { no_update_days: number; at_risk_if_due_within_days: number };
   deadline: { require_calendar_hold: boolean; warn_within_days: number };
   spof: { max_sole_critical_items: number; betweenness_percentile: number };
   severity_weights: { deadline_proximity: number; seniority: number; thread_age: number };
+  /** Turns person-days at risk into money. The only figure Baton cannot infer. */
+  cost_model: { blended_day_rate_gbp: number };
 }
 
 export interface WorkspaceState {
   generatedAt: string;
   workspace: string;
+  scope: Scope;
   /** 0..100 org health. Rises as risks are cleared. */
   health: number;
   connected: boolean;

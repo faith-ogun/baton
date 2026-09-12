@@ -23,7 +23,7 @@ const STEPS = [
     n: '03',
     title: 'Rules score the risk, a model writes the sentence',
     body:
-      'Detection and severity are deterministic, every time, from thresholds you can read. The model is used for exactly three things: deciding whether a message is an ask and to whom, resolving "the Moderna thing" to a project, and drafting the message a human will read.',
+      'Detection and severity are deterministic, every time, from thresholds you can read. The model is used for exactly three things: deciding whether a message is an ask and to whom, resolving "the Sentrix thing" to a project, and drafting the message a human will read.',
     chip: 'rules decide, the model writes',
   },
   {

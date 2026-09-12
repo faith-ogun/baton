@@ -19,26 +19,26 @@ export function AuditTimeline({ entries }: { entries: AuditEntry[] }) {
     <div className="flex h-full min-h-0 flex-col">
       <div className="flex items-center gap-2.5 border-b border-hair px-4 py-3">
         <span className="baton-rule w-5" />
-        <span className="kicker text-paper-3/70">audit trail</span>
-        <span className="ml-auto font-mono text-[0.6875rem] text-ink-4">
+        <span className="kicker text-dim">audit trail</span>
+        <span className="ml-auto font-mono text-[0.6875rem] text-dim">
           {entries.length} actions · written to Sheets
         </span>
       </div>
 
-      <ol className="min-h-0 flex-1 divide-y divide-hair/60 overflow-y-auto">
+      <ol className="min-h-0 flex-1 divide-y divide-hair overflow-y-auto">
         {entries.map((e, i) => (
           <li
             key={e.id}
-            className={`flex items-start gap-3 px-4 py-3 ${i === 0 ? 'bt-pass bg-agent/[0.06]' : ''}`}
+            className={`flex items-start gap-3 px-4 py-3 ${i === 0 ? 'bt-pass bg-agent-soft/45' : ''}`}
           >
-            <span className="mt-1 inline-flex size-6 shrink-0 items-center justify-center rounded-md bg-agent/15 text-agent-lift">
+            <span className="mt-1 inline-flex size-6 shrink-0 items-center justify-center rounded-md bg-agent/15 text-agent-ink">
               {APP_ICON(e.app, 13)}
             </span>
             <div className="min-w-0 flex-1">
-              <p className="text-[0.8125rem] leading-[1.45] font-medium text-paper">{e.verb}</p>
-              <p className="mt-0.5 text-[0.8125rem] leading-[1.5] text-paper-3/65">{e.detail}</p>
+              <p className="text-[0.8125rem] leading-[1.45] font-medium text-strong">{e.verb}</p>
+              <p className="mt-0.5 text-[0.8125rem] leading-[1.5] text-dim">{e.detail}</p>
             </div>
-            <span className="num shrink-0 pt-0.5 text-[0.6875rem] text-ink-4">{clock(e.at)}</span>
+            <span className="num shrink-0 pt-0.5 text-[0.6875rem] text-dim">{clock(e.at)}</span>
           </li>
         ))}
       </ol>

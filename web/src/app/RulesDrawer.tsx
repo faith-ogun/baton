@@ -3,7 +3,7 @@ import { Chip } from '../ui/ui';
 
 /** Every slider in the drawer, flattened so the panel is one map over a list. */
 const FIELDS: {
-  group: keyof Omit<Rules, 'severity_weights'> | 'severity_weights';
+  group: keyof Rules;
   key: string;
   label: string;
   min: number;
@@ -21,6 +21,7 @@ const FIELDS: {
   { group: 'severity_weights', key: 'deadline_proximity', label: 'deadline proximity', min: 0, max: 1, step: 0.05 },
   { group: 'severity_weights', key: 'seniority', label: 'seniority', min: 0, max: 1, step: 0.05 },
   { group: 'severity_weights', key: 'thread_age', label: 'thread age', min: 0, max: 1, step: 0.05 },
+  { group: 'cost_model', key: 'blended_day_rate_gbp', label: 'blended day rate', min: 150, max: 1200, step: 10, unit: 'GBP' },
 ];
 
 const GROUP_LABEL: Record<string, string> = {
@@ -29,6 +30,7 @@ const GROUP_LABEL: Record<string, string> = {
   deadline: 'deadline',
   spof: 'spof',
   severity_weights: 'severity_weights',
+  cost_model: 'cost_model',
 };
 
 /**
@@ -55,20 +57,20 @@ export function RulesDrawer({
     <aside className="flex h-full w-[330px] shrink-0 flex-col border-l border-hair bg-panel">
       <div className="flex items-center gap-2.5 border-b border-hair px-4 py-3">
         <span className="baton-rule w-5" />
-        <span className="kicker text-paper-3/70">rules.yaml</span>
+        <span className="kicker text-dim">rules.yaml</span>
         <button
           type="button"
           onClick={onClose}
-          className="ml-auto rounded-md px-2 py-1 text-[0.75rem] text-ink-4 transition-colors hover:bg-white/5 hover:text-paper"
+          className="ml-auto rounded-md px-2 py-1 text-[0.75rem] text-dim transition-colors hover:bg-white/5 hover:text-strong"
         >
           Close
         </button>
       </div>
 
       <div className="min-h-0 flex-1 overflow-y-auto px-4 py-4">
-        <p className="text-[0.8125rem] leading-[1.65] text-paper-3/65">
+        <p className="text-[0.8125rem] leading-[1.65] text-mid">
           Baton&rsquo;s whole judgement about what counts as dropped. Move a number and the queue
-          re-scores. There is no second set of thresholds hidden in a prompt.
+          re-scores in front of you. There is no second set of thresholds hidden in a prompt.
         </p>
 
         <div className="mt-5 space-y-5">
@@ -88,11 +90,11 @@ export function RulesDrawer({
                 )}
                 <label className="block">
                   <span className="flex items-baseline gap-2">
-                    <span className="text-[0.8125rem] text-paper-3/85">{f.label}</span>
-                    <span className="num ml-auto text-[0.8125rem] text-paper">
+                    <span className="text-[0.8125rem] text-mid">{f.label}</span>
+                    <span className="num ml-auto text-[0.8125rem] text-strong">
                       {f.step < 1 ? value.toFixed(2) : value}
                     </span>
-                    {f.unit && <span className="font-mono text-[0.625rem] text-ink-4">{f.unit}</span>}
+                    {f.unit && <span className="font-mono text-[0.625rem] text-dim">{f.unit}</span>}
                   </span>
                   <input
                     type="range"
@@ -115,7 +117,7 @@ export function RulesDrawer({
               onChange={(e) => set('deadline', 'require_calendar_hold', e.target.checked)}
               className="size-4 accent-[var(--color-accent)]"
             />
-            <span className="text-[0.8125rem] text-paper-3/85">
+            <span className="text-[0.8125rem] text-mid">
               a deadline must have a calendar hold
             </span>
           </label>
@@ -123,7 +125,7 @@ export function RulesDrawer({
       </div>
 
       <div className="border-t border-hair px-4 py-3">
-        <Chip tone="onInk">deterministic · no model involved</Chip>
+        <Chip tone="neutral">deterministic · no model involved</Chip>
       </div>
     </aside>
   );

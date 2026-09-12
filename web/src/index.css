@@ -55,14 +55,27 @@
   --color-line: #e6dccd;
   --color-line-2: #d3c4b0;
 
-  /* ── dark surfaces (the app) ─────────────────────────────
-     `void` sits below the brand navy so panels in navy lift off the ground. */
-  --color-void: #08111d;
-  --color-panel: #0f2238;
-  --color-panel-2: #16304a;
-  --color-panel-3: #1d3c5a;
-  --color-hair: #22405c;
-  --color-hair-2: #2d5273;
+  /* ── the app's surfaces ──────────────────────────────────
+     The dashboard is themed, and these carry its LIGHT values. The dark set
+     overrides the same custom properties further down, so every utility
+     (`bg-panel`, `border-hair`, `text-dim`) re-themes with no second class
+     name anywhere in the components. Light is the default because a room full
+     of judges is usually a bright room, and because a mission-control screen
+     earns its density from hierarchy, not from being dark.
+
+     `void` is the ground, `panel` the raised surface. In light mode the ground
+     is the warm off-white and the panel is pure white, so the relationship
+     (ground recedes, panel lifts) survives the flip. */
+  --color-void: #f4f1ea;
+  --color-panel: #ffffff;
+  --color-panel-2: #faf8f3;
+  --color-panel-3: #f3eee4;
+  --color-hair: #e4dacb;
+  --color-hair-2: #cfbfa9;
+  /* type on app surfaces */
+  --color-strong: #0f2238;
+  --color-mid: #3d5169;
+  --color-dim: #6b7a8b;
 
   /* ── accent: the brand orange ────────────────────────────
      Orange fails text contrast on cream at full strength, so it comes in
@@ -101,6 +114,7 @@
   --font-mono: 'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, monospace;
 
   /* ── shadow ──────────────────────────────────────────── */
+  --shadow-card: 0 1px 2px rgb(15 34 56 / 0.05), 0 6px 16px -8px rgb(15 34 56 / 0.14);
   --shadow-press: 0 2px 0 var(--color-accent-ink);
   --shadow-press-ink: 0 2px 0 var(--color-ink);
   --shadow-paper: 0 1px 2px rgb(15 34 56 / 0.05), 0 8px 28px -8px rgb(15 34 56 / 0.12);
@@ -139,15 +153,48 @@
   /* The dashboard owns the whole viewport, so it sets the ground itself. */
   body:has(.app-shell) {
     background: var(--color-void);
-    color: var(--color-paper);
+    color: var(--color-strong);
   }
-  .app-shell ::selection {
-    background: var(--color-accent-lift);
-    color: var(--color-ink);
-  }
-  .app-shell :focus-visible {
-    outline-color: var(--color-accent-lift);
-  }
+}
+
+/* ── the dark cut of the app ─────────────────────────────
+   Same custom properties, different values. Set on <html> by the theme hook,
+   so it also covers anything portalled out of the shell. */
+[data-app-theme='dark'] {
+  --color-void: #08111d;
+  --color-panel: #0f2238;
+  --color-panel-2: #16304a;
+  --color-panel-3: #1d3c5a;
+  --color-hair: #22405c;
+  --color-hair-2: #2d5273;
+  --color-strong: #f3eee4;
+  --color-mid: #b9c4cf;
+  --color-dim: #7d8b9a;
+  --shadow-card: 0 1px 0 rgb(255 255 255 / 0.04) inset, 0 10px 26px -14px rgb(0 0 0 / 0.7);
+
+  /* The tinted surfaces have to invert too, or a panel meant to be a pale
+     wash behind dark text becomes a pale slab behind pale text, which is how
+     the first dark cut ended up with an unreadable proposal box and an
+     invisible top row in the audit trail. Each `soft` goes dark, and each
+     `ink`, which exists to be legible ON a light wash, becomes the `lift`
+     cut, which exists to be legible on a dark one. */
+  --color-accent-soft: #2c1a11;
+  --color-accent-ink: #e0834f;
+  --color-agent-soft: #191a3a;
+  --color-agent-ink: #9a92f5;
+  --color-info-soft: #10222a;
+  --color-info-ink: #7fb0c9;
+  --color-ok-soft: #0e2a1e;
+  --color-warn-soft: #2b2310;
+  --color-risk-soft: #2d1512;
+}
+
+[data-app-theme='dark'] .app-shell ::selection {
+  background: var(--color-accent-lift);
+  color: var(--color-ink);
+}
+[data-app-theme='dark'] .app-shell :focus-visible {
+  outline-color: var(--color-accent-lift);
 }
 
 @layer components {
@@ -389,3 +436,37 @@
 .bt-drift-c { animation: bt-drift-c 8s ease-in-out infinite; }
 .bt-dash    { animation: bt-dash 1.3s linear infinite; }
 .bt-halo    { animation: bt-halo 2.6s ease-out infinite; transform-origin: center; transform-box: fill-box; }
+
+
+/* ── tour mode ───────────────────────────────────────────
+   A spotlight cut out of a dimmed overlay with a box-shadow, so the real UI
+   stays visible and interactive underneath rather than being replaced by a
+   screenshot of itself. */
+
+.tour-veil {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  pointer-events: none;
+}
+
+.tour-spot {
+  position: fixed;
+  z-index: 61;
+  border-radius: 14px;
+  pointer-events: none;
+  box-shadow:
+    0 0 0 2px var(--color-accent),
+    0 0 0 9999px rgb(8 17 29 / 0.62);
+  transition:
+    top 0.42s var(--ease-out-quint),
+    left 0.42s var(--ease-out-quint),
+    width 0.42s var(--ease-out-quint),
+    height 0.42s var(--ease-out-quint);
+}
+
+@keyframes bt-count {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: none; }
+}
+.bt-count { animation: bt-count 0.4s var(--ease-out-quint) both; }
