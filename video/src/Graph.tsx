@@ -1,6 +1,6 @@
 import React from 'react';
 import {interpolate, interpolateColors, Easing} from 'remotion';
-import {C, RISK, B} from './theme';
+import {C, RISK, B, B4} from './theme';
 import {MONO} from './fonts';
 import {
   NODES,
@@ -29,8 +29,8 @@ const askOn = (f: number) =>
   });
 
 /** 0 -> 1 as the approved fix lands and the ask clears. */
-const CLEAR_START = 172;
-const CLEAR_END = 184;
+const CLEAR_START = B4.clearFrom;
+const CLEAR_END = B4.clearTo;
 const clearOn = (f: number) =>
   interpolate(f, [CLEAR_START, CLEAR_END], [0, 1], {
     extrapolateLeft: 'clamp',

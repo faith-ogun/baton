@@ -1,13 +1,13 @@
 import React from 'react';
 import {interpolate} from 'remotion';
-import {C, B} from './theme';
+import {C, B, B4} from './theme';
 import {MONO} from './fonts';
 
 const LINE = 'Baton sent the nudge';
-const TYPE_IN = 174;
-const TYPE_OUT = 188;
-const META_IN = 188;
-const META_OUT = 196;
+const TYPE_IN = B4.typeFrom;
+const TYPE_OUT = B4.typeTo;
+const META_IN = B4.metaFrom;
+const META_OUT = B4.metaTo;
 
 export const AuditRow: React.FC<{frame: number}> = ({frame}) => {
   const rowIn = interpolate(frame, [TYPE_IN - 4, TYPE_IN + 2], [0, 1], {

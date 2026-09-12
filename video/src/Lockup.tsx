@@ -1,12 +1,14 @@
 import React from 'react';
 import {interpolate, Easing, Img, staticFile} from 'remotion';
-import {C} from './theme';
+import {C, B, DURATION} from './theme';
 import {SERIF} from './fonts';
 
-const IN_START = 206;
-const IN_END = 220;
-const OUT_START = 230;
-const OUT_END = 238; // fully clear by 238, so frame 239 matches frame 0
+// Beat 5 keeps its original 42-frame shape, hung off the beat boundary.
+const IN_START = B.lockup + 8;
+const IN_END = B.lockup + 22;
+const OUT_START = B.lockup + 32;
+// Fully clear two frames early, so the last frame matches frame 0 exactly.
+const OUT_END = DURATION - 2;
 
 export const Lockup: React.FC<{frame: number}> = ({frame}) => {
   const o =

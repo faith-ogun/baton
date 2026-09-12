@@ -34,7 +34,7 @@ const W = (id: string, kind: GraphNode['kind'], label: string, risk: number, loa
 });
 
 export const PEOPLE: GraphNode[] = [
-  P('u:frank', 'Frank Mercer', 0.46, 0.62, 'Regulatory lead'),
+  P('u:frank', 'Frank Bouvier', 0.46, 0.62, 'Regulatory lead'),
   P('u:sally', 'Sally Ahmed', 0.88, 0.71, 'Clinical ops'),
   P('u:priya', 'Priya Raman', 0.79, 0.94, 'CMC / quality', true),
   P('u:tomas', 'Tomas Lind', 0.31, 0.44, 'Biostatistics'),
@@ -109,7 +109,7 @@ export const RISKS: Risk[] = [
     title: 'Frank asked Sally for Module 3 sign-off 6 days ago. No reply.',
     detail:
       'The ask sits in a mail thread with four other recipients, so nobody reads it as theirs. The filing deadline is in 2 days and this sign-off blocks it.',
-    people: ['Frank Mercer', 'Sally Ahmed'],
+    people: ['Frank Bouvier', 'Sally Ahmed'],
     nodes: ['u:frank', 'u:sally', 'th:sentrix-ask', 'd:module3'],
     project: 'Sentrix filing',
     ageDays: 6,
@@ -146,7 +146,7 @@ export const RISKS: Risk[] = [
       label: 'Post the check-in',
       summary: 'Comment on the task, set a 24-hour checkpoint and copy Frank as second owner.',
       app: 'Tasks',
-      patch: { 'second owner': 'Frank Mercer', checkpoint: 'tomorrow 09:00' },
+      patch: { 'second owner': 'Frank Bouvier', checkpoint: 'tomorrow 09:00' },
       draft:
         'Flagging this one: no movement since 4 September and it blocks the 14 September filing. I have added Frank as a second owner so it is not on one person, and set a checkpoint for 09:00 tomorrow. Priya, if the hold-up is the missing batch 22-041 certificate, say so here and I will chase it. Baton',
     },
@@ -231,7 +231,7 @@ export const INCOMING_RISK: Risk = {
   title: 'The agency just asked for the dissolution dataset. Nobody owns it.',
   detail:
     'A mail from the agency landed 4 seconds ago requesting the comparative dissolution dataset within 48 hours. It names no owner, and the person who holds that data is the same person already carrying four stalled items.',
-  people: ['Priya Raman', 'Frank Mercer'],
+  people: ['Priya Raman', 'Frank Bouvier'],
   nodes: ['u:priya', 'th:sentrix-ask', 'd:module3', 'p:sentrix'],
   project: 'Sentrix filing',
   ageDays: 0,
@@ -244,7 +244,7 @@ export const INCOMING_RISK: Risk = {
     label: 'Create and assign it',
     summary: 'Open a task owned by Frank, due in 24 hours, linked to the agency thread.',
     app: 'Tasks',
-    patch: { owner: 'Frank Mercer', due: 'tomorrow 17:00', links: 'agency thread' },
+    patch: { owner: 'Frank Bouvier', due: 'tomorrow 17:00', links: 'agency thread' },
     draft:
       'Frank, the agency asked for the comparative dissolution dataset with a 48-hour clock. I have opened it as a task on you rather than Priya, who is already sole owner of four critical items. The 22-041 and 22-044 runs are the ones they will want. Baton',
   },

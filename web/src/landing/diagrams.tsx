@@ -130,7 +130,7 @@ export function OpenLoopDiagram() {
       </text>
 
       {/* the sender */}
-      <Person x={16} y={44} label="FM" />
+      <Person x={16} y={44} label="FB" />
 
       {/* the thread it went into */}
       <path d="M31 44 H56" stroke="var(--color-line-2)" strokeWidth="1.4" />

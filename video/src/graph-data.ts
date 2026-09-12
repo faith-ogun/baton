@@ -31,7 +31,7 @@ export type Node = PersonNode | ItemNode;
 
 export const NODES: Node[] = [
   // people
-  {id: 'FM', kind: 'person', initials: 'FM', x: 150, y: 86, state: 'clear', order: 0},
+  {id: 'FB', kind: 'person', initials: 'FB', x: 150, y: 86, state: 'clear', order: 0},
   {id: 'SA', kind: 'person', initials: 'SA', x: 452, y: 66, state: 'watch', order: 2},
   {id: 'RF', kind: 'person', initials: 'RF', x: 74, y: 240, state: 'clear', order: 5},
   {id: 'PR', kind: 'person', initials: 'PR', x: 218, y: 312, state: 'watch', order: 4},
@@ -56,10 +56,10 @@ export type Edge = {
 };
 
 export const EDGES: Edge[] = [
-  {from: 'FM', to: 'M1', order: 0, ask: true},
+  {from: 'FB', to: 'M1', order: 0, ask: true},
   {from: 'M1', to: 'SA', order: 1, ask: true},
   {from: 'SA', to: 'D1', order: 2},
-  {from: 'FM', to: 'RF', order: 3},
+  {from: 'FB', to: 'RF', order: 3},
   {from: 'RF', to: 'PR', order: 4},
   {from: 'PR', to: 'T1', order: 5},
   {from: 'T1', to: 'D1', order: 6},

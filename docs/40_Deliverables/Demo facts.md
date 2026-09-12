@@ -24,7 +24,7 @@ no em dashes.
 |---|---|
 | **Aldermere Bio** | Invented company. Chosen to sound like a real biotech without colliding with one. Stated as invented in the footer. |
 | **Sentrix** | Invented drug name, hence "the Sentrix filing". |
-| **Frank Mercer, Sally Ahmed, Priya Raman, Tomas Lind, Rachel Foster** | Invented people. |
+| **Frank Bouvier, Sally Ahmed, Priya Raman, Tomas Lind, Rachel Foster** | Invented people. |
 | `aldermere.ambi` | The seeded workspace. |
 
 The earlier draft used **Moderna**, a real company, against an invented regulatory

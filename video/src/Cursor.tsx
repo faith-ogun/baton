@@ -1,14 +1,14 @@
 import React from 'react';
 import {interpolate, Easing} from 'remotion';
-import {C} from './theme';
+import {C, B4} from './theme';
 import {CLICK_POINT} from './Card';
 
 export const CURSOR = {
-  enter: 146,
-  arrive: 166,
-  pressIn: 166,
-  pressOut: 176,
-  gone: 202,
+  enter: B4.cursorIn,
+  arrive: B4.click,
+  pressIn: B4.click,
+  pressOut: B4.release,
+  gone: B4.cursorOut,
 };
 
 const START = {x: 1246, y: 686};

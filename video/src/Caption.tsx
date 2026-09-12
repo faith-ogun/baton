@@ -1,14 +1,15 @@
 import React from 'react';
 import {interpolate} from 'remotion';
-import {C} from './theme';
+import {C, B, B4} from './theme';
 import {MONO} from './fonts';
 
 type Cap = {text: string; in: [number, number]; out: [number, number]};
 
+// The third caption completes exactly as the pointer presses APPROVE.
 const CAPS: Cap[] = [
   {text: 'THE WORKSPACE GRAPH', in: [8, 22], out: [42, 50]},
-  {text: 'AN ASK GOES UNANSWERED', in: [50, 62], out: [146, 154]},
-  {text: 'APPROVED. ACTED. LOGGED.', in: [154, 166], out: [198, 207]},
+  {text: 'AN ASK GOES UNANSWERED', in: [50, 62], out: [B4.click - 20, B4.click - 12]},
+  {text: 'APPROVED. ACTED. LOGGED.', in: [B4.click - 12, B4.click], out: [B.lockup, B.lockup + 9]},
 ];
 
 export const Caption: React.FC<{frame: number}> = ({frame}) => (
