@@ -294,7 +294,7 @@ async def lifespan(app: FastAPI):
         try:
             rows = await read_audit()
             if rows:
-                with STORE.lock:
+                async with STORE.lock:
                     STORE.audit = rows
                     STORE.state["audit"] = list(rows)
                 log.info("rehydrated %d audit row(s) from the workspace sheet", len(rows))

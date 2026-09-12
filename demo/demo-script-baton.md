@@ -1,11 +1,11 @@
-# Baton — Demo Video Script (hard 2:00, lands ~1:56)
+# Baton — Demo Video Script (hard 2:00, lands ~1:55)
 
 **Why this version:** the hackathon brief is a **2-minute** video, and only what is inside it gets
 scored. So this is not the full product tour. It is the one spine that proves the category claim,
 cut to a real spoken length, against the **live Ambiguous workspace** rather than seeded data.
 
-**Measured (not guessed):** the voice-over is **296 spoken words**, across exactly five spoken lines.
-- at 140 wpm → **2:07** · at 150 wpm → **1:58** · at 155 wpm → **1:55** · at 165 wpm → **1:48**
+**Measured (not guessed):** the voice-over is **293 spoken words**, across exactly five spoken lines.
+- at 140 wpm → **2:06** · at 150 wpm → **1:57** · at 155 wpm → **1:53** · at 165 wpm → **1:47**
 
 At 140 wpm this crosses 2:00, so take cut 1 below if your calibration comes in slow. Parts 4 and 5
 were rewritten after the first voice-over pass: Part 4 now names what the OpenAI model actually
@@ -117,14 +117,22 @@ rather than fighting it.
 
 ---
 
-## PART 5 — The claim (1:47 – 1:58)
-**~18 seconds · 44 words**
+## PART 5 — The claim (1:47 – 1:57)
+**~17 seconds · 41 words**
+
+**Note on the rewrite.** Two earlier versions of this line hung on "every risk here is one you did
+not think to ask", and it does not survive being said out loud. A team lead obviously does wonder
+whether Sally has replied yet; that is the most normal thought in the job. So the line was
+flattering the product by insulting the listener, and the moment you notice that, the whole beat
+sounds false. The chatbot's problem was never that you failed to think of the question. It is that
+it cannot see a single thing in your workspace, so it can only ever hand back good general advice.
+That version is true, it is what the cutaway already shows, and it lands in one pass.
 
 - `[ANIM: clips/why-not-a-chatbox.mp4 — rendered and ready, 14s at 1920x1080, silent. It runs longer than the words, which is fine: this is the one place in the film to let a shot breathe. Start it as you begin the line. Its first beat, the chat window answering correctly and uselessly, reads on its own in about 4s.]`
 
 - `[If you need to claw back time, trim the clip's head by 4s and start on the graph assembling. The spoken line carries the beat either way.]`
 
-> "This cannot exist in a chat window. A chatbot answers the question you thought to ask, and every risk here is one you did not: nobody thinks to ask which thread went quiet next to which deadline. Baton reads all of them at once."
+> "This cannot exist in a chat window. Ask a chatbot how to stop work slipping and it gives you a correct, useless answer, because it cannot see your team. Baton can see it, and it does not wait to be asked."
 
 ---
 
@@ -148,7 +156,7 @@ rather than fighting it.
 | The audit sheet in the workspace | Governed, logged, and readable by the audited team | Usefulness |
 | The registry re-scoring live | Deterministic and inspectable, not a prompt | Technical execution |
 | Ask declining to act | Read-only by construction, not by policy | Usefulness |
-| "You did not think to ask" | The value cannot be reproduced in a chatbox | Innovation |
+| The chatbot's correct, useless answer | The value cannot be reproduced in a chatbox | Innovation |
 
 ---
 
