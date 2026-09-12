@@ -12,13 +12,13 @@ import { Chip, Container, Kicker, SectionHead } from '../ui/ui';
 const JOURNEY = [
   {
     when: 'Monday, 08:40',
-    who: 'Amara opens Baton',
+    who: 'Rachel opens Baton',
     what: 'Five things are about to drop and one of them is worth twenty-two thousand pounds. She has not opened a single app yet.',
   },
   {
     when: '08:41',
     who: 'She reads the top card',
-    what: 'Nicolas asked Sally for a sign-off six days ago. Amara did not know, because she was not on the thread, and neither of them thought to tell her.',
+    what: 'Nicolas asked Sally for a sign-off six days ago. Rachel did not know, because she was not on the thread, and neither of them thought to tell her.',
   },
   {
     when: '08:42',
@@ -28,7 +28,7 @@ const JOURNEY = [
   {
     when: '08:43',
     who: 'She edits one line and approves',
-    what: 'Baton replies in the existing thread, to Sally alone, stating the date. It goes out as Baton, not as Amara, so it is a system nudge and nobody is being told off.',
+    what: 'Baton replies in the existing thread, to Sally alone, stating the date. It goes out as Baton, not as Rachel, so it is a system nudge and nobody is being told off.',
   },
   {
     when: '08:45',
@@ -175,7 +175,7 @@ export function Who() {
             <Kicker>five minutes on a monday</Kicker>
           </div>
           <h3 className="display-tight mt-4 max-w-2xl text-[1.75rem] text-balance sm:text-[2.1rem]">
-            Amara leads regulatory affairs at Aldermere Bio. Here is her whole week&rsquo;s worth of
+            Rachel leads regulatory affairs at Aldermere Bio. Here is her whole week&rsquo;s worth of
             chasing.
           </h3>
 

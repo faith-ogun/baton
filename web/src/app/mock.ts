@@ -38,7 +38,7 @@ export const PEOPLE: GraphNode[] = [
   P('u:sally', 'Sally Ahmed', 0.88, 0.71, 'Clinical ops'),
   P('u:priya', 'Priya Raman', 0.79, 0.94, 'CMC / quality', true),
   P('u:tomas', 'Tomas Lind', 0.31, 0.44, 'Biostatistics'),
-  P('u:amara', 'Amara Okafor', 0.12, 0.35, 'Regulatory affairs lead'),
+  P('u:rachel', 'Rachel Foster', 0.12, 0.35, 'Regulatory affairs lead'),
   P('u:baton', 'Baton', 0, 0.5, 'AI coworker'),
 ];
 
@@ -51,7 +51,7 @@ const WORK: GraphNode[] = [
   W('t:method-val', 'task', 'Method validation', 0.7, 0.55, 'Priya · no update 6d'),
   W('t:impurity', 'task', 'Impurity memo', 0.68, 0.5, 'Priya · no update 5d'),
   W('t:sap-sync', 'task', 'SAP alignment', 0.24, 0.4, 'Tomas · in progress'),
-  W('t:cover-letter', 'task', 'Cover letter', 0.08, 0.3, 'Amara · in progress'),
+  W('t:cover-letter', 'task', 'Cover letter', 0.08, 0.3, 'Rachel · in progress'),
   W('t:train-deck', 'task', 'Training deck', 0.52, 0.35, 'Sally · unscheduled'),
 
   W('th:sentrix-ask', 'thread', 'Module 3 sign-off', 0.93, 0.7, 'Mail · 6 days, no reply'),
@@ -82,12 +82,12 @@ export const EDGES: GraphEdge[] = [
 
   // the rest of the team
   { source: 'u:tomas', target: 't:sap-sync', kind: 'assigned' },
-  { source: 'u:amara', target: 't:cover-letter', kind: 'assigned' },
+  { source: 'u:rachel', target: 't:cover-letter', kind: 'assigned' },
   { source: 't:cover-letter', target: 'p:sentrix', kind: 'mentions' },
   { source: 't:sap-sync', target: 'p:sentrix', kind: 'mentions' },
   { source: 'u:nicolas', target: 'p:sentrix', kind: 'participates' },
   { source: 'u:sally', target: 'p:sentrix', kind: 'participates' },
-  { source: 'u:amara', target: 'th:qa-window', kind: 'participates' },
+  { source: 'u:rachel', target: 'th:qa-window', kind: 'participates' },
   { source: 'u:tomas', target: 'th:qa-window', kind: 'participates' },
   { source: 'd:module3', target: 'p:sentrix', kind: 'mentions' },
 
@@ -182,7 +182,7 @@ export const RISKS: Risk[] = [
     title: 'The safety-training deadline is in 3 days with nothing booked.',
     detail:
       'A site-wide commitment with an owner and a deck, but no calendar hold for anyone who has to attend. Nothing in the workspace will remind the team it exists.',
-    people: ['Sally Ahmed', 'Amara Okafor'],
+    people: ['Sally Ahmed', 'Rachel Foster'],
     nodes: ['u:sally', 't:train-deck', 'd:safety-due'],
     project: 'Safety training',
     dueInDays: 3,
@@ -264,7 +264,7 @@ export const AUDIT: AuditEntry[] = [
     id: 'a:3',
     at: '2026-09-11T16:40:00Z',
     verb: 'Booked a review slot',
-    detail: 'Created "Module 3 pre-read" Thu 11:00 for Nicolas, Sally and Amara.',
+    detail: 'Created "Module 3 pre-read" Thu 11:00 for Nicolas, Sally and Rachel.',
     app: 'Calendar',
     href: '#',
   },
@@ -272,7 +272,7 @@ export const AUDIT: AuditEntry[] = [
     id: 'a:2',
     at: '2026-09-11T09:05:00Z',
     verb: 'Set a second owner',
-    detail: 'Added Amara to "Draft cover letter" after 4 days of no movement.',
+    detail: 'Added Rachel to "Draft cover letter" after 4 days of no movement.',
     app: 'Tasks',
     href: '#',
   },
@@ -296,7 +296,7 @@ export const AUDIT: AuditEntry[] = [
 export const SCOPE: Scope = {
   org: 'Aldermere Bio',
   team: 'Regulatory affairs',
-  lead: 'Amara Okafor',
+  lead: 'Rachel Foster',
   headcount: 8,
   siblings: [
     { id: 'reg', team: 'Regulatory affairs', open: 5, health: 52 },

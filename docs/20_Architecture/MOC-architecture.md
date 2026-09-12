@@ -1,0 +1,35 @@
+---
+title: "MOC-architecture"
+type: moc
+status: current
+tags: [type/moc]
+last-reviewed: 2026-09-12
+---
+
+# MOC-architecture
+
+How Baton is built.
+
+## Start here
+
+- [[System architecture]] — the whole shape, and why Vite not Next
+- [[The deterministic and LLM split]] — the credibility moat
+
+## The engine
+
+- [[The risk engine and registry]] — scoring, health, and why the registry produces the seeded numbers
+- [[The cost model]] — person-days to money, and why it is derived not borrowed
+
+## The screen
+
+- [[The graph layer]] — type and risk as separate channels, and the label placement that took three attempts
+- [[The theme decision]] — light and dark, and the two token traps
+- [[The routing bug]] — one cause, three dead links
+
+## Governance
+
+- [[Governance and human-in-the-loop]] — the four guarantees
+
+## Related
+
+- [[MOC]] · [[MOC-product]] · [[MOC-domain]]

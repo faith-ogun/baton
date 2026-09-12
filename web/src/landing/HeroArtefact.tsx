@@ -44,7 +44,7 @@ const TONE: Record<Tone, string> = {
 };
 
 const NODES: N[] = [
-  { id: 'amara', kind: 'person', x: 58, y: 62, r: 10, tone: 'ok', who: 'AO', drift: 'b' },
+  { id: 'rachel', kind: 'person', x: 58, y: 62, r: 10, tone: 'ok', who: 'RF', drift: 'b' },
   { id: 'nicolas', kind: 'person', x: 142, y: 44, r: 11, tone: 'warn', who: 'NB', label: 'Nicolas', drift: 'a' },
   { id: 'ask', kind: 'thread', x: 224, y: 74, r: 10, tone: 'risk', drift: 'c' },
   { id: 'sally', kind: 'person', x: 308, y: 50, r: 12, tone: 'risk', who: 'SA', label: 'Sally', drift: 'b' },
@@ -60,7 +60,7 @@ const NODES: N[] = [
 const AT = Object.fromEntries(NODES.map((n) => [n.id, n])) as Record<string, N>;
 
 const EDGES: [string, string, boolean?][] = [
-  ['amara', 'nicolas'],
+  ['rachel', 'nicolas'],
   ['nicolas', 'ask', true],
   ['ask', 'sally', true],
   ['ask', 'module3', true],

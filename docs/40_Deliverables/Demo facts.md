@@ -1,9 +1,9 @@
 ---
-title: Demo facts (what is invented, what is derived, what needs checking)
+title: "Demo facts"
 type: reference
 status: current
+tags: [type/reference, topic/demo, topic/cost-model]
 last-reviewed: 2026-09-12
-tags: [type/reference, status/current, project/baton]
 ---
 
 # Demo facts
@@ -24,7 +24,7 @@ no em dashes.
 |---|---|
 | **Aldermere Bio** | Invented company. Chosen to sound like a real biotech without colliding with one. Stated as invented in the footer. |
 | **Sentrix** | Invented drug name, hence "the Sentrix filing". |
-| **Nicolas Bouvier, Sally Ahmed, Priya Raman, Tomas Lind, Amara Okafor** | Invented people. |
+| **Nicolas Bouvier, Sally Ahmed, Priya Raman, Tomas Lind, Rachel Foster** | Invented people. |
 | `aldermere.ambi` | The seeded workspace. |
 
 The earlier draft used **Moderna**, a real company, against an invented regulatory
@@ -105,3 +105,7 @@ a switcher across three boards, not a merged view.
 
 This is why the whole-company view is drawn with a cross through it in the "who this is
 for" diagram rather than being sold as the flagship feature.
+
+## Related
+
+- [[The cost model]] · [[Scope guards]] · [[MOC-deliverables]]
