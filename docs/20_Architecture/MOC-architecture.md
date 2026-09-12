@@ -15,6 +15,12 @@ How Baton is built.
 - [[System architecture]] — the whole shape, and why Vite not Next
 - [[The deterministic and LLM split]] — the credibility moat
 
+## The environment
+
+- [[The Ambiguous API, verified]] — the real endpoints and event types, and the four places the root
+  CLAUDE.md cheat-sheet is wrong
+- [[The Ambiguous workspace setup]] — naming, and the workspace the CLI creates by accident
+
 ## The engine
 
 - [[The risk engine and registry]] — scoring, health, and why the registry produces the seeded numbers
