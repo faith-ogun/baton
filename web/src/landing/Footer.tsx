@@ -1,6 +1,6 @@
 import { Link } from '../lib/router';
 import { Lockup } from '../brand/Mark';
-import { Arrow, Container, Kicker } from '../ui/ui';
+import { Container, Kicker } from '../ui/ui';
 
 const COLUMNS: [string, [string, string][]][] = [
   [
@@ -52,23 +52,17 @@ export function Footer() {
     <footer className="border-t border-line bg-paper">
       <Container className="py-12 sm:py-14">
         <div className="grid gap-10 lg:grid-cols-[auto_1fr] lg:gap-16">
-          {/* The mark fills its column rather than sitting in the top of it:
-              the CTA is pushed to the bottom, so whatever height the right-hand
-              block ends up being, this side has no dead air under it. */}
-          <div className="flex flex-col lg:min-h-full">
+          {/* No call to action down here. The nav and the CTA band above both
+              already offer the dashboard, and a third button in the footer is
+              just noise at the point somebody has finished reading. The
+              Dashboard link in the Product column covers it. */}
+          <div>
             <Link to="/" className="inline-block">
               <Lockup width={224} className="transition-opacity hover:opacity-85" />
             </Link>
             <p className="display-tight mt-5 text-[1.5rem]">
               Never drop the <em className="display-em text-accent-mid">baton</em>.
             </p>
-            <Link
-              to="/app"
-              className="group mt-6 inline-flex w-fit items-center gap-2 rounded-full bg-ink px-4 py-2 text-[0.8125rem] font-medium text-paper shadow-press transition-all duration-150 hover:bg-ink-2 active:translate-y-[2px] active:shadow-none lg:mt-auto"
-            >
-              Open the dashboard
-              <Arrow />
-            </Link>
           </div>
 
           {/* Links and description in ONE column, stacked. They were previously
