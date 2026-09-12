@@ -1,0 +1,391 @@
+@import 'tailwindcss';
+
+/*
+  Baton — design tokens, taken straight off the logo board.
+
+  Six colours came off the brand sheet: navy #0F2238, burnt orange #C96A3D,
+  cream #F3EEE4, neutral grey #8A96A3, accent blue #5E8FA8 and accent purple
+  #7A6FF0. Everything below is those six plus the tints and shades needed to
+  build both halves of the product out of them.
+
+  Two grounds, one brand:
+    the site  light. Cream and white, navy ink, orange accent. This is the
+              logo board's own world, so the mark sits on it untouched.
+    the app   dark. Navy deepened to a mission-control ground, the mark in its
+              reversed cut. A dense screen wants a dark room.
+
+  Roles, kept strict so the orange never turns to noise:
+    accent (orange)   Baton's own voice. Primary actions, one highlighted word
+                      per headline, the baton rule, the mark itself.
+    agent (purple)    only ever "Baton did this". Audit rows, its identity
+                      chip, the approved-action flash. Nothing else may use it.
+    info (blue)       people and neutral structure in the graph.
+    grey              metadata, timestamps, the things that are just facts.
+
+  Risk is a three-stop scale and it is deliberately NOT the brand orange:
+    ok #2E7D5B  ·  warn #D9A441  ·  risk #C2402F
+  A red that shares the orange's hue would make "at risk" and "primary action"
+  read as one signal, which is exactly the mistake to avoid on a screen whose
+  whole job is telling you what is on fire.
+
+  Rules of the system:
+    - Hairlines are warm on the light ground, cool on the dark one. Never grey.
+    - One hard 2px shadow, on the primary button, in burnt orange. The signature.
+    - The baton rule (a 3px orange bar with round caps) marks every section and
+      every active tab. It is the one piece of ornament that earns its place.
+    - Motion moves left to right. It is a hand-off; it should read as one.
+*/
+
+@theme {
+  /* ── ink: the brand navy ─────────────────────────────── */
+  --color-ink: #0f2238;
+  --color-ink-2: #2a3e56;
+  --color-ink-3: #566677;
+  --color-ink-4: #8a96a3;
+
+  /* ── light surfaces (the site) ───────────────────────────
+     White page, cream in bands rather than as a wash. Cream everywhere
+     flattens a page; used in stripes it gives it a pulse. `paper` is also the
+     light-on-dark ink: cream type on the navy bands, never pure white. */
+  --color-canvas: #ffffff;
+  --color-paper: #f3eee4;
+  --color-paper-2: #eae2d5;
+  --color-paper-3: #dcd0be;
+  --color-card: #ffffff;
+  --color-line: #e6dccd;
+  --color-line-2: #d3c4b0;
+
+  /* ── dark surfaces (the app) ─────────────────────────────
+     `void` sits below the brand navy so panels in navy lift off the ground. */
+  --color-void: #08111d;
+  --color-panel: #0f2238;
+  --color-panel-2: #16304a;
+  --color-panel-3: #1d3c5a;
+  --color-hair: #22405c;
+  --color-hair-2: #2d5273;
+
+  /* ── accent: the brand orange ────────────────────────────
+     Orange fails text contrast on cream at full strength, so it comes in
+     stops: --accent for fills, --accent-mid for display type (passes AA
+     large), --accent-ink for anything small (passes AA). --accent-lift is the
+     brightened cut for the dark ground. */
+  --color-accent: #c96a3d;
+  --color-accent-mid: #b2542a;
+  --color-accent-ink: #98461f;
+  --color-accent-lift: #e0834f;
+  --color-accent-soft: #f7e3d6;
+
+  /* ── agent: Baton's identity, purple ─────────────────── */
+  --color-agent: #7a6ff0;
+  --color-agent-lift: #9a92f5;
+  --color-agent-ink: #5348c4;
+  --color-agent-soft: #e8e6fd;
+
+  /* ── info: accent blue ───────────────────────────────── */
+  --color-info: #5e8fa8;
+  --color-info-lift: #7fb0c9;
+  --color-info-ink: #3f6d85;
+  --color-info-soft: #e2edf2;
+
+  /* ── risk: the three-stop scale ──────────────────────── */
+  --color-ok: #2e7d5b;
+  --color-ok-soft: #dcefe5;
+  --color-warn: #d9a441;
+  --color-warn-soft: #fbeed2;
+  --color-risk: #c2402f;
+  --color-risk-soft: #f8dcd8;
+
+  /* ── type ────────────────────────────────────────────── */
+  --font-display: 'Fraunces', 'Iowan Old Style', Georgia, serif;
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+
+  /* ── shadow ──────────────────────────────────────────── */
+  --shadow-press: 0 2px 0 var(--color-accent-ink);
+  --shadow-press-ink: 0 2px 0 var(--color-ink);
+  --shadow-paper: 0 1px 2px rgb(15 34 56 / 0.05), 0 8px 28px -8px rgb(15 34 56 / 0.12);
+  --shadow-lift: 0 2px 4px rgb(15 34 56 / 0.06), 0 18px 44px -12px rgb(15 34 56 / 0.18);
+  --shadow-panel: 0 1px 0 rgb(255 255 255 / 0.04) inset, 0 18px 40px -18px rgb(0 0 0 / 0.6);
+
+  /* ── motion ──────────────────────────────────────────── */
+  --ease-out-quint: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    background: var(--color-canvas);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+  }
+
+  ::selection {
+    background: var(--color-accent);
+    color: #fff;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  /* The dashboard owns the whole viewport, so it sets the ground itself. */
+  body:has(.app-shell) {
+    background: var(--color-void);
+    color: var(--color-paper);
+  }
+  .app-shell ::selection {
+    background: var(--color-accent-lift);
+    color: var(--color-ink);
+  }
+  .app-shell :focus-visible {
+    outline-color: var(--color-accent-lift);
+  }
+}
+
+@layer components {
+  /* Display type: Fraunces with a touch of wonk so headlines have a face, and
+     a low optical size so they stay sturdy rather than fashion-magazine. */
+  .display {
+    font-family: var(--font-display);
+    font-variation-settings: 'opsz' 40, 'SOFT' 20, 'WONK' 1;
+    font-weight: 600;
+    letter-spacing: -0.022em;
+    line-height: 1.02;
+  }
+
+  .display-tight {
+    font-family: var(--font-display);
+    font-variation-settings: 'opsz' 24, 'SOFT' 18, 'WONK' 1;
+    font-weight: 600;
+    letter-spacing: -0.018em;
+    line-height: 1.1;
+  }
+
+  /* Emphasis inside a headline. Italic Fraunces with the wonk turned up: the
+     shape does the work, so the colour is not carrying it alone. A word set
+     only in an accent colour is the flattest way to emphasise something. */
+  .display-em {
+    font-style: italic;
+    font-variation-settings: 'opsz' 40, 'SOFT' 40, 'WONK' 1;
+    font-weight: 600;
+  }
+
+  /* The small uppercase label that opens every section. */
+  .kicker {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    font-weight: 500;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+  }
+
+  .num {
+    font-family: var(--font-mono);
+    font-variant-numeric: tabular-nums;
+    letter-spacing: -0.02em;
+  }
+
+  /* The signature: a baton. 3px, round caps, orange, handed left to right. */
+  .baton-rule {
+    display: block;
+    height: 3px;
+    border-radius: 999px;
+    background: linear-gradient(90deg, var(--color-accent) 0%, var(--color-accent-lift) 100%);
+  }
+}
+
+/* ── motion ──────────────────────────────────────────────
+   Everything is entrance-only and cheap, and everything travels left to
+   right, because the product is a hand-off. Nothing loops in the viewport
+   except the risk dots and the one node that is on fire. */
+
+@keyframes bt-pass {
+  from {
+    opacity: 0;
+    transform: translateX(-18px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes bt-rise {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes bt-sweep {
+  from {
+    clip-path: inset(0 100% 0 0);
+  }
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+@keyframes bt-pulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 currentColor;
+    opacity: 1;
+  }
+  70% {
+    box-shadow: 0 0 0 5px transparent;
+    opacity: 0.8;
+  }
+}
+
+/* A node catching fire: one hard flare, then it holds red. */
+@keyframes bt-flare {
+  0% {
+    box-shadow: 0 0 0 0 var(--color-risk);
+  }
+  40% {
+    box-shadow: 0 0 0 14px rgb(194 64 47 / 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgb(194 64 47 / 0);
+  }
+}
+
+/* Approve: the card hands itself off to the right and goes. */
+@keyframes bt-handoff {
+  0% {
+    opacity: 1;
+    transform: none;
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(64px) scale(0.97);
+  }
+}
+
+.bt-pass {
+  animation: bt-pass 0.6s var(--ease-out-quint) both;
+}
+.bt-rise {
+  animation: bt-rise 0.7s var(--ease-out-quint) both;
+}
+.bt-sweep {
+  animation: bt-sweep 0.7s var(--ease-out-quint) both;
+}
+.bt-pulse {
+  animation: bt-pulse 2.4s ease-in-out infinite;
+}
+.bt-flare {
+  animation: bt-flare 1.1s var(--ease-out-quint) 2;
+}
+.bt-handoff {
+  animation: bt-handoff 0.42s var(--ease-out-quint) both;
+}
+
+/* Reveal on scroll. The hidden state is gated behind `.reveal-ready`, which
+   only the useReveal hook adds, so a page that never runs its JS is fully
+   readable rather than fully blank. */
+.reveal-ready .reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition:
+    opacity 0.7s var(--ease-out-quint),
+    transform 0.7s var(--ease-out-quint);
+}
+.reveal-ready .reveal.is-in {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+  .reveal-ready .reveal {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Faint grain on the large flat areas so they do not read as flat screen
+   colour. Two-stop repeating gradient, no image asset. */
+.grain {
+  position: relative;
+}
+.grain::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.02;
+  background-image:
+    repeating-linear-gradient(0deg, #fff 0 1px, transparent 1px 5px),
+    repeating-linear-gradient(90deg, #fff 0 1px, transparent 1px 7px);
+}
+
+/* Dense scrollbars for the app panels. */
+.app-shell *::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+.app-shell *::-webkit-scrollbar-track {
+  background: transparent;
+}
+.app-shell *::-webkit-scrollbar-thumb {
+  background: var(--color-hair);
+  border-radius: 999px;
+}
+.app-shell *::-webkit-scrollbar-thumb:hover {
+  background: var(--color-hair-2);
+}
+
+/* ── the hero graph ──────────────────────────────────────
+   Hand-placed rather than force-simulated: a hero image should be composed,
+   and it should look identical every single load. The drift keeps it alive. */
+
+@keyframes bt-drift-a {
+  0%, 100% { transform: translate(0, 0); }
+  50%      { transform: translate(3px, -4px); }
+}
+@keyframes bt-drift-b {
+  0%, 100% { transform: translate(0, 0); }
+  50%      { transform: translate(-4px, 3px); }
+}
+@keyframes bt-drift-c {
+  0%, 100% { transform: translate(0, 0); }
+  50%      { transform: translate(2px, 4px); }
+}
+/* An unanswered ask, travelling and never arriving. */
+@keyframes bt-dash {
+  from { stroke-dashoffset: 28; }
+  to   { stroke-dashoffset: 0; }
+}
+@keyframes bt-halo {
+  0%, 100% { opacity: 0.18; transform: scale(1); }
+  55%      { opacity: 0;    transform: scale(2.2); }
+}
+
+.bt-drift-a { animation: bt-drift-a 7s ease-in-out infinite; }
+.bt-drift-b { animation: bt-drift-b 9s ease-in-out infinite; }
+.bt-drift-c { animation: bt-drift-c 8s ease-in-out infinite; }
+.bt-dash    { animation: bt-dash 1.3s linear infinite; }
+.bt-halo    { animation: bt-halo 2.6s ease-out infinite; transform-origin: center; transform-box: fill-box; }
