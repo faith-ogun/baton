@@ -144,8 +144,26 @@ category. And never shorten a sentence to fit; drop a whole line from this list 
 
 ## Guardrails
 
-- **Verify Approve works before you roll.** If it errors on camera the film is dead. Fire one
-  approve, confirm the artefact appears in Ambiguous, then reset if needed.
+> [!warning] Approve is verified, but do NOT restart the backend once you start recording
+> The approve loop was proven end to end on live data: a real calendar event
+> `ab7f63f0-410c-4c23-853d-9868ace84dc9` was created in the workspace, the detector then stopped
+> firing because the workspace genuinely had a hold, and the row read back out of the sheet.
+> **But the audit timeline is in-memory.** A backend restart empties it while the sheet keeps its
+> rows, so restarting between the Approve and the audit-strip shot would show an empty timeline.
+> It is deliberately at zero rows right now so it fills live on camera.
+
+> [!warning] One click on Approve, not two
+> The calendar endpoint does **not** honour `Idempotency-Key`: two identical posts create two
+> events. The route now only accepts a risk in `open`, so a double click is refused rather than
+> duplicated, but do not lean on it. Click once and wait for the card to fly out.
+
+- **The board is set.** At recording time it carries **4 risks**: the sole-owner at 82 leading, one
+  stalled task at 74, and the 13 and 14 September unbooked deadlines at 66 and 64. Exposure
+  **£7,280**, £4,160 of it on the sole-owner risk. Health starts around 55.
+- **Approve a deadline card, not the sole-owner card.** The two calendar ones are proven end to end
+  on live data. The sole-owner action reassigns Priya's task to Rachel and is verified at the field
+  and id level but deliberately unfired, so it carries the residual risk of any untested path. If
+  you want the sole-owner card as the hero, fire it once in rehearsal first and re-seed.
 - **Do not narrate a live workspace over a seeded one.** If the status bar says `seeded workspace`,
   the dev server has not picked up `web/.env.local`; restart it.
 - **Never say "deterministic" on camera.** Say "needs no model at all", or "cannot go differently on

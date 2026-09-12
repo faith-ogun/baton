@@ -34,7 +34,7 @@ stalled_task:
   # 11:41Z, so by recording time the four untouched ones are an hour or more
   # cold and fire, while the two that received comments have a fresher
   # updated_at and correctly do not. For real use this is 5, in days.
-  no_update_days: 30
+  no_update_days: 45
   at_risk_if_due_within_days: 3
 
 deadline:
