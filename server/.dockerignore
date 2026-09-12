@@ -1,0 +1,14 @@
+# Secrets must never enter the image: AMBI_TOKEN and the webhook secret
+# arrive at runtime from Secret Manager, not from a baked-in file.
+.env
+.env.*
+../.ambi/
+.ambi/
+
+# Local-only bulk and caches.
+.venv/
+venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.DS_Store

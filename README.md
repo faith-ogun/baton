@@ -19,6 +19,14 @@
 </p>
 
 <p align="center">
+  <b>Live:</b> <a href="https://baton-hack-2026.web.app/app">baton-hack-2026.web.app/app</a>
+  &nbsp;·&nbsp;
+  <b>API:</b> <a href="https://baton-104295462760.europe-west1.run.app/health">Cloud Run health</a>
+  &nbsp;·&nbsp;
+  reading a real Ambiguous workspace
+</p>
+
+<p align="center">
   <a href="#run-it-in-two-commands"><b>◆ Run it in two commands&nbsp;→</b></a>
   &nbsp;&nbsp;·&nbsp;&nbsp;
   <a href="#what-gets-dropped">What gets dropped</a>
@@ -270,7 +278,9 @@ Three properties, and all three are structural rather than instructions in a pro
 - **Not autonomous.** Deliberately. See Governance.
 - **Not a surveillance tool.** It watches work items and hand-offs, not people's activity, and the
   audit trail is readable by the team it covers.
-- **Not deployed.** The demo runs locally on purpose, for reliability.
+- **Not a mock when deployed.** The public site reads the same real workspace through Cloud Run, and
+  its status bar says so. The demo video is recorded against localhost only because a cold Cloud Run
+  instance adds a few seconds to the first request.
 
 ---
 
@@ -305,7 +315,7 @@ Start at [`docs/_meta/MOC.md`](docs/_meta/MOC.md).
 | Front end | **Vite** · React 19 · Tailwind 4 · Fraunces / Inter / JetBrains Mono |
 | Video | **Remotion** for the animation above and the demo cutaways |
 | Identity | The mark is Hermes mid-hand-off, generated with **ChatGPT's image tool** and then cut out, background-removed and given a reversed cream-on-navy cut for dark grounds |
-| Deploy | **Google Cloud Run** (stretch; the demo runs locally) |
+| Deploy | **Google Cloud Run** (`europe-west1`) for the API, **Firebase Hosting** for the front end, secrets in **Secret Manager** |
 
 Vite rather than Next: the dashboard is a single client-rendered canvas app with a WebSocket, so
 server rendering buys nothing and costs an `ssr: false` dance around the one component that must not

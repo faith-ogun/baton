@@ -292,6 +292,9 @@ app.add_middleware(
         "http://127.0.0.1:5173",
         "http://localhost:4173",
         "http://127.0.0.1:4173",
+        # Firebase Hosting origins for the deployed front end.
+        "https://baton-hack-2026.web.app",
+        "https://baton-hack-2026.firebaseapp.com",
     ],
     allow_credentials=False,
     allow_methods=["*"],

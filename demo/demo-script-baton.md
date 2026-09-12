@@ -4,8 +4,8 @@
 scored. So this is not the full product tour. It is the one spine that proves the category claim,
 cut to a real spoken length, against the **live Ambiguous workspace** rather than seeded data.
 
-**Measured (not guessed):** the voice-over is **269 spoken words**, across exactly five spoken lines.
-- at 140 wpm → **1:55** · at 150 wpm → **1:48** · at 155 wpm → **1:44** · at 165 wpm → **1:38**
+**Measured (not guessed):** the voice-over is **273 spoken words**, across exactly five spoken lines.
+- at 140 wpm → **1:57** · at 150 wpm → **1:49** · at 155 wpm → **1:46** · at 165 wpm → **1:39**
 
 Every production note in this file is deliberately **not** a blockquote. In this format `>` means
 "words you say out loud", so a note written as one would be counted and the running time above
@@ -18,7 +18,8 @@ deliberate so you can pause on the audit sheet rather than racing past it.
 multiply by three. That is your real words per minute. Trust word count divided by your rate, never
 a "this part feels like 20 seconds" guess.
 
-**Format:** screen recording of the live app at `localhost:5173/app` plus your own voice-over, cut
+**Format:** screen recording of the live app at `localhost:5173/app`, or the deployed
+`https://baton-hack-2026.web.app/app`, plus your own voice-over, cut
 with two Remotion cutaways that are **rendered and ready** in `demo/clips/`:
 `why-not-a-chatbox.mp4` (14s, 1920x1080) and `the-split.mp4` (12s, 1920x1080). Both are silent, so
 the voice-over plays over them. Narrate in **your own voice**, never an AI
@@ -58,13 +59,21 @@ category claim in four seconds. Only then cut to Baton's board.
 ## PART 2 — The risk that is invisible from inside any app (0:22 – 0:50)
 **~26 seconds · 60 words**
 
-- `[SCREEN: click the top row. It expands: "Priya is the only owner of 4 critical items." Severity 82. The graph dims to just her cluster, her node wearing its dashed sole-owner collar.]`
+**Note: click the SECOND card, not the first.**
+
+A stalled task sits at the top scoring 99, because a stall's score climbs the
+longer it sits and it will be pinned at the cap by recording time. The card you
+want is the one below it: **"Priya is the only owner of 4 critical items", 82**.
+The line below is written for that, and it turns the ordering into the point
+rather than fighting it.
+
+- `[SCREEN: click the sole-owner card, the second one. It expands. The graph dims to just her cluster, her node wearing its dashed sole-owner collar.]`
 
 - `[SCREEN: open "Why this fired" so the rule line is legible on screen.]`
 
 - `[CAP: "spof · 4 sole-owned critical items > 3 · betweenness 1.00 > 0.90"]`
 
-> "The worst one is not a late task. Priya is the only person who can finish four items on the critical path, and her betweenness across the graph is one. That is not in any record. It is the shape of the work, so there is no document you could open that contains it. It is worth four thousand pounds if she is out for a week."
+> "The one that matters is not the late task at the top. Priya is the only person who can finish four items on the critical path, and her betweenness across the graph is one. That is not in any record. It is the shape of the work, so there is no document you could open that contains it. It is worth four thousand pounds if she is out for a week."
 
 ---
 
@@ -176,9 +185,14 @@ The calendar endpoint does **not** honour `Idempotency-Key`: two identical posts
 events. The route now only accepts a risk in `open`, so a double click is refused rather than
 duplicated, but do not lean on it. Click once and wait for the card to fly out.
 
-- **The board is set.** At recording time it carries **4 risks**: the sole-owner at 82 leading, one
-  stalled task at 74, and the 13 and 14 September unbooked deadlines at 66 and 64. Exposure
-  **£7,280**, £4,160 of it on the sole-owner risk. Health starts around 55.
+- **The board carries 4 risks**, in this order: a stalled task pinned at **99**, the sole-owner at
+  **82**, then the 13 and 14 September unbooked deadlines at **66** and **64**. Health around 51.
+  The sole-owner risk is £4,160 of it. **Click the second card, not the first**; see the note in
+  Part 2.
+- **You can record against the deployed site instead of localhost if you prefer.**
+  `https://baton-hack-2026.web.app/app` is live, reads `webhooks live` and pulls the same real
+  workspace through Cloud Run. Localhost is still the safer bet for the Approve beat, because a
+  cold Cloud Run instance can take a few seconds on the first request.
 - **Approve a deadline card, not the sole-owner card.** The two calendar ones are proven end to end
   on live data. The sole-owner action reassigns Priya's task to Rachel and is verified at the field
   and id level but deliberately unfired, so it carries the residual risk of any untested path. If

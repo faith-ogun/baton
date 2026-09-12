@@ -1,0 +1,12 @@
+# Controls what is uploaded to Cloud Build. Keeping secrets out of the upload
+# is the strongest guarantee they never reach the image layer.
+.env
+.env.*
+.ambi/
+
+.venv/
+venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.DS_Store
