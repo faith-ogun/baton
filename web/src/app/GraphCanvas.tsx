@@ -144,18 +144,31 @@ function glyph(
   }
 }
 
+export interface GraphHandle {
+  /** Set the zoom, animated. Driven by the toolbar slider. */
+  setZoom: (k: number) => void;
+  /** Frame the whole graph. */
+  fit: () => void;
+}
+
 export function GraphCanvas({
   nodes,
   edges,
   selected,
   onSelect,
   palette,
+  showLabels = true,
+  onZoom,
+  handleRef,
 }: {
   nodes: GraphNode[];
   edges: GraphEdge[];
   selected: string | null;
   onSelect: (id: string | null) => void;
   palette: Palette;
+  showLabels?: boolean;
+  onZoom?: (k: number) => void;
+  handleRef?: React.RefObject<GraphHandle | null>;
 }) {
   const wrap = useRef<HTMLDivElement>(null);
   const fg = useRef<ForceGraphMethods<SimNode, SimLink> | undefined>(undefined);
@@ -198,6 +211,16 @@ export function GraphCanvas({
       if (next) sl.open = next.open;
     }
   }, [nodes, edges]);
+
+  // The toolbar drives the graph through this, rather than the graph exposing
+  // its whole kapsule: two verbs are all the outside needs.
+  useEffect(() => {
+    if (!handleRef) return;
+    handleRef.current = {
+      setZoom: (k) => fg.current?.zoom(k, 180),
+      fit: () => fg.current?.zoomToFit(600, 52),
+    };
+  }, [handleRef]);
 
   useEffect(() => {
     if (!wrap.current) return;
@@ -346,7 +369,7 @@ export function GraphCanvas({
    */
   const paintLabels = useCallback(
     (ctx: CanvasRenderingContext2D, scale: number) => {
-      if (scale < 0.45) return;
+      if (!showLabels || scale < 0.45) return;
       /*
        * Dividing by the scale is what keeps a label a constant size on SCREEN
        * whatever the zoom. The floor this used to carry, Math.max(8.5, ...),
@@ -458,7 +481,7 @@ export function GraphCanvas({
       ctx.globalAlpha = 1;
       ctx.textAlign = 'center';
     },
-    [focus, hover, palette, size.w, size.h],
+    [focus, hover, palette, size.w, size.h, showLabels],
   );
 
   const paintPointer = useCallback((n: SimNode, colour: string, ctx: CanvasRenderingContext2D) => {
@@ -510,7 +533,13 @@ export function GraphCanvas({
           d3VelocityDecay={0.32}
           warmupTicks={40}
           onRenderFramePost={paintLabels}
-          onEngineStop={() => fg.current?.zoomToFit(700, 52)}
+          minZoom={0.25}
+          maxZoom={4}
+          onZoom={(t) => onZoom?.(t.k)}
+          onEngineStop={() => {
+            fg.current?.zoomToFit(700, 52);
+            onZoom?.(fg.current?.zoom() ?? 1);
+          }}
           enableNodeDrag
         />
       )}

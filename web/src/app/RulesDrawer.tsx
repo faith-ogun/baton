@@ -1,5 +1,4 @@
 import type { Rules } from '../types';
-import { Chip } from '../ui/ui';
 
 /** Every slider in the drawer, flattened so the panel is one map over a list. */
 const FIELDS: {
@@ -54,9 +53,9 @@ export function RulesDrawer({
     } as Rules);
 
   return (
-    <aside className="flex h-full w-[330px] shrink-0 flex-col border-l border-hair bg-panel">
-      <div className="flex items-center gap-2.5 border-b border-hair px-4 py-3">
-        <span className="baton-rule w-5" />
+    <aside className="flex h-full w-[304px] shrink-0 flex-col border-l border-hair bg-panel">
+      <div className="flex h-11 shrink-0 items-center gap-2.5 border-b border-hair px-3.5">
+        <span className="baton-rule w-4" />
         <span className="kicker text-dim">rules.yaml</span>
         <button
           type="button"
@@ -67,7 +66,7 @@ export function RulesDrawer({
         </button>
       </div>
 
-      <div className="min-h-0 flex-1 overflow-y-auto px-4 py-4">
+      <div className="min-h-0 flex-1 overflow-y-auto px-3.5 py-3.5">
         <p className="text-[0.8125rem] leading-[1.65] text-mid">
           Baton&rsquo;s whole judgement about what counts as dropped. Move a number and the queue
           re-scores in front of you. There is no second set of thresholds hidden in a prompt.
@@ -124,8 +123,8 @@ export function RulesDrawer({
         </div>
       </div>
 
-      <div className="border-t border-hair px-4 py-3">
-        <Chip tone="neutral">deterministic · no model involved</Chip>
+      <div className="flex h-6 shrink-0 items-center border-t border-hair px-3.5 font-mono text-[0.625rem] text-dim">
+        cannot go differently on a second run
       </div>
     </aside>
   );

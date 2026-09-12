@@ -5,28 +5,48 @@ import { useEffect } from 'react';
  * `.reveal-ready`, which only this hook adds, so if the JS never runs the page
  * is fully readable rather than fully blank.
  *
- * This is a throttled sweep rather than an IntersectionObserver on purpose.
- * An observer only reports elements whose intersection it actually samples, so
- * an instant jump down the page, which is exactly what the nav's anchor links
- * do, can carry an element from below the fold to above it without ever firing.
- * Those sections then sit at opacity 0 for good, and you find the holes by
- * scrolling back up. A sweep cannot miss: anything at or above the trigger
- * line is revealed, whether it was scrolled past slowly or skipped entirely.
- * With a couple of dozen elements the cost is not measurable.
+ * This is the third attempt and the reasoning behind it matters, because the
+ * two obvious implementations both fail, and both fail by leaving whole
+ * sections of the page permanently invisible:
+ *
+ *  1. An IntersectionObserver alone only reports elements whose intersection it
+ *     actually samples. An instant jump down the page, which is exactly what
+ *     this page's own nav anchors do, can carry an element from below the fold
+ *     to above it without ever firing. Those sections then sit at opacity 0 for
+ *     good, and you find the holes by scrolling back up.
+ *  2. A sweep driven by `scroll` events assumes scroll events arrive. Measured
+ *     in this app: `window.scrollY` moved from 0 to 3177 with **zero** scroll
+ *     events delivered on either `window` or `document`. Anything that moves
+ *     the viewport programmatically, and some embedded browser surfaces
+ *     generally, can change the scroll offset without a single event.
+ *
+ * So: the observer handles the common case and makes entry feel immediate, and
+ * a cheap interval is the thing that cannot miss. Every tick re-checks the
+ * whole pending set against a trigger line, so it does not matter HOW the
+ * viewport got where it is. Both stop themselves the moment nothing is left,
+ * which on a normal read-through is within a few seconds, and the cost until
+ * then is a couple of dozen rect reads a few times a second.
  */
 export function useReveal() {
   useEffect(() => {
     const root = document.documentElement;
     const pending = new Set(document.querySelectorAll<HTMLElement>('.reveal'));
     if (!pending.size) return;
-
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
     root.classList.add('reveal-ready');
 
-    let frame = 0;
+    let io: IntersectionObserver | undefined;
+    let timer: number | undefined;
 
+    const stop = () => {
+      io?.disconnect();
+      if (timer) window.clearInterval(timer);
+      timer = undefined;
+    };
+
+    /** Reveal everything at or above the trigger line, however it got there. */
     const sweep = () => {
-      frame = 0;
       const line = window.innerHeight * 0.88;
       for (const el of pending) {
         if (el.getBoundingClientRect().top < line) {
@@ -37,20 +57,21 @@ export function useReveal() {
       if (!pending.size) stop();
     };
 
-    const onScroll = () => {
-      if (frame) return;
-      frame = requestAnimationFrame(sweep);
-    };
+    io = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (!entry.isIntersecting) continue;
+          entry.target.classList.add('is-in');
+          pending.delete(entry.target as HTMLElement);
+        }
+        // Same callback also catches anything a jump skipped straight past.
+        sweep();
+      },
+      { rootMargin: '0px 0px -12% 0px', threshold: 0.06 },
+    );
+    pending.forEach((el) => io!.observe(el));
 
-    function stop() {
-      window.removeEventListener('scroll', onScroll);
-      window.removeEventListener('resize', onScroll);
-      if (frame) cancelAnimationFrame(frame);
-      frame = 0;
-    }
-
-    window.addEventListener('scroll', onScroll, { passive: true });
-    window.addEventListener('resize', onScroll);
+    timer = window.setInterval(sweep, 150);
     sweep();
 
     return () => {

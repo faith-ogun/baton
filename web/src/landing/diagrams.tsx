@@ -27,7 +27,6 @@ function Frame({ children, label }: { children: React.ReactNode; label: string }
       className="h-auto w-full"
       role="img"
       aria-label={label}
-      style={{ overflow: 'visible' }}
     >
       {children}
     </svg>
@@ -417,8 +416,11 @@ export function SpofDiagram() {
         </text>
       </g>
 
-      <text x="0" y={H} fill="var(--color-ink-3)" style={mono}>
-        BETWEENNESS 0.96 · NOT VISIBLE FROM INSIDE ANY ONE INBOX
+      <text x="0" y={H - 10} fill="var(--color-ink-3)" style={mono}>
+        BETWEENNESS 0.96
+      </text>
+      <text x="0" y={H - 1} fill="var(--color-ink-3)" style={mono}>
+        NOT VISIBLE FROM INSIDE ANY ONE INBOX
       </text>
     </Frame>
   );

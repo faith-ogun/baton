@@ -31,6 +31,11 @@ If you have just opened this vault and know nothing about Baton, read in this or
 3. [[The deterministic and LLM split]] — the credibility moat
 4. [[Demo facts]] — what is invented, derived, and unverified
 
+## The build
+
+- `90_Log/` — one note per iteration. [[iter-003 - make it a tool, not a template]] is the one to
+  read on why the workspace looks the way it does.
+
 ## How the vault works
 
 - [[VAULT]] — the operating manual
