@@ -32,20 +32,27 @@ export const OpenScreen: React.FC = () => (
 			}}
 		/>
 
-		{/* the centred stack. Nudged up by 26px so the quiet event line at the
-		    bottom does not drag the optical centre down. */}
+		{/* The lockup is pinned hard into the TOP LEFT, not centred. This is an
+		    open-screen background for a picture-in-picture edit: the app capture
+		    covers the middle of the frame, so anything centred is hidden behind
+		    it. The corner is the only region guaranteed to stay visible. */}
+		<AbsoluteFill style={{padding: '56px 0 0 68px', alignItems: 'flex-start', justifyContent: 'flex-start', flexDirection: 'row'}}>
+			<Img
+				src={staticFile('baton-logo-reversed.png')}
+				style={{height: 188, width: 'auto', flex: '0 0 auto'}}
+			/>
+		</AbsoluteFill>
+
+		{/* The words sit in the bottom left, the other region the capture does
+		    not reach, left-aligned to the same 72px margin as the lockup. */}
 		<AbsoluteFill
 			style={{
 				flexDirection: 'column',
-				alignItems: 'center',
-				justifyContent: 'center',
-				transform: 'translateY(-26px)',
+				alignItems: 'flex-start',
+				justifyContent: 'flex-end',
+				padding: '0 0 118px 72px',
 			}}
 		>
-			<Img
-				src={staticFile('baton-logo-reversed.png')}
-				style={{height: 396, width: 'auto'}}
-			/>
 
 			{/* the baton rule: a 3px orange bar with round caps, the one piece of
 			    ornament the system allows. Horizontal here, so the gradient runs
@@ -56,14 +63,14 @@ export const OpenScreen: React.FC = () => (
 					width: 96,
 					height: 3,
 					borderRadius: 999,
-					marginTop: 46,
+					marginTop: 0,
 					background: `linear-gradient(90deg, ${C.orange} 0%, ${C.orangeBright} 100%)`,
 				}}
 			/>
 
 			<div
 				style={{
-					marginTop: 42,
+					marginTop: 30,
 					fontFamily: SERIF,
 					fontStyle: 'italic',
 					fontWeight: 600,
@@ -78,7 +85,7 @@ export const OpenScreen: React.FC = () => (
 
 			<div
 				style={{
-					marginTop: 26,
+					marginTop: 20,
 					fontFamily: SANS,
 					fontWeight: 400,
 					fontSize: 27,
@@ -92,7 +99,7 @@ export const OpenScreen: React.FC = () => (
 		</AbsoluteFill>
 
 		{/* the event line, small and quiet, pinned to the bottom */}
-		<AbsoluteFill style={{alignItems: 'center', justifyContent: 'flex-end', paddingBottom: 66}}>
+		<AbsoluteFill style={{alignItems: 'flex-start', justifyContent: 'flex-end', padding: '0 0 60px 72px'}}>
 			<div
 				style={{
 					fontFamily: MONO,

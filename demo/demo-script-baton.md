@@ -138,7 +138,7 @@ That version is true, it is what the cutaway already shows, and it lands in one 
 
 - `[If you need to claw back time, trim the clip's head by 4s and start on the graph assembling. The spoken line carries the beat either way.]`
 
-> "This cannot exist in a chat window. Ask a chatbot how to stop work slipping and it gives you a correct, useless answer, because it cannot see your team. Baton can see it, and it does not wait to be asked."
+> "A chatbot can only answer from what you paste into it. Baton sits inside the workspace and reads the threads, the tasks and the dates itself, so it tells you what is about to slip before you have thought to ask."
 
 ---
 
