@@ -145,7 +145,7 @@ That version is true, it is what the cutaway already shows, and it lands in one 
 ## PART 6 — Close (straight out, or a 2s card)
 **Card only. No voice-over.**
 
-- `[ANIM: ../assets/readme/thumbnail.mp4 — the existing 8.7s hero. Use the last two seconds, the lockup and "Never drop the baton.", and let it settle. Speed up or trim so the film never crosses 2:00.]`
+- `[ANIM: clips/end-card.mp4 — built for this, 3s at 1920x1080, silent. Drop it straight on the end of the timeline; no hold duration to set. clips/end-card.jpg is the same frame as a still if you would rather choose your own length. It carries the repo and the live URL so a judge can read both off the last frame.]`
 
 - `[CAP: "github.com/faith-ogun/baton"]`
 

@@ -2,6 +2,7 @@ import React from 'react';
 import {Composition, registerRoot} from 'remotion';
 import {FPS} from '../theme';
 import {OpenScreen} from './OpenScreen';
+import {EndCard} from './EndCard';
 
 /*
   A SEPARATE Remotion entry point, the same reasoning as src/captions/root.tsx:
@@ -18,14 +19,26 @@ import {OpenScreen} from './OpenScreen';
 */
 
 export const TitleRoot: React.FC = () => (
-	<Composition
-		id="open-screen"
-		component={OpenScreen}
-		durationInFrames={1}
-		fps={FPS}
-		width={1920}
-		height={1080}
-	/>
+	<>
+		<Composition
+			id="open-screen"
+			component={OpenScreen}
+			durationInFrames={1}
+			fps={FPS}
+			width={1920}
+			height={1080}
+		/>
+		{/* Part 6. Stills for iMovie, plus a 3s clip so it can be dropped
+		    straight onto the timeline without setting a hold duration. */}
+		<Composition
+			id="end-card"
+			component={EndCard}
+			durationInFrames={FPS * 3}
+			fps={FPS}
+			width={1920}
+			height={1080}
+		/>
+	</>
 );
 
 registerRoot(TitleRoot);

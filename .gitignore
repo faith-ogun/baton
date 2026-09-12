@@ -36,3 +36,10 @@ video/out/
 # iMovie rather than repo content. The PNG stills and the Remotion sources
 # under video/src/captions are committed, so any pill can be re-rendered.
 demo/captions/*.mov
+
+# iMovie working library: 326MB of editing scratch, not repo content.
+demo/*.imovielibrary/
+
+# exported video masters: gigabytes, and over GitHub's 100MB file limit
+*.mov
+*.MOV
