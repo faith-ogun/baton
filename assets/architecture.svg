@@ -116,7 +116,7 @@
 
   <!-- ── the human gate ──────────────────────────────── -->
   <path d="M600 448 V494" stroke="#C96A3D" stroke-width="2" marker-end="url(#ao)"/>
-  <text x="612" y="476" class="m" fill="#98461F">ranked drop risks, over a WebSocket</text>
+  <text x="588" y="478" class="m" fill="#98461F" text-anchor="end">ranked drop risks, over a WebSocket</text>
 
   <rect x="40" y="494" width="1120" height="126" rx="12" fill="#FFFFFF" stroke="#E6DCCD" stroke-width="1.5"/>
   <text x="62" y="520" class="k" fill="#98461F">THE SCREEN · VITE + REACT</text>
@@ -146,8 +146,8 @@
 
   <!-- approval is what releases the executor, which is where the loop closes -->
   <path d="M714 536 V344" fill="none" stroke="#7A6FF0" stroke-width="1.6" stroke-dasharray="5 4" marker-end="url(#ap)"/>
-  <text x="726" y="476" class="m" fill="#5348C4">approval releases the executor</text>
-  <text x="726" y="492" class="m" fill="#5348C4">and the loop closes</text>
+  <text x="728" y="470" class="m" fill="#5348C4">approval releases the executor,</text>
+  <text x="728" y="486" class="m" fill="#5348C4">and that is where the loop closes</text>
 
   <!-- ── signature ───────────────────────────────────── -->
   <path d="M40 646 H1160" stroke="#E6DCCD" stroke-width="1"/>

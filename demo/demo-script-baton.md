@@ -4,8 +4,8 @@
 scored. So this is not the full product tour. It is the one spine that proves the category claim,
 cut to a real spoken length, against the **live Ambiguous workspace** rather than seeded data.
 
-**Measured (not guessed):** the voice-over is **273 spoken words**, across exactly five spoken lines.
-- at 140 wpm → **1:57** · at 150 wpm → **1:49** · at 155 wpm → **1:46** · at 165 wpm → **1:39**
+**Measured (not guessed):** the voice-over is **278 spoken words**, across exactly five spoken lines.
+- at 140 wpm → **1:59** · at 150 wpm → **1:51** · at 155 wpm → **1:48** · at 165 wpm → **1:41**
 
 Every production note in this file is deliberately **not** a blockquote. In this format `>` means
 "words you say out loud", so a note written as one would be counted and the running time above
@@ -29,7 +29,7 @@ genuine".
 **Tone:** calm, specific, certain. You are a team lead showing the thing that catches what your
 team drops. Every sentence finishes.
 
-`[CAM]` you · `[SCREEN]` the live app · `[AMBI]` the Ambiguous workspace itself · `[ANIM]` a cutaway in `demo/clips/` · `[CAP]` a caption you add in the edit.
+`[CAM]` you · `[SCREEN]` the live app · `[AMBI]` the Ambiguous workspace itself · `[ANIM]` a cutaway in `demo/clips/` · `[CAP]` a branded inset pill in `demo/captions/`, dropped in as picture-in-picture.
 
 **British English. No em dashes. Hard 2:00.**
 
@@ -50,9 +50,19 @@ category claim in four seconds. Only then cut to Baton's board.
 
 - `[CAP: "Aldermere Bio is invented. The workspace and its records are real."]`
 
+**Note: seven tasks, four risks. They are different numbers on purpose.**
+
+If you show the Ambiguous task list, a judge sees **7 tasks** and then hears
+"four things". Say the relationship out loud, because the gap is the product:
+Baton is not counting tasks, it is judging which work is about to drop. Two of
+the four are not even tasks. The sole-owner risk is about a **person**, and the
+two unbooked deadlines are about **dates with nothing in the calendar against
+them**. Discrimination is the point; a tool that flagged all seven would be a
+task list with a red tint.
+
 - `[SCREEN: cut to Baton's board, already open and settled. Do NOT film the load. The status bar reads webhooks live and aldermere.ambi.cc; the header reads Regulatory affairs, Aldermere Bio, 7 people, lead Rachel Foster.]`
 
-> "Baton is a member of this team's workspace, with its own address, sitting alongside the five people it watches. This is its board. Nothing on it was typed by me: Baton read the tasks, the calendar and the people for itself, and it has found four things about to fall through the cracks."
+> "Baton is a member of this team's workspace, with its own address, sitting alongside the five people it watches. This is its board. Nothing on it was typed by me: Baton read the seven tasks, the calendar and the people for itself, and out of all that it has flagged four things about to fall through the cracks."
 
 ---
 
